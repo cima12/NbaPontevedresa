@@ -36,14 +36,26 @@ def fallo(msg):
     sys.exit(1)
 
 
+class ErrorAPI(Exception):
+    def __init__(self, codigo, url, cuerpo):
+        self.codigo, self.url, self.cuerpo = codigo, url, cuerpo
+        super().__init__(f"HTTP {codigo} en {url}")
+
+
+def descripcion_error(e):
+    try:
+        return json.loads(e.cuerpo)["error"]["description"]
+    except Exception:
+        return e.cuerpo[:300]
+
+
 def peticion(url, datos=None, cabeceras=None):
     req = urllib.request.Request(url, data=datos, headers=cabeceras or {})
     try:
         with urllib.request.urlopen(req, timeout=40) as r:
             return json.loads(r.read().decode())
     except urllib.error.HTTPError as e:
-        cuerpo = e.read().decode(errors="replace")[:800]
-        fallo(f"HTTP {e.code} en {url.split('?')[0]}\n{cuerpo}")
+        raise ErrorAPI(e.code, url.split("?")[0], e.read().decode(errors="replace")[:800])
     except urllib.error.URLError as e:
         fallo(f"No se pudo conectar con {url.split('?')[0]}: {e.reason}")
 
@@ -63,10 +75,13 @@ def obtener_token():
         "redirect_uri": REDIRECT_URI,
         "refresh_token": ref,
     }).encode()
-    resp = peticion(TOKEN_URL, datos, {
-        "Authorization": "Basic " + basic,
-        "Content-Type": "application/x-www-form-urlencoded",
-    })
+    try:
+        resp = peticion(TOKEN_URL, datos, {
+            "Authorization": "Basic " + basic,
+            "Content-Type": "application/x-www-form-urlencoded",
+        })
+    except ErrorAPI as e:
+        fallo(f"Yahoo rechaza las claves al renovar el token (HTTP {e.codigo}): {e.cuerpo[:300]}")
     token = resp.get("access_token")
     if not token:
         fallo("Yahoo no ha devuelto access_token (revisa los Secrets).")
@@ -105,8 +120,42 @@ def elementos(contenedor, clave):
 
 
 # ---------------------------------------------------------------- lectura
-def leer_settings(token):
-    fc = api(token, f"league/nba.l.{LIGA_ID}/settings")
+def buscar_liga(token):
+    """Diagnóstico + busca la clave real de la liga entre las ligas NBA del usuario."""
+    # 1) Recurso público: si esto falla, la app de Yahoo no tiene permiso de Fantasy Sports.
+    try:
+        juego = fusionar(api(token, "game/nba")["game"])
+        print(f"OK  Juego NBA actual: game_key {juego.get('game_key')}, temporada {juego.get('season')}")
+    except ErrorAPI as e:
+        fallo(f"Yahoo no deja leer ni datos públicos de Fantasy (HTTP {e.codigo}: {descripcion_error(e)}).\n"
+              "    -> Casi seguro la app no tiene el permiso 'Fantasy Sports - Read', o se añadió\n"
+              "       después de autorizar. Revisa la app y vuelve a ejecutar autorizar_yahoo.py.")
+
+    # 2) Ligas NBA de la cuenta autorizada.
+    try:
+        fc = api(token, "users;use_login=1/games;game_keys=nba/leagues")
+    except ErrorAPI as e:
+        fallo(f"No puedo leer tus ligas (HTTP {e.codigo}: {descripcion_error(e)}).")
+
+    ligas = []
+    for u in elementos(fc.get("users", {}), "user"):
+        for g in elementos(fusionar(u).get("games", {}), "game"):
+            for lg in elementos(fusionar(g).get("leagues", {}), "league"):
+                ligas.append(fusionar(lg))
+
+    print(f"OK  La cuenta autorizada está en {len(ligas)} liga(s) NBA esta temporada:")
+    for lg in ligas:
+        print(f"      - {lg.get('name')}  (id {lg.get('league_id')}, clave {lg.get('league_key')})")
+
+    for lg in ligas:
+        if str(lg.get("league_id")) == LIGA_ID:
+            return lg["league_key"]
+    fallo(f"La liga {LIGA_ID} no aparece entre las ligas de esta cuenta. ¿Autorizaste con la\n"
+          "    cuenta de Yahoo con la que juegas? ¿Es correcto el ID?")
+
+
+def leer_settings(token, league_key):
+    fc = api(token, f"league/{league_key}/settings")
     liga = fc["league"]
     meta = liga[0]
     sets = fusionar(liga[1]["settings"])
@@ -176,10 +225,13 @@ def leer_equipos(token, league_key):
 # ---------------------------------------------------------------- principal
 def main():
     token = obtener_token()
-    resumen, raw = leer_settings(token)
+    league_key = buscar_liga(token)
+    try:
+        resumen, raw = leer_settings(token, league_key)
+        equipos = leer_equipos(token, resumen["league_key"])
+    except ErrorAPI as e:
+        fallo(f"HTTP {e.codigo} en {e.url}\n{e.cuerpo}")
     print(f"OK  Liga: {resumen['nombre']}  ({resumen['league_key']}, temporada {resumen['temporada']})")
-
-    equipos = leer_equipos(token, resumen["league_key"])
     print(f"OK  {len(equipos)} equipos leídos.")
 
     resumen["lista_equipos"] = equipos
