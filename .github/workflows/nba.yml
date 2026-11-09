@@ -1,13 +1,17 @@
 name: Datos NBA
 
 on:
-  workflow_dispatch:   # botón "Run workflow" (de momento solo manual)
+  workflow_dispatch:          # botón "Run workflow"
+  schedule:                   # automático (hora UTC; en España +1 en invierno)
+    - cron: "23 6 * * *"      # 07:23 España: partidos de la noche
+    - cron: "23 10 * * *"     # 11:23: correcciones de estadísticas
+    - cron: "23 17 * * *"     # 18:23: cambios de calendario
 
 permissions:
   contents: write
 
 concurrency:
-  group: guardar-datos      # nunca dos Actions guardando a la vez
+  group: guardar-datos        # nunca dos Actions guardando a la vez
   cancel-in-progress: false
 
 jobs:
@@ -16,10 +20,10 @@ jobs:
     timeout-minutes: 15
     steps:
       - name: Descargar el repositorio
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
 
       - name: Preparar Python
-        uses: actions/setup-python@v5
+        uses: actions/setup-python@v6
         with:
           python-version: "3.12"
 
@@ -30,7 +34,7 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add data
+          git add -A data
           if git diff --cached --quiet; then
             echo "Sin cambios en los datos."
           else
