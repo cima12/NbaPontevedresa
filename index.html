@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#000000">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<title>NBA Pontevedresa</title>
+<style>
+  :root {
+    --bg: #000; --card: #111418; --card2: #191d23; --line: #262b33;
+    --txt: #e8eaed; --sub: #9aa0a6; --verde: #3ddc84; --ambar: #f4b942; --rojo: #ff5f56;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; background: var(--bg); color: var(--txt);
+    font: 14px/1.4 -apple-system, "Segoe UI", Roboto, system-ui, sans-serif; -webkit-text-size-adjust: 100%; }
+  header { position: sticky; top: 0; z-index: 20; background: var(--bg);
+    padding: calc(10px + env(safe-area-inset-top)) 12px 0; border-bottom: 1px solid var(--line); }
+  h1 { margin: 0 0 8px; font-size: 18px; letter-spacing: .3px; }
+  h1 span { color: var(--verde); }
+  nav { display: flex; gap: 4px; }
+  nav button { flex: 1; background: none; border: 0; color: var(--sub); font: inherit; font-weight: 600;
+    padding: 10px 4px; border-bottom: 3px solid transparent; cursor: pointer; }
+  nav button.activo { color: var(--txt); border-bottom-color: var(--verde); }
+  main { padding: 12px 12px 24px; max-width: 1100px; margin: 0 auto; }
+  .seccion { display: none; } .seccion.activa { display: block; }
+  .tarjeta { background: var(--card); border-radius: 12px; padding: 12px; margin-bottom: 12px; }
+  .controles { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+  select, input[type=search] { background: var(--card2); color: var(--txt); border: 1px solid var(--line);
+    border-radius: 8px; padding: 8px 10px; font: inherit; }
+  input[type=search] { flex: 1; min-width: 140px; }
+  .chips { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 10px; align-items: center; }
+  .chips .etq { color: var(--sub); font-size: 12px; margin-right: 2px; }
+  .chip { background: var(--card2); border: 1px solid var(--line); color: var(--txt); border-radius: 999px;
+    padding: 5px 10px; font: inherit; font-size: 12px; cursor: pointer; }
+  .chip.fuera { background: transparent; color: var(--sub); text-decoration: line-through; border-style: dashed; }
+  .ayuda { color: var(--sub); font-size: 12px; margin: 8px 0 0; }
+  .tabla-wrap { overflow-x: auto; border-radius: 12px; background: var(--card); -webkit-overflow-scrolling: touch; }
+  table { border-collapse: collapse; width: 100%; font-variant-numeric: tabular-nums; }
+  th, td { padding: 7px 6px; text-align: center; white-space: nowrap; border-bottom: 1px solid var(--line); }
+  th { position: sticky; top: 0; background: var(--card2); color: var(--sub); font-size: 12px; font-weight: 600;
+    cursor: pointer; user-select: none; z-index: 2; }
+  th.orden { color: var(--verde); }
+  th.punt { text-decoration: line-through; opacity: .5; }
+  td.fijo, th.fijo { position: sticky; left: 0; text-align: left; background: var(--card); z-index: 1; }
+  th.fijo { background: var(--card2); z-index: 3; }
+  td.fijo .nom { display: inline-block; max-width: 40vw; overflow: hidden; text-overflow: ellipsis; vertical-align: bottom; }
+  td.fijo .eq { display: block; margin-left: 26px; margin-top: -2px; }
+  .nom { font-weight: 600; }
+  .peq { color: var(--sub); font-size: 11px; }
+  .pos { color: var(--sub); font-size: 12px; display: inline-block; width: 26px; }
+  td.val { font-weight: 700; }
+  td.cat { font-size: 13px; }
+  td.cat.off { opacity: .35; }
+  .mas { display: block; width: 100%; margin-top: 10px; padding: 12px; background: var(--card2);
+    color: var(--txt); border: 1px solid var(--line); border-radius: 10px; font: inherit; cursor: pointer; }
+  .dias { display: grid; grid-template-columns: repeat(7, 1fr); gap: 6px; margin-top: 8px; }
+  .dia { background: var(--card2); border-radius: 8px; padding: 6px 2px; text-align: center; }
+  .dia b { display: block; font-size: 16px; }
+  .dia.ligero b { color: var(--verde); }
+  .dia.hoy { outline: 2px solid var(--verde); }
+  .n4 { color: var(--verde); font-weight: 700; } .n3 { color: var(--txt); } .n2 { color: var(--rojo); }
+  .n5 { color: var(--verde); font-weight: 800; } .n1, .n0 { color: var(--rojo); font-weight: 700; }
+  td.sem { font-size: 15px; }
+  td.sem .peq { display: block; margin-top: -2px; }
+  th.actual { color: var(--txt); }
+  .estado { text-align: center; color: var(--sub); padding: 30px 10px; }
+  footer { color: var(--sub); font-size: 11px; text-align: center; padding: 8px 12px calc(16px + env(safe-area-inset-bottom)); }
+  footer a { color: var(--sub); }
+</style>
+</head>
+<body>
+<header>
+  <h1>NBA <span>Pontevedresa</span></h1>
+  <nav>
+    <button data-sec="ranking" class="activo">Ranking</button>
+    <button data-sec="calendario">Calendario</button>
+  </nav>
+</header>
+
+<main>
+  <!-- ============ RANKING ============ -->
+  <section id="ranking" class="seccion activa">
+    <div class="tarjeta">
+      <div class="controles">
+        <select id="ventana">
+          <option value="temporada">Temporada</option>
+          <option value="ult30">Últimos 30 días</option>
+          <option value="ult14">Últimos 14 días</option>
+          <option value="ult7">Últimos 7 días</option>
+        </select>
+        <select id="equipo"><option value="">Todos los equipos</option></select>
+        <input type="search" id="buscar" placeholder="Buscar jugador…">
+      </div>
+      <div class="chips" id="chips"><span class="etq">Puntear:</span></div>
+      <p class="ayuda">Toca una categoría para <b>puntearla</b> (no cuenta en el valor). Toca una cabecera de la tabla para ordenar.
+        El color indica lo bueno (verde) o malo (rojo) que es el jugador en esa categoría.</p>
+    </div>
+    <div class="tabla-wrap"><table id="tabla-ranking"></table></div>
+    <button class="mas" id="ver-mas" hidden>Ver más jugadores</button>
+    <div class="estado" id="estado-ranking">Cargando…</div>
+  </section>
+
+  <!-- ============ CALENDARIO ============ -->
+  <section id="calendario" class="seccion">
+    <div class="tarjeta">
+      <div class="nom" id="titulo-semana">Esta semana</div>
+      <div class="dias" id="dias"></div>
+      <p class="ayuda">Partidos NBA cada día. En <span style="color:var(--verde)">verde</span> los días ligeros
+        (<span id="lig-max">7</span> partidos o menos): con 8 titulares es más fácil que no se te quede nadie en el banquillo.</p>
+    </div>
+    <div class="tabla-wrap"><table id="tabla-semanas"></table></div>
+    <p class="ayuda">Número grande: partidos del equipo esa semana (lunes a domingo, hora EE. UU.).
+      Debajo: en la semana actual, cuántos le quedan (contando hoy); en las siguientes, cuántos caen en días ligeros. Toca una semana para ordenar.</p>
+  </section>
+</main>
+
+<footer>
+  Estadísticas: NBA.com · Actualizado: <span id="actualizado">—</span>
+</footer>
+
+<script>
+"use strict";
+const CATS = [
+  { k: "fg",  n: "FG%", v: s => s.fg_pct == null ? "–" : (s.fg_pct * 100).toFixed(1) },
+  { k: "ft",  n: "FT%", v: s => s.ft_pct == null ? "–" : (s.ft_pct * 100).toFixed(1) },
+  { k: "tpm", n: "3PM", v: s => s.tpm.toFixed(1) },
+  { k: "pts", n: "PTS", v: s => s.pts.toFixed(1) },
+  { k: "reb", n: "REB", v: s => s.reb.toFixed(1) },
+  { k: "ast", n: "AST", v: s => s.ast.toFixed(1) },
+  { k: "stl", n: "STL", v: s => s.stl.toFixed(1) },
+  { k: "blk", n: "BLK", v: s => s.blk.toFixed(1) },
+  { k: "to",  n: "TO",  v: s => s.to.toFixed(1) },
+];
+const PASO = 100;
+const est = { datos: null, semanas: null, ventana: "temporada", equipo: "", buscar: "",
+              punt: new Set(), orden: "valor", limite: PASO, ordenSemana: 0 };
+
+const $ = id => document.getElementById(id);
+const leerLS = (k, d) => { try { const v = localStorage.getItem(k); return v ? JSON.parse(v) : d; } catch (e) { return d; } };
+const guardarLS = (k, v) => { try { localStorage.setItem(k, JSON.stringify(v)); } catch (e) {} };
+const esc = t => String(t).replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
+
+function color(z) {
+  if (z == null || isNaN(z)) return "";
+  const a = Math.min(Math.abs(z) / 2.2, 1) * 0.55;
+  return z >= 0 ? `background:rgba(61,220,132,${a.toFixed(2)})` : `background:rgba(255,95,86,${a.toFixed(2)})`;
+}
+
+function hoyEEUU() {
+  return new Date().toLocaleDateString("en-CA", { timeZone: "America/New_York" });
+}
+
+async function cargar(ruta) {
+  const r = await fetch(ruta + "?t=" + Date.now());
+  if (!r.ok) throw new Error(ruta + ": HTTP " + r.status);
+  return r.json();
+}
+
+/* ---------------- RANKING ---------------- */
+function valorJugador(s) {
+  return s.z.reduce((acc, z, i) => acc + (est.punt.has(CATS[i].k) ? 0 : z), 0);
+}
+
+function pintarRanking() {
+  const d = est.datos; if (!d) return;
+  const v = est.ventana, q = est.buscar.trim().toLowerCase();
+  let filas = d.jugadores.filter(j => j[v] && j[v].z);
+  if (q) filas = filas.filter(j => j.nombre.toLowerCase().includes(q));
+  else filas = filas.filter(j => j[v].elegible);
+  if (est.equipo) filas = filas.filter(j => j.equipo === est.equipo);
+
+  filas.forEach(j => j._val = valorJugador(j[v]));
+  const iCat = CATS.findIndex(c => c.k === est.orden);
+  if (est.orden === "valor") filas.sort((a, b) => b._val - a._val);
+  else if (est.orden === "min") filas.sort((a, b) => b[v].min - a[v].min);
+  else if (est.orden === "pj") filas.sort((a, b) => b[v].pj - a[v].pj);
+  else filas.sort((a, b) => b[v].z[iCat] - a[v].z[iCat]);
+
+  // posición según el valor (no cambia al ordenar por otra columna)
+  const rank = new Map([...filas].sort((a, b) => b._val - a._val).map((j, i) => [j.id, i + 1]));
+
+  const th = (k, t, cls = "") =>
+    `<th data-orden="${k}" class="${cls}${est.orden === k ? " orden" : ""}${est.punt.has(k) ? " punt" : ""}">${t}</th>`;
+  let html = "<thead><tr>" + th("valor", "Jugador", "fijo") + th("valor", "Valor") +
+    th("pj", "PJ") + th("min", "MIN") + CATS.map(c => th(c.k, c.n)).join("") + "</tr></thead><tbody>";
+
+  for (const j of filas.slice(0, est.limite)) {
+    const s = j[v];
+    html += `<tr><td class="fijo"><span class="pos">${rank.get(j.id)}</span><span class="nom">${esc(j.nombre)}</span><span class="peq eq">${esc(j.equipo)}</span></td>
+      <td class="val" style="${color(j._val / 3)}">${j._val.toFixed(1)}</td>
+      <td>${s.pj}</td><td>${s.min.toFixed(0)}</td>` +
+      CATS.map((c, i) => `<td class="cat${est.punt.has(c.k) ? " off" : ""}" style="${color(s.z[i])}">${c.v(s)}</td>`).join("") +
+      "</tr>";
+  }
+  html += "</tbody>";
+  $("tabla-ranking").innerHTML = html;
+  $("ver-mas").hidden = filas.length <= est.limite;
+  $("estado-ranking").textContent = filas.length ? "" : "No hay jugadores con esos filtros.";
+  $("estado-ranking").hidden = !!filas.length;
+}
+
+function prepararRanking() {
+  const equipos = [...new Set(est.datos.jugadores.map(j => j.equipo))].sort();
+  $("equipo").insertAdjacentHTML("beforeend", equipos.map(e => `<option>${e}</option>`).join(""));
+
+  est.punt = new Set(leerLS("punt", []));
+  const chips = $("chips");
+  CATS.forEach(c => {
+    const b = document.createElement("button");
+    b.className = "chip" + (est.punt.has(c.k) ? " fuera" : "");
+    b.textContent = c.n;
+    b.onclick = () => {
+      est.punt.has(c.k) ? est.punt.delete(c.k) : est.punt.add(c.k);
+      b.classList.toggle("fuera");
+      guardarLS("punt", [...est.punt]);
+      pintarRanking();
+    };
+    chips.appendChild(b);
+  });
+
+  $("ventana").onchange = e => { est.ventana = e.target.value; est.limite = PASO; pintarRanking(); };
+  $("equipo").onchange = e => { est.equipo = e.target.value; est.limite = PASO; pintarRanking(); };
+  $("buscar").oninput = e => { est.buscar = e.target.value; est.limite = PASO; pintarRanking(); };
+  $("ver-mas").onclick = () => { est.limite += PASO; pintarRanking(); };
+  $("tabla-ranking").onclick = e => {
+    const t = e.target.closest("th"); if (!t) return;
+    est.orden = t.dataset.orden; pintarRanking();
+  };
+  pintarRanking();
+}
+
+/* ---------------- CALENDARIO ---------------- */
+const DIAS = ["L", "M", "X", "J", "V", "S", "D"];
+const fmt = iso => { const [y, m, d] = iso.split("-"); return `${+d}/${+m}`; };
+
+function pintarCalendario() {
+  const S = est.semanas; if (!S) return;
+  const hoy = hoyEEUU();
+  let i0 = S.semanas.findIndex(s => s.inicio <= hoy && hoy <= s.fin);
+  if (i0 < 0) i0 = Math.max(0, S.semanas.findIndex(s => s.inicio > hoy));
+  const sem = S.semanas.slice(i0, i0 + 4);
+  if (!sem.length) { $("tabla-semanas").innerHTML = ""; return; }
+
+  // franja de días de la semana actual
+  const actual = sem[0];
+  $("titulo-semana").textContent = `Semana del ${fmt(actual.inicio)} al ${fmt(actual.fin)}`;
+  $("lig-max").textContent = S.dia_ligero_max;
+  let dias = "";
+  for (let k = 0; k < 7; k++) {
+    const f = new Date(actual.inicio + "T12:00:00Z"); f.setUTCDate(f.getUTCDate() + k);
+    const iso = f.toISOString().slice(0, 10), n = actual.por_dia[iso] || 0;
+    dias += `<div class="dia${n && n <= S.dia_ligero_max ? " ligero" : ""}${iso === hoy ? " hoy" : ""}">
+      <span class="peq">${DIAS[k]} ${fmt(iso)}</span><b>${n}</b></div>`;
+  }
+  $("dias").innerHTML = dias;
+
+  // tabla equipos × semanas
+  const hoyIdx = (hoy >= actual.inicio && hoy <= actual.fin)
+    ? Math.round((Date.parse(hoy) - Date.parse(actual.inicio)) / 864e5) : -1;
+  const equipos = [...new Set(sem.flatMap(s => Object.keys(s.equipos)))];
+  const dato = (s, e) => s.equipos[e] || { p: 0, lig: 0 };
+  const o = Math.min(est.ordenSemana, sem.length - 1);
+  equipos.sort((a, b) => (dato(sem[o], b).p - dato(sem[o], a).p) || (dato(sem[o], b).lig - dato(sem[o], a).lig) || a.localeCompare(b));
+
+  let html = `<thead><tr><th class="fijo">Equipo</th>` +
+    sem.map((s, k) => `<th data-k="${k}" class="${k === o ? "orden" : ""}${k === 0 ? " actual" : ""}">${["Esta", "Próxima", "+2", "+3"][k]}<br><span class="peq">${fmt(s.inicio)}–${fmt(s.fin)}</span></th>`).join("") +
+    `<th>Total</th></tr></thead><tbody>`;
+  for (const e of equipos) {
+    let tot = 0;
+    html += `<tr><td class="fijo nom">${e}</td>` + sem.map((s, k) => {
+      const x = dato(s, e); tot += x.p;
+      let sub = x.lig ? x.lig + " lig." : "&nbsp;";
+      if (k === 0 && hoyIdx >= 0) {            // semana en curso: cuántos le quedan desde hoy
+        const quedan = (x.dias || []).filter(d => d >= hoyIdx).length;
+        sub = `quedan ${quedan}`;
+      }
+      return `<td class="sem"><span class="n${Math.min(x.p, 5)}">${x.p}</span><span class="peq">${sub}</span></td>`;
+    }).join("") + `<td>${tot}</td></tr>`;
+  }
+  $("tabla-semanas").innerHTML = html + "</tbody>";
+}
+
+$("tabla-semanas").onclick = e => {
+  const t = e.target.closest("th[data-k]"); if (!t) return;
+  est.ordenSemana = +t.dataset.k; pintarCalendario();
+};
+
+/* ---------------- ARRANQUE ---------------- */
+document.querySelectorAll("nav button").forEach(b => b.onclick = () => {
+  document.querySelectorAll("nav button").forEach(x => x.classList.toggle("activo", x === b));
+  document.querySelectorAll(".seccion").forEach(s => s.classList.toggle("activa", s.id === b.dataset.sec));
+  guardarLS("seccion", b.dataset.sec);
+  window.scrollTo(0, 0);
+});
+const secGuardada = leerLS("seccion", "ranking");
+if (secGuardada !== "ranking") document.querySelector(`nav button[data-sec="${secGuardada}"]`)?.click();
+
+(async () => {
+  try {
+    est.datos = await cargar("data/nba/jugadores.json");
+    const f = new Date(est.datos.actualizado);
+    $("actualizado").textContent = f.toLocaleString("es-ES", { day: "numeric", month: "short", hour: "2-digit", minute: "2-digit" });
+    prepararRanking();
+  } catch (e) {
+    $("estado-ranking").textContent = "No se pudieron cargar los datos de jugadores (" + e.message + ").";
+  }
+  try {
+    est.semanas = await cargar("data/nba/semanas.json");
+    pintarCalendario();
+  } catch (e) {
+    $("tabla-semanas").innerHTML = `<tr><td class="estado">No se pudo cargar el calendario (${esc(e.message)}).</td></tr>`;
+  }
+})();
+</script>
+</body>
+</html>
