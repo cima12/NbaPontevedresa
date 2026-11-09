@@ -1,0 +1,40 @@
+name: Datos NBA
+
+on:
+  workflow_dispatch:   # botón "Run workflow" (de momento solo manual)
+
+permissions:
+  contents: write
+
+concurrency:
+  group: guardar-datos      # nunca dos Actions guardando a la vez
+  cancel-in-progress: false
+
+jobs:
+  nba:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Descargar el repositorio
+        uses: actions/checkout@v4
+
+      - name: Preparar Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Leer datos de la NBA
+        run: python scripts/nba.py
+
+      - name: Guardar los datos en el repositorio
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data
+          if git diff --cached --quiet; then
+            echo "Sin cambios en los datos."
+          else
+            git commit -m "Datos NBA $(date -u +'%Y-%m-%d %H:%M') UTC"
+            git pull --rebase
+            git push
+          fi
