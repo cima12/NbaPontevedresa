@@ -1,14 +1,15 @@
 """
 nba.py · NbaPontevedresa · Datos públicos de la NBA (no necesita Yahoo).
 
-Descarga de la CDN pública de la NBA:
-  - el calendario de la temporada regular
-  - las estadísticas de cada jugador en cada partido ya terminado
-y genera:
-  data/nba/calendario.json   -> todos los partidos (fecha EE. UU., equipos, estado)
-  data/nba/lineas.json       -> estadísticas partido a partido (caché: solo baja lo nuevo)
-  data/nba/jugadores.json    -> promedios por jugador: temporada y últimos 7/14/30 días
+Descarga de la CDN pública de la NBA el calendario y las estadísticas de cada
+partido terminado, y genera en data/nba/:
+  calendario.json      -> todos los partidos de temporada regular
+  lineas/AAAA-MM.json  -> estadísticas partido a partido (caché por meses: solo baja lo nuevo)
+  nombres.json         -> id de jugador -> nombre
+  jugadores.json       -> promedios y valor 9-cat: temporada y últimos 7/14/30 días
+  semanas.json         -> partidos de cada equipo por semana (lunes a domingo)
 
+Solo reescribe un archivo si su contenido ha cambiado (para no inflar el repositorio).
 Solo usa la librería estándar de Python.
 """
 
@@ -17,18 +18,20 @@ import sys
 import time
 import urllib.error
 import urllib.request
-from datetime import datetime, timedelta, timezone
+from datetime import date, datetime, timedelta, timezone
 from pathlib import Path
+
+import valor
 
 URL_CALENDARIO = "https://cdn.nba.com/static/json/staticData/scheduleLeagueV2.json"
 URL_BOX = "https://cdn.nba.com/static/json/liveData/boxscore/boxscore_{}.json"
-MAX_PARTIDOS_POR_EJECUCION = 400   # la primera vez baja todo lo jugado; luego solo lo nuevo
-PAUSA = 0.25                       # segundos entre descargas, para no abusar
+MAX_PARTIDOS_POR_EJECUCION = 400
+PAUSA = 0.25
+DIA_LIGERO = 7          # días con 7 partidos NBA o menos
 
 RAIZ = Path(__file__).resolve().parent.parent
 DIR = RAIZ / "data" / "nba"
 
-# Orden de las columnas de cada línea en lineas.json
 COLS = ["jugador", "equipo", "rival", "fecha", "min", "fgm", "fga", "ftm", "fta",
         "tpm", "pts", "reb", "ast", "stl", "blk", "to"]
 
@@ -39,6 +42,7 @@ CABECERAS = {
 }
 
 
+# ---------------------------------------------------------------- utilidades
 def fallo(msg):
     print("ERROR:", msg)
     sys.exit(1)
@@ -57,13 +61,21 @@ def leer_json(ruta, defecto):
         return defecto
 
 
-def guardar(ruta, datos, compacto=False):
+def _sin_fecha(d):
+    return {k: v for k, v in d.items() if k != "actualizado"} if isinstance(d, dict) else d
+
+
+def guardar(ruta, datos):
+    """Escribe en formato compacto solo si el contenido (sin 'actualizado') ha cambiado."""
+    if ruta.exists() and _sin_fecha(leer_json(ruta, None)) == _sin_fecha(datos):
+        return False
     ruta.parent.mkdir(parents=True, exist_ok=True)
-    if compacto:
-        texto = json.dumps(datos, ensure_ascii=False, separators=(",", ":"))
-    else:
-        texto = json.dumps(datos, ensure_ascii=False, indent=1)
-    ruta.write_text(texto, encoding="utf-8")
+    ruta.write_text(json.dumps(datos, ensure_ascii=False, separators=(",", ":")), encoding="utf-8")
+    return True
+
+
+def hoy_eeuu():
+    return (datetime.now(timezone.utc) - timedelta(hours=5)).date()   # hora aprox. de Nueva York
 
 
 def minutos(texto):
@@ -93,19 +105,45 @@ def leer_calendario():
                 continue
             partidos.append({
                 "id": gid,
-                "fecha": (g.get("gameDateEst") or "")[:10],       # día EE. UU. (el que usa Yahoo)
+                "fecha": (g.get("gameDateEst") or "")[:10],
                 "hora_utc": g.get("gameDateTimeUTC"),
                 "local": g["homeTeam"].get("teamTricode"),
                 "visitante": g["awayTeam"].get("teamTricode"),
-                "estado": g.get("gameStatus"),                     # 1 pendiente, 2 en juego, 3 final
+                "estado": g.get("gameStatus"),     # 1 pendiente, 2 en juego, 3 final
             })
     partidos.sort(key=lambda p: (p["fecha"], p["hora_utc"] or "", p["id"]))
     return ls.get("seasonYear"), partidos
 
 
-# ---------------------------------------------------------------- box scores
+# ---------------------------------------------------------------- caché de líneas
+def cargar_cache():
+    partidos = {}
+    for f in sorted((DIR / "lineas").glob("*.json")):
+        partidos.update(leer_json(f, {}).get("partidos", {}))
+    nombres = leer_json(DIR / "nombres.json", {})
+
+    antiguo = DIR / "lineas.json"            # formato de la primera versión: se migra
+    if antiguo.exists():
+        viejo = leer_json(antiguo, {})
+        partidos.update(viejo.get("partidos", {}))
+        nombres.update(viejo.get("nombres", {}))
+        antiguo.unlink()
+        print("OK  Migrado lineas.json al nuevo formato por meses.")
+    return {"partidos": partidos, "nombres": nombres}
+
+
+def guardar_cache(cache, fechas):
+    por_mes = {}
+    for gid, lineas in cache["partidos"].items():
+        mes = fechas.get(gid, lineas[0][3] if lineas else "0000-00")[:7]
+        por_mes.setdefault(mes, {})[gid] = lineas
+    for mes, partidos in por_mes.items():
+        guardar(DIR / "lineas" / f"{mes}.json",
+                {"columnas": COLS, "partidos": dict(sorted(partidos.items()))})
+    guardar(DIR / "nombres.json", dict(sorted(cache["nombres"].items(), key=lambda kv: int(kv[0]))))
+
+
 def leer_box(gid, fecha):
-    """Devuelve (lineas, nombres) de un partido terminado, o None si aún no está final."""
     g = descargar(URL_BOX.format(gid))["game"]
     if g.get("gameStatus") != 3:
         return None
@@ -152,7 +190,7 @@ def actualizar_lineas(calendario, cache):
     return nuevos, errores, quedan
 
 
-# ---------------------------------------------------------------- promedios
+# ---------------------------------------------------------------- promedios y valor
 def acumular(lineas):
     t = {"pj": 0, "min": 0.0, "fgm": 0, "fga": 0, "ftm": 0, "fta": 0,
          "tpm": 0, "pts": 0, "reb": 0, "ast": 0, "stl": 0, "blk": 0, "to": 0}
@@ -180,7 +218,7 @@ def calcular_jugadores(cache):
         for l in lineas:
             por_jugador.setdefault(str(l[0]), []).append(l)
 
-    hoy = datetime.now(timezone.utc).date()
+    hoy = hoy_eeuu()
     cortes = {d: (hoy - timedelta(days=d)).isoformat() for d in (7, 14, 30)}
     jugadores = []
     for pid, lineas in por_jugador.items():
@@ -188,7 +226,7 @@ def calcular_jugadores(cache):
         j = {
             "id": int(pid),
             "nombre": cache["nombres"].get(pid, pid),
-            "equipo": lineas[-1][1],                      # equipo del último partido
+            "equipo": lineas[-1][1],
             "ultimo_partido": lineas[-1][3],
             "temporada": acumular(lineas),
         }
@@ -196,8 +234,40 @@ def calcular_jugadores(cache):
             rec = [l for l in lineas if l[3] > corte]
             j[f"ult{d}"] = acumular(rec) if rec else None
         jugadores.append(j)
-    jugadores.sort(key=lambda j: -j["temporada"]["pts"])
-    return jugadores
+
+    # Partidos mínimos para entrar en el ranking de cada periodo
+    max_pj = max((j["temporada"]["pj"] for j in jugadores), default=0)
+    minimos = {"temporada": max(3, round(max_pj * 0.3)), "ult7": 2, "ult14": 3,
+               "ult30": max(3, round(min(max_pj, 15) * 0.3))}
+    for ventana, pj_min in minimos.items():
+        n = valor.calcular(jugadores, ventana, pj_min)
+        print(f"OK  Valor 9-cat '{ventana}': {n} jugadores elegibles (mín. {pj_min} PJ).")
+
+    jugadores.sort(key=lambda j: -(j["temporada"].get("valor") or -99))
+    return jugadores, minimos
+
+
+# ---------------------------------------------------------------- semanas
+def calcular_semanas(calendario):
+    por_dia = {}
+    for p in calendario:
+        por_dia[p["fecha"]] = por_dia.get(p["fecha"], 0) + 1
+
+    semanas = {}
+    for p in calendario:
+        d = date.fromisoformat(p["fecha"])
+        lunes = (d - timedelta(days=d.weekday())).isoformat()
+        s = semanas.setdefault(lunes, {"inicio": lunes,
+                                       "fin": (date.fromisoformat(lunes) + timedelta(days=6)).isoformat(),
+                                       "equipos": {}, "por_dia": {}})
+        s["por_dia"][p["fecha"]] = por_dia[p["fecha"]]
+        ligero = por_dia[p["fecha"]] <= DIA_LIGERO
+        for eq in (p["local"], p["visitante"]):
+            e = s["equipos"].setdefault(eq, {"p": 0, "lig": 0, "dias": []})
+            e["p"] += 1
+            e["lig"] += ligero
+            e["dias"].append(d.weekday())          # 0 = lunes
+    return {"dia_ligero_max": DIA_LIGERO, "semanas": [semanas[k] for k in sorted(semanas)]}
 
 
 # ---------------------------------------------------------------- principal
@@ -206,33 +276,31 @@ def main():
     jugados = sum(1 for p in calendario if p["estado"] == 3)
     print(f"OK  Calendario {temporada}: {len(calendario)} partidos de temporada regular ({jugados} terminados).")
 
-    cache = leer_json(DIR / "lineas.json", {"columnas": COLS, "partidos": {}, "nombres": {}})
-    cache["columnas"] = COLS
+    cache = cargar_cache()
     nuevos, errores, quedan = actualizar_lineas(calendario, cache)
-    print(f"OK  Box scores: {nuevos} partidos nuevos descargados, {len(cache['partidos'])} en total"
+    print(f"OK  Box scores: {nuevos} partidos nuevos, {len(cache['partidos'])} en total"
           + (f", {errores} con error" if errores else "")
           + (f". Quedan {quedan} para la próxima ejecución." if quedan else "."))
-    if errores and not nuevos and not cache["partidos"]:
+    if errores and not cache["partidos"]:
         fallo("No se ha podido descargar ningún box score. Puede que la NBA bloquee a GitHub.")
 
-    jugadores = calcular_jugadores(cache)
+    jugadores, minimos = calcular_jugadores(cache)
     ahora = datetime.now(timezone.utc).isoformat(timespec="seconds")
 
-    guardar(DIR / "calendario.json", {"temporada": temporada, "actualizado": ahora, "partidos": calendario})
-    guardar(DIR / "lineas.json", cache, compacto=True)
-    guardar(DIR / "jugadores.json", {"temporada": temporada, "actualizado": ahora, "jugadores": jugadores})
+    guardar_cache(cache, {p["id"]: p["fecha"] for p in calendario})
+    guardar(DIR / "calendario.json", {"temporada": temporada, "partidos": calendario})
+    guardar(DIR / "semanas.json", calcular_semanas(calendario))
+    cambio = guardar(DIR / "jugadores.json", {
+        "temporada": temporada, "actualizado": ahora, "hoy_eeuu": hoy_eeuu().isoformat(),
+        "categorias": valor.CATEGORIAS, "pj_minimos": minimos, "jugadores": jugadores,
+    })
 
-    print(f"OK  {len(jugadores)} jugadores con estadísticas.")
-    print("\n--- Comprobación: máximos anotadores (mín. 5 partidos) ---")
-    top = [j for j in jugadores if j["temporada"]["pj"] >= 5][:8]
-    for j in top:
+    print(f"OK  {len(jugadores)} jugadores." + ("" if cambio else " (Sin cambios desde la última vez.)"))
+    print("\n--- Comprobación: top 10 por valor 9-cat (temporada) ---")
+    for j in [j for j in jugadores if j["temporada"].get("elegible")][:10]:
         t = j["temporada"]
-        print(f"  {j['nombre']:<26} {j['equipo']}  {t['pj']:>2} PJ  {t['pts']:>5} pts  "
-              f"{t['reb']:>4} reb  {t['ast']:>4} ast  FG {t['fg_pct']}")
-
-    hoy = (datetime.now(timezone.utc) - timedelta(hours=5)).date().isoformat()  # hora aprox. de Nueva York
-    hoy_partidos = [p for p in calendario if p["fecha"] == hoy]
-    print(f"\nPartidos hoy ({hoy}, día EE. UU.): {len(hoy_partidos)}")
+        print(f"  {j['nombre']:<26} {j['equipo']}  {t['pj']:>2} PJ  valor {t['valor']:>6}  "
+              f"{t['pts']:>5} pts {t['reb']:>4} reb {t['ast']:>4} ast")
     print("\nGuardado en data/nba/")
 
 
