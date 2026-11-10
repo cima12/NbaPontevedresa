@@ -13,6 +13,7 @@ Solo reescribe un archivo si su contenido ha cambiado (para no inflar el reposit
 Solo usa la librería estándar de Python.
 """
 
+import http.client
 import json
 import sys
 import time
@@ -27,6 +28,8 @@ URL_CALENDARIO = "https://cdn.nba.com/static/json/staticData/scheduleLeagueV2.js
 URL_BOX = "https://cdn.nba.com/static/json/liveData/boxscore/boxscore_{}.json"
 MAX_PARTIDOS_POR_EJECUCION = 400
 PAUSA = 0.25
+REINTENTOS = 3          # intentos por descarga antes de rendirse
+ESPERAS = (5, 20)       # segundos de espera entre intentos
 DIA_LIGERO = 7          # días con 7 partidos NBA o menos
 
 RAIZ = Path(__file__).resolve().parent.parent
@@ -48,10 +51,29 @@ def fallo(msg):
     sys.exit(1)
 
 
-def descargar(url):
-    req = urllib.request.Request(url, headers=CABECERAS)
-    with urllib.request.urlopen(req, timeout=30) as r:
-        return json.loads(r.read().decode("utf-8"))
+# Fallos de red pasajeros (la CDN de la NBA a veces corta, tarda o devuelve error)
+ERRORES_RED = (urllib.error.URLError, TimeoutError, ConnectionError,
+               http.client.HTTPException, OSError, json.JSONDecodeError)
+
+
+def descargar(url, reintentos=REINTENTOS):
+    """Descarga un JSON; si falla por un problema pasajero, espera y lo vuelve a intentar."""
+    for intento in range(1, reintentos + 1):
+        try:
+            req = urllib.request.Request(url, headers=CABECERAS)
+            with urllib.request.urlopen(req, timeout=30) as r:
+                return json.loads(r.read().decode("utf-8"))
+        except urllib.error.HTTPError as e:
+            if e.code == 404 or intento == reintentos:   # 404 = no existe: no insistir
+                raise
+            error = e
+        except ERRORES_RED as e:
+            if intento == reintentos:
+                raise
+            error = e
+        espera = ESPERAS[min(intento - 1, len(ESPERAS) - 1)]
+        print(f"AVISO  Intento {intento} fallido ({error}). Reintento en {espera} s…")
+        time.sleep(espera)
 
 
 def leer_json(ruta, defecto):
@@ -93,10 +115,15 @@ def minutos(texto):
 def leer_calendario():
     try:
         raw = descargar(URL_CALENDARIO)
-    except (urllib.error.URLError, json.JSONDecodeError) as e:
-        fallo(f"No se pudo descargar el calendario de la NBA: {e}")
+        ls = raw["leagueSchedule"]
+    except (*ERRORES_RED, KeyError, TypeError) as e:
+        # Plan B: usar el calendario guardado en la última ejecución buena
+        guardado = leer_json(DIR / "calendario.json", None)
+        if not guardado or not guardado.get("partidos"):
+            fallo(f"No se pudo descargar el calendario de la NBA y no hay copia guardada: {e}")
+        print(f"AVISO  No se pudo descargar el calendario ({e}). Uso la copia guardada.")
+        return guardado.get("temporada"), guardado["partidos"]
 
-    ls = raw["leagueSchedule"]
     partidos = []
     for dia in ls.get("gameDates", []):
         for g in dia.get("games", []):
@@ -175,7 +202,7 @@ def actualizar_lineas(calendario, cache):
     for p in pendientes[:MAX_PARTIDOS_POR_EJECUCION]:
         try:
             res = leer_box(p["id"], p["fecha"])
-        except (urllib.error.URLError, json.JSONDecodeError, KeyError) as e:
+        except (*ERRORES_RED, KeyError, TypeError) as e:
             errores += 1
             print(f"AVISO  No se pudo leer el partido {p['id']} ({p['visitante']}@{p['local']}): {e}")
             continue
