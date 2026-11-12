@@ -1,0 +1,51 @@
+name: Comprobar acceso Yahoo
+
+on:
+  workflow_dispatch:      # botón "Run workflow" para probar cuando quieras
+  schedule:
+    - cron: "47 7 * * *"  # todos los días a las 07:47 UTC (08:47 en Galicia en invierno)
+
+permissions:
+  contents: read
+  issues: write           # para abrir el aviso cuando Yahoo apruebe
+
+concurrency:
+  group: comprobar-acceso
+  cancel-in-progress: true
+
+jobs:
+  comprobar:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Descargar el repositorio
+        uses: actions/checkout@v5
+
+      - name: Preparar Python
+        uses: actions/setup-python@v6
+        with:
+          python-version: "3.12"
+
+      - name: Preguntar a Yahoo
+        id: yahoo
+        env:
+          YAHOO_CLIENT_ID: ${{ secrets.YAHOO_CLIENT_ID }}
+          YAHOO_CLIENT_SECRET: ${{ secrets.YAHOO_CLIENT_SECRET }}
+          YAHOO_REFRESH_TOKEN: ${{ secrets.YAHOO_REFRESH_TOKEN }}
+        run: python scripts/comprobar_acceso.py
+
+      - name: Avisar si ya hay acceso
+        if: steps.yahoo.outputs.acceso == 'si'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          TITULO="✅ Yahoo ha aprobado el acceso a la API"
+          if gh issue list --repo "$GITHUB_REPOSITORY" --state all --search "$TITULO in:title" --json number --jq 'length' | grep -qv '^0$'; then
+            echo "El aviso ya existía; no se abre otro."
+          else
+            gh issue create --repo "$GITHUB_REPOSITORY" --title "$TITULO" --body "La comprobación diaria ha conseguido leer datos de Yahoo Fantasy.
+
+          Siguientes pasos:
+          1. Lanzar el Action «Actualizar liga».
+          2. Desactivar este Action: Actions → Comprobar acceso Yahoo → ··· → Disable workflow."
+          fi
