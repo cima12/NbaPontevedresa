@@ -1,51 +1,40 @@
-name: Comprobar acceso Yahoo
+"""
+comprobar_acceso.py · NbaPontevedresa · ¿Ha aprobado ya Yahoo la app?
 
-on:
-  workflow_dispatch:      # botón "Run workflow" para probar cuando quieras
-  schedule:
-    - cron: "47 7 * * *"  # todos los días a las 07:47 UTC (08:47 en Galicia en invierno)
+Lo ejecuta GitHub Actions una vez al día (workflow "Comprobar acceso Yahoo").
+Renueva el token y hace UNA consulta pública (game/nba):
+  - 403 "not authorized"  -> todavía sin aprobar (el Action sale en verde, sin más).
+  - respuesta correcta    -> ¡aprobado! El workflow abre un aviso (issue) en el repo.
+  - otro error            -> el Action sale en rojo para que se revise.
 
-permissions:
-  contents: read
-  issues: write           # para abrir el aviso cuando Yahoo apruebe
+No guarda nada en el repositorio y nunca imprime tokens.
+"""
 
-concurrency:
-  group: comprobar-acceso
-  cancel-in-progress: true
+import os
+import sys
 
-jobs:
-  comprobar:
-    runs-on: ubuntu-latest
-    timeout-minutes: 5
-    steps:
-      - name: Descargar el repositorio
-        uses: actions/checkout@v5
+from conexion import ErrorAPI, api, descripcion_error, fusionar, obtener_token
 
-      - name: Preparar Python
-        uses: actions/setup-python@v6
-        with:
-          python-version: "3.12"
 
-      - name: Preguntar a Yahoo
-        id: yahoo
-        env:
-          YAHOO_CLIENT_ID: ${{ secrets.YAHOO_CLIENT_ID }}
-          YAHOO_CLIENT_SECRET: ${{ secrets.YAHOO_CLIENT_SECRET }}
-          YAHOO_REFRESH_TOKEN: ${{ secrets.YAHOO_REFRESH_TOKEN }}
-        run: python scripts/comprobar_acceso.py
+def escribir_salida(acceso):
+    ruta = os.environ.get("GITHUB_OUTPUT")
+    if ruta:
+        with open(ruta, "a", encoding="utf-8") as f:
+            f.write(f"acceso={acceso}\n")
 
-      - name: Avisar si ya hay acceso
-        if: steps.yahoo.outputs.acceso == 'si'
-        env:
-          GH_TOKEN: ${{ github.token }}
-        run: |
-          TITULO="✅ Yahoo ha aprobado el acceso a la API"
-          if gh issue list --repo "$GITHUB_REPOSITORY" --state all --search "$TITULO in:title" --json number --jq 'length' | grep -qv '^0$'; then
-            echo "El aviso ya existía; no se abre otro."
-          else
-            gh issue create --repo "$GITHUB_REPOSITORY" --title "$TITULO" --body "La comprobación diaria ha conseguido leer datos de Yahoo Fantasy.
 
-          Siguientes pasos:
-          1. Lanzar el Action «Actualizar liga».
-          2. Desactivar este Action: Actions → Comprobar acceso Yahoo → ··· → Disable workflow."
-          fi
+def resumen(texto):
+    ruta = os.environ.get("GITHUB_STEP_SUMMARY")
+    if ruta:
+        with open(ruta, "a", encoding="utf-8") as f:
+            f.write(texto + "\n")
+    print(texto)
+
+
+def main():
+    token = obtener_token()  # si las claves fallan, sale en rojo él solo
+    try:
+        juego = fusionar(api(token, "game/nba")["game"])
+    except ErrorAPI as e:
+        desc = descripcion_error(e)
+        if e.codigo == 403 and "not authorized" in desc.lower():
