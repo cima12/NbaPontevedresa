@@ -1,3 +1,4 @@
+
 """
 comprobar_acceso.py · NbaPontevedresa · ¿Ha aprobado ya Yahoo la app?
 
@@ -38,3 +39,17 @@ def main():
     except ErrorAPI as e:
         desc = descripcion_error(e)
         if e.codigo == 403 and "not authorized" in desc.lower():
+            escribir_salida("no")
+            resumen("⏳ Yahoo todavía no ha aprobado la app (403: not authorized). Mañana se vuelve a probar.")
+            return
+        escribir_salida("error")
+        resumen(f"❌ Error inesperado de Yahoo (HTTP {e.codigo}): {desc}")
+        sys.exit(1)
+
+    escribir_salida("si")
+    resumen(f"✅ ¡Acceso concedido! Yahoo responde: temporada {juego.get('season')}, "
+            f"game_key {juego.get('game_key')}. Ya se puede lanzar «Actualizar liga».")
+
+
+if __name__ == "__main__":
+    main()
