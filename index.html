@@ -91,11 +91,27 @@
           <option value="ult7">Últimos 7 días</option>
         </select>
         <select id="equipo"><option value="">Todos los equipos</option></select>
+        <select id="posicion">
+          <option value="">Todas las posiciones</option>
+          <option value="PG">Base (PG)</option>
+          <option value="SG">Escolta (SG)</option>
+          <option value="SF">Alero (SF)</option>
+          <option value="PF">Ala-pívot (PF)</option>
+          <option value="C">Pívot (C)</option>
+        </select>
+        <select id="edadmax">
+          <option value="">Cualquier edad</option>
+          <option value="22">22 años o menos</option>
+          <option value="25">25 años o menos</option>
+          <option value="28">28 años o menos</option>
+          <option value="31">31 años o menos</option>
+        </select>
         <input type="search" id="buscar" placeholder="Buscar jugador…">
       </div>
       <div class="chips" id="chips"><span class="etq">Puntear:</span></div>
       <p class="ayuda">Toca una categoría para <b>puntearla</b> (no cuenta en el valor). Toca una cabecera de la tabla para ordenar.
-        El color indica lo bueno (verde) o malo (rojo) que es el jugador en esa categoría.</p>
+        El color indica lo bueno (verde) o malo (rojo) que es el jugador en esa categoría.
+        Posición y edad: ESPN (la posición oficial de Yahoo llegará con el acceso a su API).</p>
     </div>
     <div class="tabla-wrap"><table id="tabla-ranking"></table></div>
     <button class="mas" id="ver-mas" hidden>Ver más jugadores</button>
@@ -117,7 +133,7 @@
 </main>
 
 <footer>
-  Estadísticas: NBA.com · Actualizado: <span id="actualizado">—</span>
+  Estadísticas: NBA.com · Posición y edad: ESPN · Actualizado: <span id="actualizado">—</span>
 </footer>
 
 <script>
@@ -134,7 +150,7 @@ const CATS = [
   { k: "to",  n: "TO",  v: s => s.to.toFixed(1) },
 ];
 const PASO = 100;
-const est = { datos: null, semanas: null, ventana: "temporada", equipo: "", buscar: "",
+const est = { datos: null, semanas: null, ventana: "temporada", equipo: "", buscar: "", pos: "", edadMax: 0,
               punt: new Set(), orden: "valor", limite: PASO, ordenSemana: 0 };
 
 const $ = id => document.getElementById(id);
@@ -159,6 +175,20 @@ async function cargar(ruta) {
 }
 
 /* ---------------- RANKING ---------------- */
+// Edad con un decimal a fecha de hoy (null si no hay fecha de nacimiento)
+function edad(j) {
+  if (!j.nac) return null;
+  return (Date.now() - Date.parse(j.nac + "T12:00:00Z")) / (365.2425 * 864e5);
+}
+
+// "G" (ESPN) vale para PG y SG; "F" para SF y PF. "PG,SG" (Yahoo) vale para ambas.
+function juegaDe(j, pos) {
+  if (!j.pos) return false;
+  const ps = j.pos.split(/[,/-]/);
+  return ps.includes(pos) || (ps.includes("G") && (pos === "PG" || pos === "SG"))
+                          || (ps.includes("F") && (pos === "SF" || pos === "PF"));
+}
+
 function valorJugador(s) {
   return s.z.reduce((acc, z, i) => acc + (est.punt.has(CATS[i].k) ? 0 : z), 0);
 }
@@ -170,12 +200,16 @@ function pintarRanking() {
   if (q) filas = filas.filter(j => j.nombre.toLowerCase().includes(q));
   else filas = filas.filter(j => j[v].elegible);
   if (est.equipo) filas = filas.filter(j => j.equipo === est.equipo);
+  if (est.pos) filas = filas.filter(j => juegaDe(j, est.pos));
+  filas.forEach(j => j._edad = edad(j));
+  if (est.edadMax) filas = filas.filter(j => j._edad != null && j._edad < est.edadMax + 1);
 
   filas.forEach(j => j._val = valorJugador(j[v]));
   const iCat = CATS.findIndex(c => c.k === est.orden);
   if (est.orden === "valor") filas.sort((a, b) => b._val - a._val);
   else if (est.orden === "min") filas.sort((a, b) => b[v].min - a[v].min);
   else if (est.orden === "pj") filas.sort((a, b) => b[v].pj - a[v].pj);
+  else if (est.orden === "edad") filas.sort((a, b) => (a._edad ?? 99) - (b._edad ?? 99));
   else filas.sort((a, b) => b[v].z[iCat] - a[v].z[iCat]);
 
   // posición según el valor (no cambia al ordenar por otra columna)
@@ -183,13 +217,14 @@ function pintarRanking() {
 
   const th = (k, t, cls = "") =>
     `<th data-orden="${k}" class="${cls}${est.orden === k ? " orden" : ""}${est.punt.has(k) ? " punt" : ""}">${t}</th>`;
-  let html = "<thead><tr>" + th("valor", "Jugador", "fijo") + th("valor", "Valor") +
+  let html = "<thead><tr>" + th("valor", "Jugador", "fijo") + th("valor", "Valor") + th("edad", "Edad") +
     th("pj", "PJ") + th("min", "MIN") + CATS.map(c => th(c.k, c.n)).join("") + "</tr></thead><tbody>";
 
   for (const j of filas.slice(0, est.limite)) {
     const s = j[v];
-    html += `<tr><td class="fijo"><span class="pos">${rank.get(j.id)}</span><span class="nom">${esc(j.nombre)}</span><span class="peq eq">${esc(j.equipo)}</span></td>
+    html += `<tr><td class="fijo"><span class="pos">${rank.get(j.id)}</span><span class="nom">${esc(j.nombre)}</span><span class="peq eq">${esc(j.equipo)}${j.pos ? " · " + esc(j.pos) : ""}</span></td>
       <td class="val" style="${color(j._val / 3)}">${j._val.toFixed(1)}</td>
+      <td>${j._edad == null ? "–" : j._edad.toFixed(1)}</td>
       <td>${s.pj}</td><td>${s.min.toFixed(0)}</td>` +
       CATS.map((c, i) => `<td class="cat${est.punt.has(c.k) ? " off" : ""}" style="${color(s.z[i])}">${c.v(s)}</td>`).join("") +
       "</tr>";
@@ -222,6 +257,11 @@ function prepararRanking() {
 
   $("ventana").onchange = e => { est.ventana = e.target.value; est.limite = PASO; pintarRanking(); };
   $("equipo").onchange = e => { est.equipo = e.target.value; est.limite = PASO; pintarRanking(); };
+  $("posicion").onchange = e => { est.pos = e.target.value; est.limite = PASO; pintarRanking(); };
+  $("edadmax").onchange = e => { est.edadMax = +e.target.value || 0; est.limite = PASO; pintarRanking(); };
+  // Sin datos de posición (todavía no se ha ejecutado perfiles.py): ocultar esos filtros
+  if (!est.datos.jugadores.some(j => j.pos)) $("posicion").hidden = true;
+  if (!est.datos.jugadores.some(j => j.nac)) $("edadmax").hidden = true;
   $("buscar").oninput = e => { est.buscar = e.target.value; est.limite = PASO; pintarRanking(); };
   $("ver-mas").onclick = () => { est.limite += PASO; pintarRanking(); };
   $("tabla-ranking").onclick = e => {

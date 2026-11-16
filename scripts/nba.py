@@ -8,6 +8,7 @@ partido terminado, y genera en data/nba/:
   nombres.json         -> id de jugador -> nombre
   jugadores.json       -> promedios y valor 9-cat: temporada y últimos 7/14/30 días
   semanas.json         -> partidos de cada equipo por semana (lunes a domingo)
+  perfiles.json        -> posición y fecha de nacimiento (de ESPN; ver perfiles.py)
 
 Solo reescribe un archivo si su contenido ha cambiado (para no inflar el repositorio).
 Solo usa la librería estándar de Python.
@@ -22,6 +23,7 @@ import urllib.request
 from datetime import date, datetime, timedelta, timezone
 from pathlib import Path
 
+import perfiles
 import valor
 
 URL_CALENDARIO = "https://cdn.nba.com/static/json/staticData/scheduleLeagueV2.json"
@@ -312,6 +314,13 @@ def main():
         fallo("No se ha podido descargar ningún box score. Puede que la NBA bloquee a GitHub.")
 
     jugadores, minimos = calcular_jugadores(cache)
+
+    # Posición y fecha de nacimiento (ESPN). Si falla, se usan las guardadas.
+    fichas = perfiles.actualizar(jugadores, DIR / "perfiles.json", leer_json, guardar)
+    for j in jugadores:
+        f = fichas.get(str(j["id"]), {})
+        j["pos"] = f.get("pos_yahoo") or f.get("pos")
+        j["nac"] = f.get("nac")
     ahora = datetime.now(timezone.utc).isoformat(timespec="seconds")
 
     guardar_cache(cache, {p["id"]: p["fecha"] for p in calendario})
