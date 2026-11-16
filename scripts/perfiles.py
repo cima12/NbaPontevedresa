@@ -12,6 +12,9 @@ Se enlazan con los ids de la NBA por nombre (sin acentos ni sufijos Jr./III) y e
 Los jugadores que ya no aparecen en ninguna plantilla conservan su dato anterior.
 Si ESPN falla, se mantiene el archivo anterior y no se para nada.
 
+La posición se toma, si se puede, del juego de fantasy de ESPN (elegibilidad
+PG/SG/SF/PF/C, parecida a la de Yahoo); si no, la genérica de la plantilla (G/F/C).
+
 Cuando haya acceso a Yahoo, la posición oficial de Yahoo (elegibilidad, p. ej.
 "PG,SG") se añadirá como "pos_yahoo" y la web la preferirá a la de ESPN.
 """
@@ -25,6 +28,11 @@ from datetime import datetime, timezone
 
 URL_EQUIPOS = "https://site.api.espn.com/apis/site/v2/sports/basketball/nba/teams"
 URL_PLANTILLA = "https://site.api.espn.com/apis/site/v2/sports/basketball/nba/teams/{}/roster"
+# Juego de fantasy de ESPN: posiciones de elegibilidad (PG, SG, SF, PF, C), parecidas a las de Yahoo
+URL_FANTASY = ("https://lm-api-reads.fantasy.espn.com/apis/v3/games/fba/seasons/{}/players"
+               "?scoringPeriodId=0&view=players_wl")
+FILTRO_FANTASY = json.dumps({"players": {"filterActive": {"value": True}, "limit": 2000}})
+HUECOS = {0: "PG", 1: "SG", 2: "SF", 3: "PF", 4: "C"}     # eligibleSlots de ESPN
 CABECERAS = {"User-Agent": "Mozilla/5.0 (NbaPontevedresa; uso personal)", "Accept": "application/json"}
 PAUSA = 0.3
 
@@ -33,11 +41,11 @@ ESPN_A_NBA = {"GS": "GSW", "NY": "NYK", "SA": "SAS", "NO": "NOP", "UTAH": "UTA",
 SUFIJOS = {"jr", "sr", "ii", "iii", "iv", "v"}
 
 
-def _get(url):
+def _get(url, extra=None):
     ultimo = None
     for intento in range(3):
         try:
-            req = urllib.request.Request(url, headers=CABECERAS)
+            req = urllib.request.Request(url, headers={**CABECERAS, **(extra or {})})
             with urllib.request.urlopen(req, timeout=20) as r:
                 return json.loads(r.read().decode("utf-8"))
         except Exception as e:          # cualquier fallo de red o de formato
@@ -80,6 +88,19 @@ def leer_espn():
     return out
 
 
+def leer_fantasy():
+    """Lista de {nombre, equipo:'', pos:'PG,SG'} del juego de fantasy de ESPN."""
+    hoy = datetime.now(timezone.utc)
+    temporada = hoy.year + 1 if hoy.month >= 8 else hoy.year       # 2026-27 -> 2027
+    raw = _get(URL_FANTASY.format(temporada), {"X-Fantasy-Filter": FILTRO_FANTASY})
+    out = []
+    for a in raw if isinstance(raw, list) else raw.get("players", []):
+        pos = [HUECOS[h] for h in sorted(set(a.get("eligibleSlots", []))) if h in HUECOS]
+        if pos:
+            out.append({"nombre": a.get("fullName", ""), "equipo": "", "pos": ",".join(pos), "nac": None})
+    return out
+
+
 def enlazar(jugadores, espn):
     """Empareja cada jugador NBA (id, nombre, equipo) con su ficha de ESPN."""
     por_nombre, por_apellido = {}, {}
@@ -117,6 +138,16 @@ def actualizar(jugadores, ruta, leer_json, guardar):
         return previo
 
     nuevos, sin = enlazar(jugadores, espn)
+
+    # Posición de fantasy (PG/SG/SF/PF/C) en lugar de la genérica G/F/C, si se puede
+    try:
+        fantasy = leer_fantasy()
+        pos_f, _ = enlazar(jugadores, fantasy)
+        for pid, p in pos_f.items():
+            nuevos.setdefault(pid, {"pos": None, "nac": None})["pos"] = p["pos"]
+        print(f"OK  Posiciones de ESPN Fantasy: {len(pos_f)} jugadores ({len(fantasy)} en ESPN).")
+    except Exception as e:
+        print(f"AVISO  No se pudieron leer las posiciones de ESPN Fantasy ({e}). Se usa G/F/C.")
     perfiles = dict(previo)
     for pid, p in nuevos.items():
         perfiles[pid] = {**perfiles.get(pid, {}), **{k: v for k, v in p.items() if v}}
