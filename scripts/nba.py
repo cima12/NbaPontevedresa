@@ -317,9 +317,11 @@ def main():
 
     # Posición y fecha de nacimiento (ESPN). Si falla, se usan las guardadas.
     fichas = perfiles.actualizar(jugadores, DIR / "perfiles.json", leer_json, guardar)
+    # Posición oficial de Yahoo (la guarda conexion.py) cuando la hay; si no, la de ESPN
+    pos_yahoo = leer_json(DIR.parent / "liga" / "posiciones.json", {}).get("jugadores", {})
     for j in jugadores:
         f = fichas.get(str(j["id"]), {})
-        j["pos"] = f.get("pos_yahoo") or f.get("pos")
+        j["pos"] = pos_yahoo.get(str(j["id"])) or f.get("pos")
         j["nac"] = f.get("nac")
     ahora = datetime.now(timezone.utc).isoformat(timespec="seconds")
 

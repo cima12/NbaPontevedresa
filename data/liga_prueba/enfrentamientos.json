@@ -1,0 +1,272 @@
+{
+ "semana": "6",
+ "inicio": "2026-11-23",
+ "fin": "2026-11-29",
+ "partidos": [
+  {
+   "estado": "midevent",
+   "playoffs": false,
+   "equipos": [
+    {
+     "key": "466.l.9972.t.1",
+     "stats": {
+      "fgm": 50.0,
+      "fga": 97.0,
+      "fg_pct": 0.511,
+      "ftm": 25.0,
+      "fta": 33.0,
+      "ft_pct": 0.74,
+      "tpm": 11.0,
+      "pts": 131.0,
+      "reb": 45.0,
+      "ast": 29.0,
+      "stl": 7.0,
+      "blk": 8.0,
+      "to": 14.0
+     },
+     "puntos": "4"
+    },
+    {
+     "key": "466.l.9972.t.6",
+     "stats": {
+      "fgm": 34.0,
+      "fga": 78.0,
+      "fg_pct": 0.433,
+      "ftm": 19.0,
+      "fta": 23.0,
+      "ft_pct": 0.832,
+      "tpm": 12.0,
+      "pts": 83.0,
+      "reb": 32.0,
+      "ast": 29.0,
+      "stl": 5.0,
+      "blk": 3.0,
+      "to": 15.0
+     },
+     "puntos": "4"
+    }
+   ]
+  },
+  {
+   "estado": "midevent",
+   "playoffs": false,
+   "equipos": [
+    {
+     "key": "466.l.9972.t.2",
+     "stats": {
+      "fgm": 40.0,
+      "fga": 79.0,
+      "fg_pct": 0.5,
+      "ftm": 18.0,
+      "fta": 22.0,
+      "ft_pct": 0.823,
+      "tpm": 10.0,
+      "pts": 113.0,
+      "reb": 38.0,
+      "ast": 24.0,
+      "stl": 10.0,
+      "blk": 4.0,
+      "to": 13.0
+     },
+     "puntos": "4"
+    },
+    {
+     "key": "466.l.9972.t.3",
+     "stats": {
+      "fgm": 55.0,
+      "fga": 117.0,
+      "fg_pct": 0.469,
+      "ftm": 29.0,
+      "fta": 36.0,
+      "ft_pct": 0.802,
+      "tpm": 21.0,
+      "pts": 159.0,
+      "reb": 45.0,
+      "ast": 39.0,
+      "stl": 9.0,
+      "blk": 5.0,
+      "to": 18.0
+     },
+     "puntos": "4"
+    }
+   ]
+  },
+  {
+   "estado": "midevent",
+   "playoffs": false,
+   "equipos": [
+    {
+     "key": "466.l.9972.t.4",
+     "stats": {
+      "fgm": 41.0,
+      "fga": 78.0,
+      "fg_pct": 0.528,
+      "ftm": 19.0,
+      "fta": 24.0,
+      "ft_pct": 0.774,
+      "tpm": 13.0,
+      "pts": 101.0,
+      "reb": 41.0,
+      "ast": 21.0,
+      "stl": 6.0,
+      "blk": 3.0,
+      "to": 13.0
+     },
+     "puntos": "4"
+    },
+    {
+     "key": "466.l.9972.t.5",
+     "stats": {
+      "fgm": 34.0,
+      "fga": 81.0,
+      "fg_pct": 0.42,
+      "ftm": 26.0,
+      "fta": 29.0,
+      "ft_pct": 0.893,
+      "tpm": 11.0,
+      "pts": 99.0,
+      "reb": 33.0,
+      "ast": 30.0,
+      "stl": 7.0,
+      "blk": 3.0,
+      "to": 13.0
+     },
+     "puntos": "4"
+    }
+   ]
+  },
+  {
+   "estado": "midevent",
+   "playoffs": false,
+   "equipos": [
+    {
+     "key": "466.l.9972.t.7",
+     "stats": {
+      "fgm": 53.0,
+      "fga": 102.0,
+      "fg_pct": 0.526,
+      "ftm": 19.0,
+      "fta": 25.0,
+      "ft_pct": 0.754,
+      "tpm": 16.0,
+      "pts": 155.0,
+      "reb": 65.0,
+      "ast": 28.0,
+      "stl": 7.0,
+      "blk": 7.0,
+      "to": 15.0
+     },
+     "puntos": "4"
+    },
+    {
+     "key": "466.l.9972.t.8",
+     "stats": {
+      "fgm": 45.0,
+      "fga": 91.0,
+      "fg_pct": 0.493,
+      "ftm": 26.0,
+      "fta": 32.0,
+      "ft_pct": 0.818,
+      "tpm": 11.0,
+      "pts": 124.0,
+      "reb": 56.0,
+      "ast": 32.0,
+      "stl": 7.0,
+      "blk": 4.0,
+      "to": 19.0
+     },
+     "puntos": "4"
+    }
+   ]
+  },
+  {
+   "estado": "midevent",
+   "playoffs": false,
+   "equipos": [
+    {
+     "key": "466.l.9972.t.9",
+     "stats": {
+      "fgm": 49.0,
+      "fga": 97.0,
+      "fg_pct": 0.502,
+      "ftm": 19.0,
+      "fta": 24.0,
+      "ft_pct": 0.824,
+      "tpm": 14.0,
+      "pts": 117.0,
+      "reb": 46.0,
+      "ast": 28.0,
+      "stl": 12.0,
+      "blk": 5.0,
+      "to": 14.0
+     },
+     "puntos": "4"
+    },
+    {
+     "key": "466.l.9972.t.10",
+     "stats": {
+      "fgm": 33.0,
+      "fga": 74.0,
+      "fg_pct": 0.451,
+      "ftm": 20.0,
+      "fta": 22.0,
+      "ft_pct": 0.909,
+      "tpm": 11.0,
+      "pts": 101.0,
+      "reb": 20.0,
+      "ast": 27.0,
+      "stl": 5.0,
+      "blk": 2.0,
+      "to": 12.0
+     },
+     "puntos": "4"
+    }
+   ]
+  },
+  {
+   "estado": "midevent",
+   "playoffs": false,
+   "equipos": [
+    {
+     "key": "466.l.9972.t.11",
+     "stats": {
+      "fgm": 52.0,
+      "fga": 106.0,
+      "fg_pct": 0.495,
+      "ftm": 30.0,
+      "fta": 38.0,
+      "ft_pct": 0.801,
+      "tpm": 11.0,
+      "pts": 151.0,
+      "reb": 42.0,
+      "ast": 32.0,
+      "stl": 10.0,
+      "blk": 7.0,
+      "to": 16.0
+     },
+     "puntos": "4"
+    },
+    {
+     "key": "466.l.9972.t.12",
+     "stats": {
+      "fgm": 48.0,
+      "fga": 101.0,
+      "fg_pct": 0.475,
+      "ftm": 25.0,
+      "fta": 31.0,
+      "ft_pct": 0.811,
+      "tpm": 14.0,
+      "pts": 124.0,
+      "reb": 32.0,
+      "ast": 31.0,
+      "stl": 8.0,
+      "blk": 3.0,
+      "to": 15.0
+     },
+     "puntos": "4"
+    }
+   ]
+  }
+ ],
+ "actualizado": "2026-11-25T23:39:36+00:00"
+}

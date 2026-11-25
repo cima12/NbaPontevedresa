@@ -68,18 +68,33 @@
   .estado { text-align: center; color: var(--sub); padding: 30px 10px; }
   footer { color: var(--sub); font-size: 11px; text-align: center; padding: 8px 12px calc(16px + env(safe-area-inset-bottom)); }
   footer a { color: var(--sub); }
+  table.liga th { cursor: default; position: static; }
+  table.liga td { padding: 6px 5px; }
+  tr.yo td { color: var(--ambar); font-weight: 600; }
+  .avisos { list-style: none; padding: 0; margin: 8px 0; }
+  .avisos li { padding: 6px 0; border-bottom: 1px solid var(--line); }
+  details summary { cursor: pointer; color: var(--verde); margin-top: 6px; }
+  .banner { background: var(--ambar); color: #000; border-radius: 10px; padding: 8px 10px; margin-bottom: 12px; font-weight: 600; font-size: 13px; }
 </style>
 </head>
 <body>
 <header>
   <h1>NBA <span>Pontevedresa</span></h1>
   <nav>
+    <button data-sec="liga" hidden>Mi semana</button>
     <button data-sec="ranking" class="activo">Ranking</button>
     <button data-sec="calendario">Calendario</button>
   </nav>
 </header>
 
 <main>
+  <!-- ============ MI SEMANA (datos de Yahoo; ver liga.js) ============ -->
+  <section id="liga" class="seccion">
+    <div class="banner" id="liga-prueba" hidden>DATOS DE PRUEBA: equipos y jugadores repartidos al azar. No es la liga real.</div>
+    <div class="tarjeta"><div class="controles"><span class="peq">Soy:</span><select id="soy" style="flex:1"></select></div></div>
+    <div id="liga-contenido"></div>
+  </section>
+
   <!-- ============ RANKING ============ -->
   <section id="ranking" class="seccion activa">
     <div class="tarjeta">
@@ -106,12 +121,13 @@
           <option value="28">28 años o menos</option>
           <option value="31">31 años o menos</option>
         </select>
+        <select id="dueno" hidden></select>
         <input type="search" id="buscar" placeholder="Buscar jugador…">
       </div>
       <div class="chips" id="chips"><span class="etq">Puntear:</span></div>
       <p class="ayuda">Toca una categoría para <b>puntearla</b> (no cuenta en el valor). Toca una cabecera de la tabla para ordenar.
         El color indica lo bueno (verde) o malo (rojo) que es el jugador en esa categoría.
-        Posición y edad: ESPN (la posición oficial de Yahoo llegará con el acceso a su API).</p>
+        Posición: Yahoo cuando hay datos de la liga; si no, ESPN. Edad: ESPN.</p>
     </div>
     <div class="tabla-wrap"><table id="tabla-ranking"></table></div>
     <button class="mas" id="ver-mas" hidden>Ver más jugadores</button>
@@ -134,8 +150,10 @@
 
 <footer>
   Estadísticas: NBA.com · Posición y edad: ESPN · Actualizado: <span id="actualizado">—</span>
+  <span id="aviso-yahoo" hidden><br><a href="https://sports.yahoo.com/fantasy/" target="_blank" rel="noopener">Fantasy data provided by Yahoo Fantasy</a></span>
 </footer>
 
+<script src="liga.js"></script>
 <script>
 "use strict";
 const CATS = [
@@ -151,7 +169,7 @@ const CATS = [
 ];
 const PASO = 100;
 const est = { datos: null, semanas: null, ventana: "temporada", equipo: "", buscar: "", pos: "", edadMax: 0,
-              punt: new Set(), orden: "valor", limite: PASO, ordenSemana: 0 };
+              punt: new Set(), orden: "valor", limite: PASO, ordenSemana: 0, dueno: "" };
 
 const $ = id => document.getElementById(id);
 const leerLS = (k, d) => { try { const v = localStorage.getItem(k); return v ? JSON.parse(v) : d; } catch (e) { return d; } };
@@ -201,6 +219,7 @@ function pintarRanking() {
   else filas = filas.filter(j => j[v].elegible);
   if (est.equipo) filas = filas.filter(j => j.equipo === est.equipo);
   if (est.pos) filas = filas.filter(j => juegaDe(j, est.pos));
+  if (est.dueno) filas = filas.filter(ligaFiltro);
   filas.forEach(j => j._edad = edad(j));
   if (est.edadMax) filas = filas.filter(j => j._edad != null && j._edad < est.edadMax + 1);
 
@@ -222,7 +241,7 @@ function pintarRanking() {
 
   for (const j of filas.slice(0, est.limite)) {
     const s = j[v];
-    html += `<tr><td class="fijo"><span class="pos">${rank.get(j.id)}</span><span class="nom">${esc(j.nombre)}</span><span class="peq eq">${esc(j.equipo)}${j.pos ? " · " + esc(j.pos) : ""}</span></td>
+    html += `<tr><td class="fijo"><span class="pos">${rank.get(j.id)}</span><span class="nom">${esc(j.nombre)}</span><span class="peq eq">${esc(j.equipo)}${j.pos ? " · " + esc(j.pos) : ""}${ligaEtiqueta(j)}</span></td>
       <td class="val" style="${color(j._val / 3)}">${j._val.toFixed(1)}</td>
       <td>${j._edad == null ? "–" : j._edad.toFixed(1)}</td>
       <td>${s.pj}</td><td>${s.min.toFixed(0)}</td>` +
@@ -335,7 +354,7 @@ document.querySelectorAll("nav button").forEach(b => b.onclick = () => {
   window.scrollTo(0, 0);
 });
 const secGuardada = leerLS("seccion", "ranking");
-if (secGuardada !== "ranking") document.querySelector(`nav button[data-sec="${secGuardada}"]`)?.click();
+if (secGuardada !== "ranking" && secGuardada !== "liga") document.querySelector(`nav button[data-sec="${secGuardada}"]`)?.click();
 
 (async () => {
   try {
@@ -343,6 +362,7 @@ if (secGuardada !== "ranking") document.querySelector(`nav button[data-sec="${se
     const f = new Date(est.datos.actualizado);
     $("actualizado").textContent = f.toLocaleString("es-ES", { day: "numeric", month: "short", hour: "2-digit", minute: "2-digit" });
     prepararRanking();
+    iniciarLiga();             // datos de Yahoo, si los hay (liga.js)
   } catch (e) {
     $("estado-ranking").textContent = "No se pudieron cargar los datos de jugadores (" + e.message + ").";
   }

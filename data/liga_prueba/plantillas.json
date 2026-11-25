@@ -1,0 +1,2152 @@
+{
+ "fecha": "2026-11-25",
+ "equipos": {
+  "466.l.9972.t.1": [
+   {
+    "yahoo_id": "1641705",
+    "nombre": "Victor Wembanyama",
+    "equipo_nba": "SAS",
+    "pos": [
+     "C"
+    ],
+    "hueco": "PG",
+    "estado": "",
+    "lesion": "",
+    "nba_id": 1641705
+   },
+   {
+    "yahoo_id": "1630559",
+    "nombre": "Austin Reaves",
+    "equipo_nba": "LAL",
+    "pos": [
+     "PG",
+     "SG"
+    ],
+    "hueco": "SG",
+    "estado": "",
+    "lesion": "",
+    "nba_id": 1630559
+   },
+   {
+    "yahoo_id": "1631117",
+    "nombre": "Walker Kessler",
+    "equipo_nba": "LAL",
+    "pos": [
+     "C"
+    ],
+    "hueco": "SF",
+    "estado": "",
+    "lesion": "",
+    "nba_id": 1631117
+   },
+   {
+    "yahoo_id": "1630596",
+    "nombre": "Evan Mobley",
+    "equipo_nba": "CLE",
+    "pos": [
+     "PF",
+     "C"
+    ],
+    "hueco": "PF",
+    "estado": "O",
+    "lesion": "",
+    "nba_id": 1630596
+   },
+   {
+    "yahoo_id": "1642844",
+    "nombre": "Dylan Harper",
+    "equipo_nba": "SAS",
+    "pos": [
+     "PG",
+     "SG"
+    ],
+    "hueco": "C",
+    "estado": "O",
+    "lesion": "",
+    "nba_id": 1642844
+   },
+   {
+    "yahoo_id": "1627832",
+    "nombre": "Fred VanVleet",
+    "equipo_nba": "HOU",
+    "pos": [
+     "PG",
+     "SG"
+    ],
+    "hueco": "Util",
+    "estado": "",
+    "lesion": "",
+    "nba_id": 1627832
+   },
+   {
+    "yahoo_id": "1628384",
+    "nombre": "OG Anunoby",
+    "equipo_nba": "NYK",
+    "pos": [
+     "SF",
+     "PF"
+    ],
+    "hueco": "Util",
+    "estado": "O",
+    "lesion": "",
+    "nba_id": 1628384
+   },
+   {
+    "yahoo_id": "203944",
+    "nombre": "Julius Randle",
+    "equipo_nba": "BKN",
+    "pos": [
+     "PF"
+    ],
+    "hueco": "Util",
+    "estado": "",
+    "lesion": "",
+    "nba_id": 203944
+   },
+   {
+    "yahoo_id": "201572",
+    "nombre": "Brook Lopez",
+    "equipo_nba": "LAC",
+    "pos": [
+     "C"
+    ],
+    "hueco": "BN",
+    "estado": "",
+    "lesion": "",
+    "nba_id": 201572
+   },
+   {
+    "yahoo_id": "1627936",
+    "nombre": "Alex Caruso",
+    "equipo_nba": "OKC",
+    "pos": [
+     "PG",
+     "SG"
+    ],
+    "hueco": "BN",
+    "estado": "",
+    "lesion": "",
+    "nba_id": 1627936
+   },
+   {
+    "yahoo_id": "1641824",
+    "nombre": "Matas Buzelis",
+    "equipo_nba": "CHI",
+    "pos": [
+     "SF",
+     "PF"
+    ],
+    "hueco": "BN",
+    "estado": "",
+    "lesion": "",
+    "nba_id": 1641824
+   },
+   {
+    "yahoo_id": "1630228",
+    "nombre": "Jonathan Kuminga",
+    "equipo_nba": "MIN",
+    "pos": [
+     "SF",
+     "PF"
+    ],
+    "hueco": "BN",
+    "estado": "INJ",
+    "lesion": "",
+    "nba_id": 1630228
+   },
+   {
+    "yahoo_id": "1641783",
+    "nombre": "Tristan da Silva",
+    "equipo_nba": "ORL",
+    "pos": [
+     "SF",
+     "PF"
+    ],
+    "hueco": "BN",
+    "estado": "",
+    "lesion": "",
+    "nba_id": 1641783
+   },
+   {
+    "yahoo_id": "1629674",
+    "nombre": "Neemias Queta",
+    "equipo_nba": "BOS",
+    "pos": [
+     "C"
+    ],
+    "hueco": "IL",
+    "estado": "",
+    "lesion": "",
+    "nba_id": 1629674
+   }
+  ],
+  "466.l.9972.t.2": [
+   {
+    "yahoo_id": "203999",
+    "nombre": "Nikola Jokić",
+    "equipo_nba": "DEN",
+    "pos": [
+     "C"
+    ],
+    "hueco": "PG",
+    "estado": "",
+    "lesion": "",
+    "nba_id": 203999
+   },
+   {
+    "yahoo_id": "1626164",
+    "nombre": "Devin Booker",
+    "equipo_nba": "PHX",
+    "pos": [
+     "PG",
+     "SG"
+    ],
+    "hueco": "SG",
+    "estado": "O",
+    "lesion": "",
+    "nba_id": 1626164
+   },
+   {
+    "yahoo_id": "1642907",
+    "nombre": "Cedric Coward",
+    "equipo_nba": "MEM",
+    "pos": [
+     "SG",
+     "SF"
+    ],
+    "hueco": "SF",
+    "estado": "INJ",
+    "lesion": "",
+    "nba_id": 1642907
+   },
+   {
+    "yahoo_id": "1628973",
+    "nombre": "Jalen Brunson",
+    "equipo_nba": "NYK",
+    "pos": [
+     "PG"
+    ],
+    "hueco": "PF",
+    "estado": "",
+    "lesion": "",
+    "nba_id": 1628973
+   },
+   {
+    "yahoo_id": "1629680",
+    "nombre": "Matisse Thybulle",
+    "equipo_nba": "LAL",
+    "pos": [
+     "SF"
+    ],
+    "hueco": "C",
+    "estado": "INJ",
+    "lesion": "",
+    "nba_id": 1629680
+   },
+   {
+    "yahoo_id": "1630170",
+    "nombre": "Devin Vassell",
+    "equipo_nba": "SAS",
+    "pos": [
+     "SG",
+     "SF"
+    ],
+    "hueco": "Util",
+    "estado": "",
+    "lesion": "",
+    "nba_id": 1630170
+   },
+   {
+    "yahoo_id": "1641708",
+    "nombre": "Amen Thompson",
+    "equipo_nba": "HOU",
+    "pos": [
+     "SG",
+     "SF"
+    ],
+    "hueco": "Util",
+    "estado": "",
+    "lesion": "",
+    "nba_id": 1641708
+   },
+   {
+    "yahoo_id": "1630551",
+    "nombre": "Justin Champagnie",
+    "equipo_nba": "WAS",
+    "pos": [
+     "SF",
+     "PF"
+    ],
+    "hueco": "Util",
+    "estado": "",
+    "lesion": "",
+    "nba_id": 1630551
+   },
+   {
+    "yahoo_id": "1628964",
+    "nombre": "Mo Bamba",
+    "equipo_nba": "UTA",
+    "pos": [
+     "C"
+    ],
+    "hueco": "BN",
+    "estado": "O",
+    "lesion": "",
+    "nba_id": 1628964
+   },
+   {
+    "yahoo_id": "1631106",
+    "nombre": "Tari Eason",
+    "equipo_nba": "HOU",
+    "pos": [
+     "SF",
+     "PF"
+    ],
+    "hueco": "BN",
+    "estado": "",
+    "lesion": "",
+    "nba_id": 1631106
+   },
+   {
+    "yahoo_id": "1643411",
+    "nombre": "Darius Acuff Jr.",
+    "equipo_nba": "SAC",
+    "pos": [
+     "PG"
+    ],
+    "hueco": "BN",
+    "estado": "O",
+    "lesion": "",
+    "nba_id": 1643411
+   },
+   {
+    "yahoo_id": "1630202",
+    "nombre": "Payton Pritchard",
+    "equipo_nba": "BOS",
+    "pos": [
+     "PG",
+     "SG"
+    ],
+    "hueco": "BN",
+    "estado": "",
+    "lesion": "",
+    "nba_id": 1630202
+   },
+   {
+    "yahoo_id": "1642867",
+    "nombre": "Collin Murray-Boyles",
+    "equipo_nba": "TOR",
+    "pos": [
+     "PF"
+    ],
+    "hueco": "BN",
+    "estado": "",
+    "lesion": "",
+    "nba_id": 1642867
+   },
+   {
+    "yahoo_id": "1642276",
+    "nombre": "Kel'el Ware",
+    "equipo_nba": "MIL",
+    "pos": [
+     "C"
+    ],
+    "hueco": "IL",
+    "estado": "",
+    "lesion": "",
+    "nba_id": 1642276
+   }
+  ],
+  "466.l.9972.t.3": [
+   {
+    "yahoo_id": "1629029",
+    "nombre": "Luka Dončić",
+    "equipo_nba": "LAL",
+    "pos": [
+     "PG"
+    ],
+    "hueco": "PG",
+    "estado": "",
+    "lesion": "",
+    "nba_id": 1629029
+   },
+   {
+    "yahoo_id": "1642270",
+    "nombre": "Donovan Clingan",
+    "equipo_nba": "POR",
+    "pos": [
+     "C"
+    ],
+    "hueco": "SG",
+    "estado": "",
+    "lesion": "",
+    "nba_id": 1642270
+   },
+   {
+    "yahoo_id": "202681",
+    "nombre": "Kyrie Irving",
+    "equipo_nba": "DAL",
+    "pos": [
+     "PG"
+    ],
+    "hueco": "SF",
+    "estado": "INJ",
+    "lesion": "",
+    "nba_id": 202681
+   },
+   {
+    "yahoo_id": "1629130",
+    "nombre": "Duncan Robinson",
+    "equipo_nba": "DET",
+    "pos": [
+     "SG",
+     "SF"
+    ],
+    "hueco": "PF",
+    "estado": "",
+    "lesion": "",
+    "nba_id": 1629130
+   },
+   {
+    "yahoo_id": "1629639",
+    "nombre": "Tyler Herro",
+    "equipo_nba": "MIL",
+    "pos": [
+     "PG",
+     "SG"
+    ],
+    "hueco": "C",
+    "estado": "",
+    "lesion": "",
+    "nba_id": 1629639
+   },
+   {
+    "yahoo_id": "1627749",
+    "nombre": "Dejounte Murray",
+    "equipo_nba": "NOP",
+    "pos": [
+     "PG",
+     "SG"
+    ],
+    "hueco": "Util",
+    "estado": "",
+    "lesion": "",
+    "nba_id": 1627749
+   },
+   {
+    "yahoo_id": "1630166",
+    "nombre": "Deni Avdija",
+    "equipo_nba": "POR",
+    "pos": [
+     "SF",
+     "PF"
+    ],
+    "hueco": "Util",
+    "estado": "GTD",
+    "lesion": "",
+    "nba_id": 1630166
+   },
+   {
+    "yahoo_id": "1628401",
+    "nombre": "Derrick White",
+    "equipo_nba": "BOS",
+    "pos": [
+     "PG",
+     "SG"
+    ],
+    "hueco": "Util",
+    "estado": "O",
+    "lesion": "",
+    "nba_id": 1628401
+   },
+   {
+    "yahoo_id": "1630577",
+    "nombre": "Julian Champagnie",
+    "equipo_nba": "SAS",
+    "pos": [
+     "SF",
+     "PF"
+    ],
+    "hueco": "BN",
+    "estado": "",
+    "lesion": "",
+    "nba_id": 1630577
+   },
+   {
+    "yahoo_id": "1642847",
+    "nombre": "Jeremiah Fears",
+    "equipo_nba": "NOP",
+    "pos": [
+     "PG",
+     "SG"
+    ],
+    "hueco": "BN",
+    "estado": "",
+    "lesion": "",
+    "nba_id": 1642847
+   },
+   {
+    "yahoo_id": "1642274",
+    "nombre": "Yves Missi",
+    "equipo_nba": "NOP",
+    "pos": [
+     "C"
+    ],
+    "hueco": "BN",
+    "estado": "",
+    "lesion": "",
+    "nba_id": 1642274
+   },
+   {
+    "yahoo_id": "1631114",
+    "nombre": "Jalen Williams",
+    "equipo_nba": "OKC",
+    "pos": [
+     "SF",
+     "PF"
+    ],
+    "hueco": "BN",
+    "estado": "",
+    "lesion": "",
+    "nba_id": 1631114
+   },
+   {
+    "yahoo_id": "1626162",
+    "nombre": "Kelly Oubre Jr.",
+    "equipo_nba": "IND",
+    "pos": [
+     "SG",
+     "SF"
+    ],
+    "hueco": "BN",
+    "estado": "",
+    "lesion": "",
+    "nba_id": 1626162
+   },
+   {
+    "yahoo_id": "1631212",
+    "nombre": "Peyton Watson",
+    "equipo_nba": "CLE",
+    "pos": [
+     "SF",
+     "PF"
+    ],
+    "hueco": "IL",
+    "estado": "O",
+    "lesion": "",
+    "nba_id": 1631212
+   }
+  ],
+  "466.l.9972.t.4": [
+   {
+    "yahoo_id": "201939",
+    "nombre": "Stephen Curry",
+    "equipo_nba": "GSW",
+    "pos": [
+     "PG"
+    ],
+    "hueco": "PG",
+    "estado": "INJ",
+    "lesion": "",
+    "nba_id": 201939
+   },
+   {
+    "yahoo_id": "1630183",
+    "nombre": "Jaden McDaniels",
+    "equipo_nba": "MIN",
+    "pos": [
+     "SF",
+     "PF"
+    ],
+    "hueco": "SG",
+    "estado": "",
+    "lesion": "",
+    "nba_id": 1630183
+   },
+   {
+    "yahoo_id": "1628378",
+    "nombre": "Donovan Mitchell",
+    "equipo_nba": "CLE",
+    "pos": [
+     "PG",
+     "SG"
+    ],
+    "hueco": "SF",
+    "estado": "O",
+    "lesion": "",
+    "nba_id": 1628378
+   },
+   {
+    "yahoo_id": "1629638",
+    "nombre": "Nickeil Alexander-Walker",
+    "equipo_nba": "ATL",
+    "pos": [
+     "PG",
+     "SG"
+    ],
+    "hueco": "PF",
+    "estado": "INJ",
+    "lesion": "",
+    "nba_id": 1629638
+   },
+   {
+    "yahoo_id": "1631217",
+    "nombre": "Moussa Diabaté",
+    "equipo_nba": "CHA",
+    "pos": [
+     "PF",
+     "C"
+    ],
+    "hueco": "C",
+    "estado": "",
+    "lesion": "",
+    "nba_id": 1631217
+   },
+   {
+    "yahoo_id": "1627783",
+    "nombre": "Pascal Siakam",
+    "equipo_nba": "IND",
+    "pos": [
+     "PF"
+    ],
+    "hueco": "Util",
+    "estado": "",
+    "lesion": "",
+    "nba_id": 1627783
+   },
+   {
+    "yahoo_id": "1629008",
+    "nombre": "Michael Porter Jr.",
+    "equipo_nba": "BKN",
+    "pos": [
+     "SF",
+     "PF"
+    ],
+    "hueco": "Util",
+    "estado": "",
+    "lesion": "",
+    "nba_id": 1629008
+   },
+   {
+    "yahoo_id": "1628960",
+    "nombre": "Grayson Allen",
+    "equipo_nba": "CHA",
+    "pos": [
+     "PG",
+     "SG"
+    ],
+    "hueco": "Util",
+    "estado": "GTD",
+    "lesion": "",
+    "nba_id": 1628960
+   },
+   {
+    "yahoo_id": "1630549",
+    "nombre": "Day'Ron Sharpe",
+    "equipo_nba": "BKN",
+    "pos": [
+     "C"
+    ],
+    "hueco": "BN",
+    "estado": "O",
+    "lesion": "",
+    "nba_id": 1630549
+   },
+   {
+    "yahoo_id": "1641744",
+    "nombre": "Zach Edey",
+    "equipo_nba": "MEM",
+    "pos": [
+     "C"
+    ],
+    "hueco": "BN",
+    "estado": "",
+    "lesion": "",
+    "nba_id": 1641744
+   },
+   {
+    "yahoo_id": "1628381",
+    "nombre": "John Collins",
+    "equipo_nba": "DET",
+    "pos": [
+     "PF",
+     "C"
+    ],
+    "hueco": "BN",
+    "estado": "",
+    "lesion": "",
+    "nba_id": 1628381
+   },
+   {
+    "yahoo_id": "1642258",
+    "nombre": "Zaccharie Risacher",
+    "equipo_nba": "DAL",
+    "pos": [
+     "SF"
+    ],
+    "hueco": "BN",
+    "estado": "",
+    "lesion": "",
+    "nba_id": 1642258
+   },
+   {
+    "yahoo_id": "1630241",
+    "nombre": "Sam Merrill",
+    "equipo_nba": "CLE",
+    "pos": [
+     "SG"
+    ],
+    "hueco": "BN",
+    "estado": "",
+    "lesion": "",
+    "nba_id": 1630241
+   },
+   {
+    "yahoo_id": "1631222",
+    "nombre": "Jake LaRavia",
+    "equipo_nba": "LAL",
+    "pos": [
+     "SF",
+     "PF"
+    ],
+    "hueco": "IL",
+    "estado": "O",
+    "lesion": "",
+    "nba_id": 1631222
+   }
+  ],
+  "466.l.9972.t.5": [
+   {
+    "yahoo_id": "1627750",
+    "nombre": "Jamal Murray",
+    "equipo_nba": "DEN",
+    "pos": [
+     "PG"
+    ],
+    "hueco": "PG",
+    "estado": "",
+    "lesion": "",
+    "nba_id": 1627750
+   },
+   {
+    "yahoo_id": "1630700",
+    "nombre": "Dyson Daniels",
+    "equipo_nba": "ATL",
+    "pos": [
+     "PG",
+     "SG"
+    ],
+    "hueco": "SG",
+    "estado": "GTD",
+    "lesion": "",
+    "nba_id": 1630700
+   },
+   {
+    "yahoo_id": "1631128",
+    "nombre": "Christian Braun",
+    "equipo_nba": "DEN",
+    "pos": [
+     "SG",
+     "SF"
+    ],
+    "hueco": "SF",
+    "estado": "",
+    "lesion": "",
+    "nba_id": 1631128
+   },
+   {
+    "yahoo_id": "1631095",
+    "nombre": "Jabari Smith Jr.",
+    "equipo_nba": "HOU",
+    "pos": [
+     "PF",
+     "C"
+    ],
+    "hueco": "PF",
+    "estado": "GTD",
+    "lesion": "",
+    "nba_id": 1631095
+   },
+   {
+    "yahoo_id": "203954",
+    "nombre": "Joel Embiid",
+    "equipo_nba": "PHI",
+    "pos": [
+     "C"
+    ],
+    "hueco": "C",
+    "estado": "",
+    "lesion": "",
+    "nba_id": 203954
+   },
+   {
+    "yahoo_id": "1629027",
+    "nombre": "Trae Young",
+    "equipo_nba": "WAS",
+    "pos": [
+     "PG"
+    ],
+    "hueco": "Util",
+    "estado": "",
+    "lesion": "",
+    "nba_id": 1629027
+   },
+   {
+    "yahoo_id": "1642264",
+    "nombre": "Stephon Castle",
+    "equipo_nba": "SAS",
+    "pos": [
+     "PG",
+     "SG"
+    ],
+    "hueco": "Util",
+    "estado": "",
+    "lesion": "",
+    "nba_id": 1642264
+   },
+   {
+    "yahoo_id": "202691",
+    "nombre": "Klay Thompson",
+    "equipo_nba": "MIA",
+    "pos": [
+     "SG",
+     "SF"
+    ],
+    "hueco": "Util",
+    "estado": "",
+    "lesion": "",
+    "nba_id": 202691
+   },
+   {
+    "yahoo_id": "1629655",
+    "nombre": "Daniel Gafford",
+    "equipo_nba": "DAL",
+    "pos": [
+     "C"
+    ],
+    "hueco": "BN",
+    "estado": "",
+    "lesion": "",
+    "nba_id": 1629655
+   },
+   {
+    "yahoo_id": "1643509",
+    "nombre": "Meleek Thomas",
+    "equipo_nba": "CLE",
+    "pos": [
+     "SG"
+    ],
+    "hueco": "BN",
+    "estado": "INJ",
+    "lesion": "",
+    "nba_id": 1643509
+   },
+   {
+    "yahoo_id": "1626181",
+    "nombre": "Norman Powell",
+    "equipo_nba": "CHI",
+    "pos": [
+     "SG",
+     "SF"
+    ],
+    "hueco": "BN",
+    "estado": "",
+    "lesion": "",
+    "nba_id": 1626181
+   },
+   {
+    "yahoo_id": "1627884",
+    "nombre": "Derrick Jones Jr.",
+    "equipo_nba": "LAC",
+    "pos": [
+     "SF",
+     "PF"
+    ],
+    "hueco": "BN",
+    "estado": "GTD",
+    "lesion": "",
+    "nba_id": 1627884
+   },
+   {
+    "yahoo_id": "1642377",
+    "nombre": "Jaylen Wells",
+    "equipo_nba": "MEM",
+    "pos": [
+     "SG",
+     "SF"
+    ],
+    "hueco": "BN",
+    "estado": "",
+    "lesion": "",
+    "nba_id": 1642377
+   },
+   {
+    "yahoo_id": "201144",
+    "nombre": "Mike Conley",
+    "equipo_nba": "BOS",
+    "pos": [
+     "PG"
+    ],
+    "hueco": "IL",
+    "estado": "",
+    "lesion": "",
+    "nba_id": 201144
+   }
+  ],
+  "466.l.9972.t.6": [
+   {
+    "yahoo_id": "1630169",
+    "nombre": "Tyrese Haliburton",
+    "equipo_nba": "IND",
+    "pos": [
+     "PG",
+     "SG"
+    ],
+    "hueco": "PG",
+    "estado": "",
+    "lesion": "",
+    "nba_id": 1630169
+   },
+   {
+    "yahoo_id": "203507",
+    "nombre": "Giannis Antetokounmpo",
+    "equipo_nba": "MIA",
+    "pos": [
+     "PF",
+     "C"
+    ],
+    "hueco": "SG",
+    "estado": "",
+    "lesion": "",
+    "nba_id": 203507
+   },
+   {
+    "yahoo_id": "1630532",
+    "nombre": "Franz Wagner",
+    "equipo_nba": "ORL",
+    "pos": [
+     "SF",
+     "PF"
+    ],
+    "hueco": "SF",
+    "estado": "O",
+    "lesion": "",
+    "nba_id": 1630532
+   },
+   {
+    "yahoo_id": "201935",
+    "nombre": "James Harden",
+    "equipo_nba": "CLE",
+    "pos": [
+     "PG",
+     "SG"
+    ],
+    "hueco": "PF",
+    "estado": "",
+    "lesion": "",
+    "nba_id": 201935
+   },
+   {
+    "yahoo_id": "1630552",
+    "nombre": "Jalen Johnson",
+    "equipo_nba": "ATL",
+    "pos": [
+     "PF"
+    ],
+    "hueco": "C",
+    "estado": "GTD",
+    "lesion": "",
+    "nba_id": 1630552
+   },
+   {
+    "yahoo_id": "1628374",
+    "nombre": "Lauri Markkanen",
+    "equipo_nba": "UTA",
+    "pos": [
+     "SF",
+     "PF"
+    ],
+    "hueco": "Util",
+    "estado": "",
+    "lesion": "",
+    "nba_id": 1628374
+   },
+   {
+    "yahoo_id": "1643410",
+    "nombre": "Caleb Wilson",
+    "equipo_nba": "CHI",
+    "pos": [
+     "SF"
+    ],
+    "hueco": "Util",
+    "estado": "",
+    "lesion": "",
+    "nba_id": 1643410
+   },
+   {
+    "yahoo_id": "1641764",
+    "nombre": "Brandin Podziemski",
+    "equipo_nba": "GSW",
+    "pos": [
+     "PG",
+     "SG"
+    ],
+    "hueco": "Util",
+    "estado": "INJ",
+    "lesion": "",
+    "nba_id": 1641764
+   },
+   {
+    "yahoo_id": "1642349",
+    "nombre": "Ajay Mitchell",
+    "equipo_nba": "OKC",
+    "pos": [
+     "PG",
+     "SG"
+    ],
+    "hueco": "BN",
+    "estado": "",
+    "lesion": "",
+    "nba_id": 1642349
+   },
+   {
+    "yahoo_id": "1629636",
+    "nombre": "Darius Garland",
+    "equipo_nba": "LAC",
+    "pos": [
+     "PG"
+    ],
+    "hueco": "BN",
+    "estado": "",
+    "lesion": "",
+    "nba_id": 1629636
+   },
+   {
+    "yahoo_id": "1630533",
+    "nombre": "Ziaire Williams",
+    "equipo_nba": "LAL",
+    "pos": [
+     "SG",
+     "SF"
+    ],
+    "hueco": "BN",
+    "estado": "",
+    "lesion": "",
+    "nba_id": 1630533
+   },
+   {
+    "yahoo_id": "1628404",
+    "nombre": "Josh Hart",
+    "equipo_nba": "NYK",
+    "pos": [
+     "SG",
+     "SF"
+    ],
+    "hueco": "BN",
+    "estado": "",
+    "lesion": "",
+    "nba_id": 1628404
+   },
+   {
+    "yahoo_id": "1642849",
+    "nombre": "Nolan Traore",
+    "equipo_nba": "BKN",
+    "pos": [
+     "PG"
+    ],
+    "hueco": "BN",
+    "estado": "",
+    "lesion": "",
+    "nba_id": 1642849
+   },
+   {
+    "yahoo_id": "1629631",
+    "nombre": "De'Andre Hunter",
+    "equipo_nba": "SAC",
+    "pos": [
+     "SF",
+     "PF"
+    ],
+    "hueco": "IL",
+    "estado": "GTD",
+    "lesion": "",
+    "nba_id": 1629631
+   }
+  ],
+  "466.l.9972.t.7": [
+   {
+    "yahoo_id": "1630162",
+    "nombre": "Anthony Edwards",
+    "equipo_nba": "MIN",
+    "pos": [
+     "SG",
+     "SF"
+    ],
+    "hueco": "PG",
+    "estado": "GTD",
+    "lesion": "",
+    "nba_id": 1630162
+   },
+   {
+    "yahoo_id": "1630578",
+    "nombre": "Alperen Sengun",
+    "equipo_nba": "HOU",
+    "pos": [
+     "C"
+    ],
+    "hueco": "SG",
+    "estado": "",
+    "lesion": "",
+    "nba_id": 1630578
+   },
+   {
+    "yahoo_id": "1630188",
+    "nombre": "Jalen Smith",
+    "equipo_nba": "CHI",
+    "pos": [
+     "PF",
+     "C"
+    ],
+    "hueco": "SF",
+    "estado": "O",
+    "lesion": "",
+    "nba_id": 1630188
+   },
+   {
+    "yahoo_id": "1630217",
+    "nombre": "Desmond Bane",
+    "equipo_nba": "ORL",
+    "pos": [
+     "SG",
+     "SF"
+    ],
+    "hueco": "PF",
+    "estado": "O",
+    "lesion": "",
+    "nba_id": 1630217
+   },
+   {
+    "yahoo_id": "1642273",
+    "nombre": "Kyshawn George",
+    "equipo_nba": "WAS",
+    "pos": [
+     "SG",
+     "SF"
+    ],
+    "hueco": "C",
+    "estado": "O",
+    "lesion": "",
+    "nba_id": 1642273
+   },
+   {
+    "yahoo_id": "1628386",
+    "nombre": "Jarrett Allen",
+    "equipo_nba": "CLE",
+    "pos": [
+     "C"
+    ],
+    "hueco": "Util",
+    "estado": "",
+    "lesion": "",
+    "nba_id": 1628386
+   },
+   {
+    "yahoo_id": "1642259",
+    "nombre": "Alex Sarr",
+    "equipo_nba": "WAS",
+    "pos": [
+     "PF",
+     "C"
+    ],
+    "hueco": "Util",
+    "estado": "",
+    "lesion": "",
+    "nba_id": 1642259
+   },
+   {
+    "yahoo_id": "1628392",
+    "nombre": "Isaiah Hartenstein",
+    "equipo_nba": "OKC",
+    "pos": [
+     "C"
+    ],
+    "hueco": "Util",
+    "estado": "",
+    "lesion": "",
+    "nba_id": 1628392
+   },
+   {
+    "yahoo_id": "1630692",
+    "nombre": "Jordan Goodwin",
+    "equipo_nba": "PHX",
+    "pos": [
+     "PG",
+     "SG"
+    ],
+    "hueco": "BN",
+    "estado": "",
+    "lesion": "",
+    "nba_id": 1630692
+   },
+   {
+    "yahoo_id": "1629673",
+    "nombre": "Jordan Poole",
+    "equipo_nba": "NOP",
+    "pos": [
+     "PG",
+     "SG"
+    ],
+    "hueco": "BN",
+    "estado": "",
+    "lesion": "",
+    "nba_id": 1629673
+   },
+   {
+    "yahoo_id": "1643530",
+    "nombre": "Aday Mara",
+    "equipo_nba": "OKC",
+    "pos": [
+     "C"
+    ],
+    "hueco": "BN",
+    "estado": "",
+    "lesion": "",
+    "nba_id": 1643530
+   },
+   {
+    "yahoo_id": "1629651",
+    "nombre": "Nic Claxton",
+    "equipo_nba": "CHI",
+    "pos": [
+     "C"
+    ],
+    "hueco": "BN",
+    "estado": "",
+    "lesion": "",
+    "nba_id": 1629651
+   },
+   {
+    "yahoo_id": "1630543",
+    "nombre": "Isaiah Jackson",
+    "equipo_nba": "LAC",
+    "pos": [
+     "PF",
+     "C"
+    ],
+    "hueco": "BN",
+    "estado": "",
+    "lesion": "",
+    "nba_id": 1630543
+   },
+   {
+    "yahoo_id": "1629731",
+    "nombre": "Dean Wade",
+    "equipo_nba": "PHI",
+    "pos": [
+     "PF"
+    ],
+    "hueco": "IL",
+    "estado": "",
+    "lesion": "",
+    "nba_id": 1629731
+   }
+  ],
+  "466.l.9972.t.8": [
+   {
+    "yahoo_id": "1642843",
+    "nombre": "Cooper Flagg",
+    "equipo_nba": "DAL",
+    "pos": [
+     "SF",
+     "PF"
+    ],
+    "hueco": "PG",
+    "estado": "",
+    "lesion": "",
+    "nba_id": 1642843
+   },
+   {
+    "yahoo_id": "1628369",
+    "nombre": "Jayson Tatum",
+    "equipo_nba": "BOS",
+    "pos": [
+     "SF",
+     "PF"
+    ],
+    "hueco": "SG",
+    "estado": "",
+    "lesion": "",
+    "nba_id": 1628369
+   },
+   {
+    "yahoo_id": "1630558",
+    "nombre": "Davion Mitchell",
+    "equipo_nba": "MIA",
+    "pos": [
+     "PG"
+    ],
+    "hueco": "SF",
+    "estado": "",
+    "lesion": "",
+    "nba_id": 1630558
+   },
+   {
+    "yahoo_id": "1643409",
+    "nombre": "Cameron Boozer",
+    "equipo_nba": "MEM",
+    "pos": [
+     "PF"
+    ],
+    "hueco": "PF",
+    "estado": "",
+    "lesion": "",
+    "nba_id": 1643409
+   },
+   {
+    "yahoo_id": "1627734",
+    "nombre": "Domantas Sabonis",
+    "equipo_nba": "SAC",
+    "pos": [
+     "PF",
+     "C"
+    ],
+    "hueco": "C",
+    "estado": "",
+    "lesion": "",
+    "nba_id": 1627734
+   },
+   {
+    "yahoo_id": "1628976",
+    "nombre": "Wendell Carter Jr.",
+    "equipo_nba": "ORL",
+    "pos": [
+     "C"
+    ],
+    "hueco": "Util",
+    "estado": "O",
+    "lesion": "",
+    "nba_id": 1628976
+   },
+   {
+    "yahoo_id": "1630163",
+    "nombre": "LaMelo Ball",
+    "equipo_nba": "MIN",
+    "pos": [
+     "PG"
+    ],
+    "hueco": "Util",
+    "estado": "O",
+    "lesion": "",
+    "nba_id": 1630163
+   },
+   {
+    "yahoo_id": "1630194",
+    "nombre": "Paul Reed",
+    "equipo_nba": "DET",
+    "pos": [
+     "PF",
+     "C"
+    ],
+    "hueco": "Util",
+    "estado": "",
+    "lesion": "",
+    "nba_id": 1630194
+   },
+   {
+    "yahoo_id": "1642846",
+    "nombre": "Ace Bailey",
+    "equipo_nba": "UTA",
+    "pos": [
+     "SF",
+     "PF"
+    ],
+    "hueco": "BN",
+    "estado": "",
+    "lesion": "",
+    "nba_id": 1642846
+   },
+   {
+    "yahoo_id": "1641718",
+    "nombre": "Keyonte George",
+    "equipo_nba": "UTA",
+    "pos": [
+     "PG",
+     "SG"
+    ],
+    "hueco": "BN",
+    "estado": "",
+    "lesion": "",
+    "nba_id": 1641718
+   },
+   {
+    "yahoo_id": "1642266",
+    "nombre": "Ja'Kobe Walter",
+    "equipo_nba": "TOR",
+    "pos": [
+     "SG"
+    ],
+    "hueco": "BN",
+    "estado": "",
+    "lesion": "",
+    "nba_id": 1642266
+   },
+   {
+    "yahoo_id": "1629661",
+    "nombre": "Cameron Johnson",
+    "equipo_nba": "DEN",
+    "pos": [
+     "SF",
+     "PF"
+    ],
+    "hueco": "BN",
+    "estado": "",
+    "lesion": "",
+    "nba_id": 1629661
+   },
+   {
+    "yahoo_id": "1642852",
+    "nombre": "Derik Queen",
+    "equipo_nba": "NOP",
+    "pos": [
+     "PF",
+     "C"
+    ],
+    "hueco": "BN",
+    "estado": "INJ",
+    "lesion": "",
+    "nba_id": 1642852
+   },
+   {
+    "yahoo_id": "1627826",
+    "nombre": "Ivica Zubac",
+    "equipo_nba": "IND",
+    "pos": [
+     "C"
+    ],
+    "hueco": "IL",
+    "estado": "",
+    "lesion": "",
+    "nba_id": 1627826
+   }
+  ],
+  "466.l.9972.t.9": [
+   {
+    "yahoo_id": "203076",
+    "nombre": "Anthony Davis",
+    "equipo_nba": "WAS",
+    "pos": [
+     "PF",
+     "C"
+    ],
+    "hueco": "PG",
+    "estado": "O",
+    "lesion": "",
+    "nba_id": 203076
+   },
+   {
+    "yahoo_id": "202331",
+    "nombre": "Paul George",
+    "equipo_nba": "BOS",
+    "pos": [
+     "SF",
+     "PF"
+    ],
+    "hueco": "SG",
+    "estado": "",
+    "lesion": "",
+    "nba_id": 202331
+   },
+   {
+    "yahoo_id": "1628970",
+    "nombre": "Miles Bridges",
+    "equipo_nba": "PHX",
+    "pos": [
+     "SF",
+     "PF"
+    ],
+    "hueco": "SF",
+    "estado": "",
+    "lesion": "",
+    "nba_id": 1628970
+   },
+   {
+    "yahoo_id": "1630245",
+    "nombre": "Ayo Dosunmu",
+    "equipo_nba": "MIN",
+    "pos": [
+     "PG",
+     "SG"
+    ],
+    "hueco": "PF",
+    "estado": "GTD",
+    "lesion": "",
+    "nba_id": 1630245
+   },
+   {
+    "yahoo_id": "1627759",
+    "nombre": "Jaylen Brown",
+    "equipo_nba": "PHI",
+    "pos": [
+     "SG",
+     "SF"
+    ],
+    "hueco": "C",
+    "estado": "O",
+    "lesion": "",
+    "nba_id": 1627759
+   },
+   {
+    "yahoo_id": "1642285",
+    "nombre": "Cam Spencer",
+    "equipo_nba": "MEM",
+    "pos": [
+     "PG",
+     "SG"
+    ],
+    "hueco": "Util",
+    "estado": "",
+    "lesion": "",
+    "nba_id": 1642285
+   },
+   {
+    "yahoo_id": "1626167",
+    "nombre": "Myles Turner",
+    "equipo_nba": "MIL",
+    "pos": [
+     "C"
+    ],
+    "hueco": "Util",
+    "estado": "",
+    "lesion": "",
+    "nba_id": 1626167
+   },
+   {
+    "yahoo_id": "1627739",
+    "nombre": "Kris Dunn",
+    "equipo_nba": "LAC",
+    "pos": [
+     "PG",
+     "SG"
+    ],
+    "hueco": "Util",
+    "estado": "",
+    "lesion": "",
+    "nba_id": 1627739
+   },
+   {
+    "yahoo_id": "1628368",
+    "nombre": "De'Aaron Fox",
+    "equipo_nba": "SAS",
+    "pos": [
+     "PG",
+     "SG"
+    ],
+    "hueco": "BN",
+    "estado": "",
+    "lesion": "",
+    "nba_id": 1628368
+   },
+   {
+    "yahoo_id": "1629057",
+    "nombre": "Robert Williams III",
+    "equipo_nba": "POR",
+    "pos": [
+     "C"
+    ],
+    "hueco": "BN",
+    "estado": "INJ",
+    "lesion": "",
+    "nba_id": 1629057
+   },
+   {
+    "yahoo_id": "1627751",
+    "nombre": "Jakob Poeltl",
+    "equipo_nba": "TOR",
+    "pos": [
+     "C"
+    ],
+    "hueco": "BN",
+    "estado": "",
+    "lesion": "",
+    "nba_id": 1627751
+   },
+   {
+    "yahoo_id": "1629001",
+    "nombre": "De'Anthony Melton",
+    "equipo_nba": "GSW",
+    "pos": [
+     "PG",
+     "SG"
+    ],
+    "hueco": "BN",
+    "estado": "GTD",
+    "lesion": "",
+    "nba_id": 1629001
+   },
+   {
+    "yahoo_id": "1641778",
+    "nombre": "Leaky Black",
+    "equipo_nba": "SAC",
+    "pos": [
+     "SF"
+    ],
+    "hueco": "BN",
+    "estado": "",
+    "lesion": "",
+    "nba_id": 1641778
+   },
+   {
+    "yahoo_id": "1629646",
+    "nombre": "Charles Bassey",
+    "equipo_nba": "GSW",
+    "pos": [
+     "C"
+    ],
+    "hueco": "IL",
+    "estado": "",
+    "lesion": "",
+    "nba_id": 1629646
+   }
+  ],
+  "466.l.9972.t.10": [
+   {
+    "yahoo_id": "1626157",
+    "nombre": "Karl-Anthony Towns",
+    "equipo_nba": "NYK",
+    "pos": [
+     "C"
+    ],
+    "hueco": "PG",
+    "estado": "",
+    "lesion": "",
+    "nba_id": 1626157
+   },
+   {
+    "yahoo_id": "1630595",
+    "nombre": "Cade Cunningham",
+    "equipo_nba": "DET",
+    "pos": [
+     "PG"
+    ],
+    "hueco": "SG",
+    "estado": "",
+    "lesion": "",
+    "nba_id": 1630595
+   },
+   {
+    "yahoo_id": "1629660",
+    "nombre": "Ty Jerome",
+    "equipo_nba": "MEM",
+    "pos": [
+     "PG",
+     "SG"
+    ],
+    "hueco": "SF",
+    "estado": "",
+    "lesion": "",
+    "nba_id": 1629660
+   },
+   {
+    "yahoo_id": "201142",
+    "nombre": "Kevin Durant",
+    "equipo_nba": "HOU",
+    "pos": [
+     "SF",
+     "PF"
+    ],
+    "hueco": "PF",
+    "estado": "",
+    "lesion": "",
+    "nba_id": 201142
+   },
+   {
+    "yahoo_id": "1630168",
+    "nombre": "Onyeka Okongwu",
+    "equipo_nba": "ATL",
+    "pos": [
+     "C"
+    ],
+    "hueco": "C",
+    "estado": "",
+    "lesion": "",
+    "nba_id": 1630168
+   },
+   {
+    "yahoo_id": "1629630",
+    "nombre": "Ja Morant",
+    "equipo_nba": "POR",
+    "pos": [
+     "PG"
+    ],
+    "hueco": "Util",
+    "estado": "",
+    "lesion": "",
+    "nba_id": 1629630
+   },
+   {
+    "yahoo_id": "1642450",
+    "nombre": "Daniss Jenkins",
+    "equipo_nba": "DET",
+    "pos": [
+     "PG"
+    ],
+    "hueco": "Util",
+    "estado": "",
+    "lesion": "",
+    "nba_id": 1642450
+   },
+   {
+    "yahoo_id": "1642865",
+    "nombre": "Yaxel Lendeborg",
+    "equipo_nba": "GSW",
+    "pos": [
+     "SF",
+     "PF"
+    ],
+    "hueco": "Util",
+    "estado": "",
+    "lesion": "",
+    "nba_id": 1642865
+   },
+   {
+    "yahoo_id": "203468",
+    "nombre": "CJ McCollum",
+    "equipo_nba": "ATL",
+    "pos": [
+     "PG",
+     "SG"
+    ],
+    "hueco": "BN",
+    "estado": "INJ",
+    "lesion": "",
+    "nba_id": 203468
+   },
+   {
+    "yahoo_id": "1628997",
+    "nombre": "Caleb Martin",
+    "equipo_nba": "DAL",
+    "pos": [
+     "SG"
+    ],
+    "hueco": "BN",
+    "estado": "O",
+    "lesion": "",
+    "nba_id": 1628997
+   },
+   {
+    "yahoo_id": "1641739",
+    "nombre": "Toumani Camara",
+    "equipo_nba": "POR",
+    "pos": [
+     "SF",
+     "PF"
+    ],
+    "hueco": "BN",
+    "estado": "",
+    "lesion": "",
+    "nba_id": 1641739
+   },
+   {
+    "yahoo_id": "1630598",
+    "nombre": "Aaron Wiggins",
+    "equipo_nba": "ATL",
+    "pos": [
+     "SG",
+     "SF"
+    ],
+    "hueco": "BN",
+    "estado": "",
+    "lesion": "",
+    "nba_id": 1630598
+   },
+   {
+    "yahoo_id": "1629622",
+    "nombre": "Max Strus",
+    "equipo_nba": "LAC",
+    "pos": [
+     "SF"
+    ],
+    "hueco": "BN",
+    "estado": "",
+    "lesion": "",
+    "nba_id": 1629622
+   },
+   {
+    "yahoo_id": "1641731",
+    "nombre": "Bilal Coulibaly",
+    "equipo_nba": "WAS",
+    "pos": [
+     "SG",
+     "SF"
+    ],
+    "hueco": "IL",
+    "estado": "",
+    "lesion": "",
+    "nba_id": 1641731
+   }
+  ],
+  "466.l.9972.t.11": [
+   {
+    "yahoo_id": "1631096",
+    "nombre": "Chet Holmgren",
+    "equipo_nba": "OKC",
+    "pos": [
+     "PF",
+     "C"
+    ],
+    "hueco": "PG",
+    "estado": "GTD",
+    "lesion": "",
+    "nba_id": 1631096
+   },
+   {
+    "yahoo_id": "1628983",
+    "nombre": "Shai Gilgeous-Alexander",
+    "equipo_nba": "OKC",
+    "pos": [
+     "PG"
+    ],
+    "hueco": "SG",
+    "estado": "",
+    "lesion": "",
+    "nba_id": 1628983
+   },
+   {
+    "yahoo_id": "1629627",
+    "nombre": "Zion Williamson",
+    "equipo_nba": "NOP",
+    "pos": [
+     "PF",
+     "C"
+    ],
+    "hueco": "SF",
+    "estado": "",
+    "lesion": "",
+    "nba_id": 1629627
+   },
+   {
+    "yahoo_id": "1641709",
+    "nombre": "Ausar Thompson",
+    "equipo_nba": "DET",
+    "pos": [
+     "SF",
+     "PF"
+    ],
+    "hueco": "PF",
+    "estado": "",
+    "lesion": "",
+    "nba_id": 1641709
+   },
+   {
+    "yahoo_id": "2544",
+    "nombre": "LeBron James",
+    "equipo_nba": "PHI",
+    "pos": [
+     "SF",
+     "PF"
+    ],
+    "hueco": "C",
+    "estado": "",
+    "lesion": "",
+    "nba_id": 2544
+   },
+   {
+    "yahoo_id": "1630530",
+    "nombre": "Trey Murphy III",
+    "equipo_nba": "NOP",
+    "pos": [
+     "SG",
+     "SF"
+    ],
+    "hueco": "Util",
+    "estado": "",
+    "lesion": "",
+    "nba_id": 1630530
+   },
+   {
+    "yahoo_id": "1630193",
+    "nombre": "Immanuel Quickley",
+    "equipo_nba": "TOR",
+    "pos": [
+     "PG",
+     "SG"
+    ],
+    "hueco": "Util",
+    "estado": "GTD",
+    "lesion": "",
+    "nba_id": 1630193
+   },
+   {
+    "yahoo_id": "1641710",
+    "nombre": "Anthony Black",
+    "equipo_nba": "ORL",
+    "pos": [
+     "PG",
+     "SG"
+    ],
+    "hueco": "Util",
+    "estado": "",
+    "lesion": "",
+    "nba_id": 1641710
+   },
+   {
+    "yahoo_id": "1643408",
+    "nombre": "Darryn Peterson",
+    "equipo_nba": "UTA",
+    "pos": [
+     "PG",
+     "SG"
+    ],
+    "hueco": "BN",
+    "estado": "",
+    "lesion": "",
+    "nba_id": 1643408
+   },
+   {
+    "yahoo_id": "1629637",
+    "nombre": "Jaxson Hayes",
+    "equipo_nba": "UTA",
+    "pos": [
+     "C"
+    ],
+    "hueco": "BN",
+    "estado": "INJ",
+    "lesion": "",
+    "nba_id": 1629637
+   },
+   {
+    "yahoo_id": "1631245",
+    "nombre": "Quenton Jackson",
+    "equipo_nba": "IND",
+    "pos": [
+     "PG",
+     "SG"
+    ],
+    "hueco": "BN",
+    "estado": "",
+    "lesion": "",
+    "nba_id": 1631245
+   },
+   {
+    "yahoo_id": "1631221",
+    "nombre": "Collin Gillespie",
+    "equipo_nba": "PHX",
+    "pos": [
+     "PG"
+    ],
+    "hueco": "BN",
+    "estado": "",
+    "lesion": "",
+    "nba_id": 1631221
+   },
+   {
+    "yahoo_id": "1641717",
+    "nombre": "Cason Wallace",
+    "equipo_nba": "OKC",
+    "pos": [
+     "PG",
+     "SG"
+    ],
+    "hueco": "BN",
+    "estado": "",
+    "lesion": "",
+    "nba_id": 1641717
+   },
+   {
+    "yahoo_id": "1630191",
+    "nombre": "Isaiah Stewart",
+    "equipo_nba": "MEM",
+    "pos": [
+     "PF",
+     "C"
+    ],
+    "hueco": "IL",
+    "estado": "",
+    "lesion": "",
+    "nba_id": 1630191
+   }
+  ],
+  "466.l.9972.t.12": [
+   {
+    "yahoo_id": "1628389",
+    "nombre": "Bam Adebayo",
+    "equipo_nba": "MIA",
+    "pos": [
+     "PF",
+     "C"
+    ],
+    "hueco": "PG",
+    "estado": "",
+    "lesion": "",
+    "nba_id": 1628389
+   },
+   {
+    "yahoo_id": "1630178",
+    "nombre": "Tyrese Maxey",
+    "equipo_nba": "PHI",
+    "pos": [
+     "PG",
+     "SG"
+    ],
+    "hueco": "SG",
+    "estado": "",
+    "lesion": "",
+    "nba_id": 1630178
+   },
+   {
+    "yahoo_id": "1630567",
+    "nombre": "Scottie Barnes",
+    "equipo_nba": "TOR",
+    "pos": [
+     "SG",
+     "SF"
+    ],
+    "hueco": "SF",
+    "estado": "GTD",
+    "lesion": "",
+    "nba_id": 1630567
+   },
+   {
+    "yahoo_id": "1642845",
+    "nombre": "VJ Edgecombe",
+    "equipo_nba": "PHI",
+    "pos": [
+     "SG"
+    ],
+    "hueco": "PF",
+    "estado": "",
+    "lesion": "",
+    "nba_id": 1642845
+   },
+   {
+    "yahoo_id": "201950",
+    "nombre": "Jrue Holiday",
+    "equipo_nba": "POR",
+    "pos": [
+     "PG",
+     "SG"
+    ],
+    "hueco": "C",
+    "estado": "INJ",
+    "lesion": "",
+    "nba_id": 201950
+   },
+   {
+    "yahoo_id": "203897",
+    "nombre": "Zach LaVine",
+    "equipo_nba": "SAC",
+    "pos": [
+     "SG",
+     "SF"
+    ],
+    "hueco": "Util",
+    "estado": "GTD",
+    "lesion": "",
+    "nba_id": 203897
+   },
+   {
+    "yahoo_id": "203081",
+    "nombre": "Damian Lillard",
+    "equipo_nba": "POR",
+    "pos": [
+     "PG"
+    ],
+    "hueco": "Util",
+    "estado": "",
+    "lesion": "",
+    "nba_id": 203081
+   },
+   {
+    "yahoo_id": "1630180",
+    "nombre": "Saddiq Bey",
+    "equipo_nba": "NOP",
+    "pos": [
+     "SF",
+     "PF"
+    ],
+    "hueco": "Util",
+    "estado": "",
+    "lesion": "",
+    "nba_id": 1630180
+   },
+   {
+    "yahoo_id": "1641796",
+    "nombre": "Pelle Larsson",
+    "equipo_nba": "MIA",
+    "pos": [
+     "SG",
+     "SF"
+    ],
+    "hueco": "BN",
+    "estado": "",
+    "lesion": "",
+    "nba_id": 1641796
+   },
+   {
+    "yahoo_id": "1629023",
+    "nombre": "P.J. Washington",
+    "equipo_nba": "DAL",
+    "pos": [
+     "SF",
+     "PF"
+    ],
+    "hueco": "BN",
+    "estado": "",
+    "lesion": "",
+    "nba_id": 1629023
+   },
+   {
+    "yahoo_id": "1629614",
+    "nombre": "Andrew Nembhard",
+    "equipo_nba": "IND",
+    "pos": [
+     "PG",
+     "SG"
+    ],
+    "hueco": "BN",
+    "estado": "",
+    "lesion": "",
+    "nba_id": 1629614
+   },
+   {
+    "yahoo_id": "1641706",
+    "nombre": "Brandon Miller",
+    "equipo_nba": "CHA",
+    "pos": [
+     "SG",
+     "SF"
+    ],
+    "hueco": "BN",
+    "estado": "",
+    "lesion": "",
+    "nba_id": 1641706
+   },
+   {
+    "yahoo_id": "1630200",
+    "nombre": "Tre Jones",
+    "equipo_nba": "CHI",
+    "pos": [
+     "PG"
+    ],
+    "hueco": "BN",
+    "estado": "O",
+    "lesion": "",
+    "nba_id": 1630200
+   },
+   {
+    "yahoo_id": "1628989",
+    "nombre": "Kevin Huerter",
+    "equipo_nba": "DET",
+    "pos": [
+     "SG",
+     "SF"
+    ],
+    "hueco": "IL",
+    "estado": "",
+    "lesion": "",
+    "nba_id": 1628989
+   }
+  ]
+ },
+ "actualizado": "2026-11-25T23:39:36+00:00"
+}

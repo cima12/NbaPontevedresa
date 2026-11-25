@@ -1,25 +1,31 @@
 name: Actualizar liga
 
 on:
-  workflow_dispatch:   # botón "Run workflow" (de momento solo manual)
+  workflow_dispatch:            # botón "Run workflow"
+  schedule:                     # automático (hora UTC; en España +1 en invierno)
+    - cron: "41 7 * * *"        # 08:41 España: tras los partidos de la noche
+    - cron: "41 12 * * *"       # 13:41
+    - cron: "41 17 * * *"       # 18:41: antes de que empiecen los partidos
+    - cron: "11 22 * * *"       # 23:11: últimos cambios de alineación
+# Mientras Yahoo no apruebe la app, termina en verde con "⏳" y no guarda nada.
 
 permissions:
-  contents: write      # para poder guardar los JSON en el repositorio
+  contents: write
 
 concurrency:
-  group: actualizar-liga
+  group: guardar-datos          # nunca dos Actions guardando a la vez
   cancel-in-progress: false
 
 jobs:
   actualizar:
     runs-on: ubuntu-latest
-    timeout-minutes: 10
+    timeout-minutes: 15
     steps:
       - name: Descargar el repositorio
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
 
       - name: Preparar Python
-        uses: actions/setup-python@v5
+        uses: actions/setup-python@v6
         with:
           python-version: "3.12"
 
@@ -34,10 +40,11 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add data
+          git add -A data
           if git diff --cached --quiet; then
             echo "Sin cambios en los datos."
           else
-            git commit -m "Datos actualizados $(date -u +'%Y-%m-%d %H:%M') UTC"
+            git commit -m "Datos liga $(date -u +'%Y-%m-%d %H:%M') UTC"
+            git pull --rebase
             git push
           fi
