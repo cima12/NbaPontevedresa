@@ -1,0 +1,58 @@
+name: Importar histórico
+
+on:
+  workflow_dispatch:
+    inputs:
+      modo:
+        description: "censo = ver qué guarda Yahoo (primero) · importar = descargar y guardar"
+        type: choice
+        options: [censo, importar]
+        default: censo
+      temporadas:
+        description: "Opcional: rango de temporadas, p. ej. 2008-2012 (vacío = todas)"
+        required: false
+        default: ""
+
+permissions:
+  contents: write
+
+concurrency:
+  group: guardar-datos          # nunca dos Actions guardando a la vez
+  cancel-in-progress: false
+
+jobs:
+  historico:
+    runs-on: ubuntu-latest
+    timeout-minutes: 55
+    steps:
+      - name: Descargar el repositorio
+        uses: actions/checkout@v5
+
+      - name: Preparar Python
+        uses: actions/setup-python@v6
+        with:
+          python-version: "3.12"
+
+      - name: Leer el histórico de Yahoo
+        env:
+          YAHOO_CLIENT_ID: ${{ secrets.YAHOO_CLIENT_ID }}
+          YAHOO_CLIENT_SECRET: ${{ secrets.YAHOO_CLIENT_SECRET }}
+          YAHOO_REFRESH_TOKEN: ${{ secrets.YAHOO_REFRESH_TOKEN }}
+          MODO: ${{ inputs.modo }}
+          TEMPORADAS: ${{ inputs.temporadas }}
+          MINUTOS_MAX: "40"
+        run: python scripts/historico.py
+
+      - name: Guardar en el repositorio
+        if: always()                 # guarda lo descargado aunque algo falle a mitad
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A data/historico 2>/dev/null || true
+          if git diff --cached --quiet; then
+            echo "Sin cambios."
+          else
+            git commit -m "Histórico (${{ inputs.modo }}) $(date -u +'%Y-%m-%d %H:%M') UTC"
+            git pull --rebase
+            git push
+          fi

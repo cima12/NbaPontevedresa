@@ -27,6 +27,7 @@ archivos JSON en vez de llamar a Yahoo (ver scripts/pruebas/).
 """
 
 import base64
+import hashlib
 import json
 import os
 import re
@@ -137,7 +138,10 @@ def obtener_token():
 
 def _fixture(ruta):
     ruta = re.sub(r"date=[\d-]+", "date=FECHA", ruta)
-    nombre = re.sub(r"[^A-Za-z0-9]+", "_", ruta).strip("_") + ".json"
+    nombre = re.sub(r"[^A-Za-z0-9]+", "_", ruta).strip("_")
+    if len(nombre) > 150:
+        nombre = nombre[:80] + "_" + hashlib.md5(nombre.encode()).hexdigest()[:12]
+    nombre += ".json"
     f = Path(FIXTURES) / nombre
     if not f.exists():
         raise ErrorAPI(404, ruta, f"(prueba) falta el archivo {nombre}")

@@ -9,6 +9,7 @@ Uso (desde la raíz del repo):
 La web enseña esos datos de prueba abriéndola con ?prueba al final de la dirección.
 """
 
+import hashlib
 import json
 import random
 from datetime import date, datetime, timedelta, timezone
@@ -37,7 +38,10 @@ def escribir(ruta, contenido):
     nombre = "".join(c if c.isalnum() else "_" for c in ruta)
     while "__" in nombre:
         nombre = nombre.replace("__", "_")
-    (SALIDA / (nombre.strip("_") + ".json")).write_text(
+    nombre = nombre.strip("_")
+    if len(nombre) > 150:                       # nombres larguísimos (listas de jugadores)
+        nombre = nombre[:80] + "_" + hashlib.md5(nombre.encode()).hexdigest()[:12]
+    (SALIDA / (nombre + ".json")).write_text(
         json.dumps({"fantasy_content": contenido}, ensure_ascii=False), encoding="utf-8")
 
 
@@ -166,7 +170,51 @@ def main():
                                            for i in (a, b)], "team")}})
     escribir(f"league/{LK}/scoreboard", {"league": [meta_liga, {"scoreboard": {"week": str(semana),
                                                                               "0": {"matchups": lista(mats, "matchup")}}}]})
+    historico(equipos, semana, meta_liga)
     print(f"OK  Respuestas de prueba en {SALIDA} (semana {semana}: {lunes} a {domingo}).")
+
+
+def historico(equipos, semana, meta_liga):
+    """Para probar historico.py: draft, movimientos, semanas pasadas y una temporada anterior."""
+    # Draft (serpiente) con player_keys; los nombres se piden aparte de 25 en 25
+    picks, n = [], 0
+    for r in range(14):
+        orden = range(12) if r % 2 == 0 else range(11, -1, -1)
+        for i in orden:
+            n += 1
+            picks.append({"draft_result": {"pick": n, "round": r + 1, "team_key": f"{LK}.t.{i + 1}",
+                                           "player_key": f"{GAME}.p.{equipos[i][r]['id']}"}})
+    escribir(f"league/{LK}/draftresults", {"league": [meta_liga, {"draft_results": {**{str(k): v for k, v in enumerate(picks)}, "count": len(picks)}}]})
+    por_id = {f"{GAME}.p.{j['id']}": j for e in equipos for j in e}
+    keys = sorted(por_id)
+    for i in range(0, len(keys), 25):
+        lote = keys[i:i + 25]
+        escribir(f"league/{LK}/players;player_keys={','.join(lote)}",
+                 {"league": [meta_liga, {"players": lista([jugador(por_id[k]) for k in lote], "player")}]})
+    # Movimientos: un fichaje y un traspaso
+    a, b = equipos[0][13], equipos[1][13]
+    def pj(j, tipo, de, al):
+        return {"player": [jugador(j)[0], {"transaction_data": [{"type": tipo, "source_team_key": de, "destination_team_key": al}]}]}
+    movs = [[{"transaction_key": f"{GAME}.l.{LIGA}.tr.1", "type": "trade", "status": "successful", "timestamp": "1764000000",
+              "trader_team_key": f"{LK}.t.1", "tradee_team_key": f"{LK}.t.2"},
+             {"players": lista([pj(a, "trade", f"{LK}.t.1", f"{LK}.t.2")["player"], pj(b, "trade", f"{LK}.t.2", f"{LK}.t.1")["player"]], "player")}],
+            [{"transaction_key": f"{GAME}.l.{LIGA}.tr.2", "type": "add", "status": "successful", "timestamp": "1763000000"},
+             {"players": lista([[jugador(a)[0], {"transaction_data": {"type": "add", "source_type": "freeagents", "destination_team_key": f"{LK}.t.3"}}]], "player")}]]
+    escribir(f"league/{LK}/transactions;start=0;count=25", {"league": [meta_liga, {"transactions": lista(movs, "transaction")}]})
+    # Semanas pasadas = copia de la actual; plantillas de la semana 1 = las de hoy
+    sb = (SALIDA / f"league_{LK.replace('.', '_')}_scoreboard.json").read_text()
+    for w in range(1, semana + 1):
+        (SALIDA / f"league_{LK.replace('.', '_')}_scoreboard_week_{w}.json").write_text(sb)
+    ro = (SALIDA / f"league_{LK.replace('.', '_')}_teams_roster_date_FECHA.json").read_text()
+    (SALIDA / f"league_{LK.replace('.', '_')}_teams_roster_week_1.json").write_text(ro)
+    # Temporada anterior (2025-26, 2 semanas): mismas respuestas con otra clave
+    viejo, k_v = "454.l.1234", "454_l_1234"
+    for f in list(SALIDA.glob(f"league_{LK.replace('.', '_')}*.json")):
+        txt = f.read_text().replace(LK, viejo).replace(f"{GAME}.p.", "454.p.").replace(f"{GAME}.l.{LIGA}", "454.l.1234")
+        txt = txt.replace('"season": "2026"', '"season": "2025"').replace('"renew": "454_1234"', '"renew": ""') \
+                 .replace('"renewed": ""', '"renewed": "466_9972"').replace('"end_week": "22"', '"end_week": "2"') \
+                 .replace('"name": "NBA Pontevedresa (PRUEBA)"', '"name": "NBA Pontevedresa 2025 (PRUEBA)"')
+        (SALIDA / f.name.replace(LK.replace('.', '_'), k_v).replace(f"{GAME}_p_", "454_p_")).write_text(txt)
 
 
 if __name__ == "__main__":
