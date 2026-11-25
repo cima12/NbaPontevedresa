@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Por 36 minutos · Grit &amp; Grind</title>
+<style>
+:root{--bg:#000;--card:#111418;--card2:#1a1e24;--line:#262b33;--txt:#e8eaed;--dim:#9aa0a6;--verde:#3ddc84;--ambar:#f4b942;--rojo:#ff5f56}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+.fila.rejilla{display:grid;grid-template-columns:1fr 1fr;gap:8px;width:100%}
+@media(min-width:640px){.fila.rejilla{grid-template-columns:repeat(5,1fr)}}
+body{margin:0;background:var(--bg);color:var(--txt);font:14px/1.4 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;-webkit-text-size-adjust:100%}
+header{padding:14px 14px 6px}
+h1{margin:0;font-size:20px;letter-spacing:.2px}
+.sub{color:var(--dim);font-size:12px;margin-top:2px;display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.badge{background:var(--ambar);color:#000;font-weight:700;font-size:11px;padding:2px 7px;border-radius:999px}
+.badge.ok{background:var(--verde)}
+.panel{background:var(--card);margin:8px 10px;border-radius:14px;padding:12px}
+.fila{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.fila+.fila{margin-top:10px}
+.seg{display:flex;background:var(--card2);border-radius:10px;padding:3px;flex:1;min-width:240px}
+.seg button{flex:1;border:0;background:transparent;color:var(--dim);padding:8px 6px;border-radius:8px;font:inherit;font-weight:600}
+.seg button.on{background:var(--verde);color:#000}
+.campo{display:flex;flex-direction:column;gap:3px;flex:1;min-width:90px}
+.campo label{font-size:11px;color:var(--dim);text-transform:uppercase;letter-spacing:.4px}
+input,select{background:var(--card2);color:var(--txt);border:1px solid var(--line);border-radius:9px;padding:8px 9px;font:inherit;width:100%}
+input:focus,select:focus{outline:2px solid var(--verde);outline-offset:-1px}
+.chips{display:flex;gap:6px;flex-wrap:wrap}
+.chip{border:1px solid var(--line);background:var(--card2);color:var(--dim);border-radius:999px;padding:6px 12px;font:inherit;font-weight:600}
+.chip.on{border-color:var(--verde);color:var(--verde)}
+.mini{background:none;border:0;color:var(--dim);font:inherit;text-decoration:underline;padding:4px}
+.resumen{color:var(--dim);font-size:12px;margin:4px 14px}
+.tabla-wrap{overflow:auto;margin:6px 10px 10px;border-radius:14px;background:var(--card);max-height:75vh}
+table{border-collapse:separate;border-spacing:0;width:100%;font-variant-numeric:tabular-nums}
+th,td{padding:8px 7px;text-align:right;white-space:nowrap;border-bottom:1px solid var(--line)}
+th{position:sticky;top:0;background:var(--card2);z-index:2;font-size:11px;color:var(--dim);text-transform:uppercase;letter-spacing:.3px;cursor:pointer;user-select:none}
+th.ord{color:var(--verde)}
+th:first-child,td:first-child{position:sticky;left:0;text-align:left;background:var(--card);z-index:1;max-width:150px;overflow:hidden;text-overflow:ellipsis}
+th:first-child{z-index:3;background:var(--card2)}
+td:first-child .n{font-weight:600;display:block;overflow:hidden;text-overflow:ellipsis}
+td:first-child .m{font-size:11px;color:var(--dim)}
+td.top{color:var(--verde);font-weight:700}
+td.bajo{color:var(--rojo)}
+td.dim{color:var(--dim)}
+td.valor{font-weight:700}
+.vacio{padding:30px;text-align:center;color:var(--dim)}
+.mas{display:block;margin:0 auto 14px;background:var(--card2);color:var(--txt);border:1px solid var(--line);border-radius:10px;padding:10px 18px;font:inherit}
+details{margin:6px 10px 30px;background:var(--card);border-radius:14px;padding:10px 12px;color:var(--dim);font-size:13px}
+details summary{color:var(--txt);font-weight:600;cursor:pointer}
+details p{margin:8px 0}
+</style>
+</head>
+<body>
+<header>
+  <h1>Por 36 minutos</h1>
+  <div class="sub"><span id="fuente-badge" class="badge">DATOS DE PRUEBA</span><span id="fuente-txt"></span></div>
+</header>
+
+<section class="panel">
+  <div class="fila">
+    <div class="seg" id="modo">
+      <button data-m="p36" class="on">Por 36 min</button>
+      <button data-m="pp">Por partido</button>
+      <button data-m="tot">Totales</button>
+    </div>
+  </div>
+  <div class="fila" id="fila-periodo" hidden>
+    <div class="seg" id="periodo">
+      <button data-p="temporada" class="on">Temporada</button>
+      <button data-p="ult30">30 días</button>
+      <button data-p="ult14">14 días</button>
+      <button data-p="ult7">7 días</button>
+    </div>
+  </div>
+  <div class="fila rejilla">
+    <div class="campo"><label for="f-pj">Partidos mín.</label><input id="f-pj" type="number" min="0" inputmode="numeric"></div>
+    <div class="campo"><label for="f-mpg">Min/partido mín.</label><input id="f-mpg" type="number" min="0" step="1" inputmode="decimal"></div>
+    <div class="campo"><label for="f-mpgmax">Min/partido máx.</label><input id="f-mpgmax" type="number" min="0" step="1" inputmode="decimal" placeholder="sin límite"></div>
+    <div class="campo"><label for="f-min">Minutos totales mín.</label><input id="f-min" type="number" min="0" step="10" inputmode="numeric"></div>
+    <div class="campo" id="campo-edad"><label for="f-edadmax">Edad máx.</label><input id="f-edadmax" type="number" min="18" max="45" step="1" inputmode="numeric" placeholder="sin límite"></div>
+  </div>
+  <div class="fila" id="fila-pos">
+    <div class="chips" id="pos">
+      <button class="chip on" data-p="">Todos</button>
+      <button class="chip" data-p="PG">PG</button>
+      <button class="chip" data-p="SG">SG</button>
+      <button class="chip" data-p="SF">SF</button>
+      <button class="chip" data-p="PF">PF</button>
+      <button class="chip" data-p="C">C</button>
+    </div>
+  </div>
+  <div class="fila" id="fila-fantasy" hidden>
+    <div class="campo"><label for="f-fantasy">Liga</label>
+      <select id="f-fantasy"><option value="">Todos los jugadores</option><option value="FA">Solo agentes libres</option></select></div>
+  </div>
+  <div class="fila">
+    <div class="campo" style="flex:2"><label for="f-q">Buscar jugador o equipo NBA</label><input id="f-q" type="search" placeholder="Nombre o siglas (p. ej. MEM)"></div>
+    <div class="campo"><label for="f-orden">Ordenar por</label><select id="f-orden"></select></div>
+  </div>
+  <div class="fila"><button class="mini" id="reset">Restablecer filtros</button></div>
+</section>
+
+<div class="resumen" id="resumen"></div>
+<div class="tabla-wrap"><table><thead><tr id="cab"></tr></thead><tbody id="cuerpo"></tbody></table></div>
+<button class="mas" id="mas" hidden>Ver más</button>
+
+<details>
+  <summary>Cómo leer la tabla</summary>
+  <p><b>Por 36 min</b>: lo que haría el jugador si jugara 36 minutos con el mismo rendimiento. Sirve para detectar a quien rinde mucho en pocos minutos. Ojo: con poca muestra engaña, por eso conviene dejar un mínimo de partidos y minutos.</p>
+  <p><b>FG% y FT%</b> no cambian al pasarlos a 36 minutos. Al lado se ven los intentos por partido para saber si el porcentaje pesa.</p>
+  <p><b>Valor</b>: suma de las 9 categorías normalizadas (puntuación z) frente a los jugadores que pasan los filtros. En FG% y FT% se tiene en cuenta el volumen de tiros, y las pérdidas restan. Por encima de 0 = mejor que la media del grupo filtrado.</p>
+  <p><b>Periodo</b>: al cambiarlo se ajustan solos los mínimos de partidos y minutos (en 7 días un jugador juega 3 o 4 partidos como mucho). Luego puedes cambiarlos.</p>
+  <p><b>Min/partido máx.</b>: ponlo en 20, por ejemplo, para buscar jugadores con pocos minutos que rinden muy bien.</p>
+  <p>Verde = entre el 10&nbsp;% mejor del grupo filtrado en esa columna. Rojo en pérdidas = entre el 10&nbsp;% que más pierde.</p>
+</details>
+
+<script>
+const DATOS_INCRUSTADOS = /*__DATOS__*/null;
+// En GitHub Pages lee los datos del propio repositorio (los renueva el Action "Datos NBA").
+const URLS_DATOS = [
+  "data/nba/jugadores.json",
+  "https://cima12.github.io/NbaPontevedresa/data/nba/jugadores.json",
+];
+
+const CATS = [
+  {k:"pts",t:"PTS"},{k:"reb",t:"REB"},{k:"ast",t:"AST"},{k:"stl",t:"STL"},{k:"blk",t:"BLK"},
+  {k:"tpm",t:"3PM"},{k:"to",t:"TO",inv:true},
+];
+const COLS = [
+  {k:"nombre",t:"Jugador"},{k:"edad",t:"Edad"},{k:"pj",t:"PJ"},{k:"mpg",t:"MIN"},
+  ...CATS,
+  {k:"fgp",t:"FG%",pct:true},{k:"fgav",t:"FGA",dim:true},
+  {k:"ftp",t:"FT%",pct:true},{k:"ftav",t:"FTA",dim:true},
+  {k:"valor",t:"Valor"},
+];
+const MINIMOS_PERIODO = {temporada:{pj:5,min:100}, ult30:{pj:5,min:100}, ult14:{pj:3,min:60}, ult7:{pj:2,min:30}};
+const DEF = {periodo:"temporada",modo:"p36",pj:5,mpg:10,mpgmax:"",min:100,pos:"",q:"",orden:"valor",asc:false,fantasy:"",edadmax:""};
+let F = {...DEF}, jugadores = [], limite = 100, DATOS = null, REAL = false;
+
+function cargarFiltros(){ try{ const s=JSON.parse(localStorage.getItem("por36-filtros")); if(s) F={...DEF,...s,q:""}; }catch(e){} }
+function guardarFiltros(){ try{ localStorage.setItem("por36-filtros",JSON.stringify(F)); }catch(e){} }
+
+// Orden: 1) GitHub (solo funciona como archivo local), 2) jugadores.json propio de la página de Claude
+// (lo renueva cada día la tarea programada), 3) copia incrustada en el archivo.
+async function leer(url){
+  try{
+    const ctl = new AbortController(); setTimeout(()=>ctl.abort(),5000);
+    const r = await fetch(url,{signal:ctl.signal,cache:"no-store"});
+    if(r.ok){ const d = await r.json(); if(d && Array.isArray(d.jugadores)) return d; }
+  }catch(e){}
+  return null;
+}
+async function obtenerDatos(){
+  for(const url of URLS_DATOS){ const d = await leer(url); if(d) return {d, origen:"github"}; }
+  const propio = await leer("jugadores.json"); if(propio) return {d:propio, origen:"propio"};
+  return {d:DATOS_INCRUSTADOS, origen:"copia"};
+}
+
+// Formato real (data/nba/jugadores.json): promedios por partido por periodo.
+// Se convierte a totales del periodo para que el resto de cálculos sea igual.
+function esReal(d){ return d.jugadores.length && d.jugadores[0].temporada !== undefined; }
+// Edad con un decimal a fecha de hoy, desde la fecha de nacimiento ("nac")
+function edadDe(j){
+  if(j.nac) return (Date.now()-Date.parse(j.nac+"T12:00:00Z"))/(365.2425*864e5);
+  return j.edad||null;
+}
+// "G" (ESPN) vale para PG y SG; "F" para SF y PF; "PG,SG" (Yahoo) para ambas
+function juegaDe(j,pos){
+  const ps=(j.pos||"").split(/[,/-]/);
+  return ps.includes(pos) || (ps.includes("G")&&(pos==="PG"||pos==="SG")) || (ps.includes("F")&&(pos==="SF"||pos==="PF"));
+}
+function desdeReal(d, periodo){
+  const out = [];
+  for(const j of d.jugadores){
+    const s = j[periodo]; if(!s || !s.pj) continue;
+    const pj = s.pj, t = x => (x||0)*pj;
+    const fga = t(s.fga), fta = t(s.fta);
+    out.push({id:j.id, nombre:j.nombre, equipo:j.equipo, pos:j.pos||"", edad:edadDe(j),
+      ultimo:j.ultimo_partido, fantasy:j.fantasy||null,
+      pj, min:t(s.min), fga, fgm:fga*(s.fg_pct||0), fta, ftm:fta*(s.ft_pct||0),
+      tpm:t(s.tpm), pts:t(s.pts), reb:t(s.reb), ast:t(s.ast), stl:t(s.stl), blk:t(s.blk), to:t(s.to)});
+  }
+  return out;
+}
+function prepara(d){
+  const base = esReal(d) ? desdeReal(d, F.periodo) : d.jugadores;
+  return base.map(j=>{
+    const o = {...j};
+    o.mpg = j.pj ? j.min/j.pj : 0;
+    o.fgp = j.fga ? j.fgm/j.fga : null;
+    o.ftp = j.fta ? j.ftm/j.fta : null;
+    o.estado = j.fantasy ? (j.fantasy.estado || "") : "";
+    o.equipoFantasy = j.fantasy ? (j.fantasy.equipo || "") : "";
+    return o;
+  });
+}
+
+// Escala según el modo: por 36, por partido o totales
+function factor(j){ return F.modo==="p36" ? (j.min?36/j.min:0) : F.modo==="pp" ? (j.pj?1/j.pj:0) : 1; }
+function valorCelda(j,k){
+  if(k==="pj"||k==="mpg"||k==="fgp"||k==="ftp"||k==="nombre"||k==="valor"||k==="edad") return j[k];
+  if(k==="fgav") return j.fga*factor(j);
+  if(k==="ftav") return j.fta*factor(j);
+  return j[k]*factor(j);
+}
+
+function filtrar(){
+  const q = F.q.trim().toLowerCase();
+  const mpgmax = F.mpgmax===""||F.mpgmax===null ? Infinity : +F.mpgmax;
+  return jugadores.filter(j=>
+    j.pj >= (+F.pj||0) && j.mpg >= (+F.mpg||0) && j.mpg <= mpgmax && j.min >= (+F.min||0) &&
+    (!F.pos || juegaDe(j,F.pos)) &&
+    (F.edadmax===""||F.edadmax===null || (j.edad!=null && j.edad < +F.edadmax+1)) &&
+    (!F.fantasy || j.estado===F.fantasy || j.equipoFantasy===F.fantasy) &&
+    (!q || j.nombre.toLowerCase().includes(q) || j.equipo.toLowerCase()===q || (j.equipoFantasy||"").toLowerCase().includes(q))
+  );
+}
+
+// Valor = suma de puntuaciones z por 36 min dentro del grupo filtrado
+function calcularValor(lista){
+  if(!lista.length) return;
+  const p36 = j => (j.min?36/j.min:0);
+  const fgLiga = lista.reduce((a,j)=>a+j.fgm,0)/Math.max(1,lista.reduce((a,j)=>a+j.fga,0));
+  const ftLiga = lista.reduce((a,j)=>a+j.ftm,0)/Math.max(1,lista.reduce((a,j)=>a+j.fta,0));
+  const series = {
+    ...Object.fromEntries(CATS.map(c=>[c.k, lista.map(j=>j[c.k]*p36(j))])),
+    fgi: lista.map(j=>(j.fgm - fgLiga*j.fga)*p36(j)),
+    fti: lista.map(j=>(j.ftm - ftLiga*j.fta)*p36(j)),
+  };
+  const z = {};
+  for(const [k,v] of Object.entries(series)){
+    const m = v.reduce((a,b)=>a+b,0)/v.length;
+    const sd = Math.sqrt(v.reduce((a,b)=>a+(b-m)**2,0)/v.length) || 1;
+    z[k] = v.map(x=>(x-m)/sd);
+  }
+  lista.forEach((j,i)=>{
+    let s = 0;
+    for(const k in z) s += (k==="to" ? -z[k][i] : z[k][i]);
+    j.valor = s;
+  });
+}
+
+function umbrales(lista){
+  const u = {};
+  for(const c of COLS){
+    if(c.k==="nombre"||c.dim||c.k==="pj"||c.k==="mpg"||c.k==="edad") continue;
+    const v = lista.map(j=>valorCelda(j,c.k)).filter(x=>x!==null&&!isNaN(x)).sort((a,b)=>a-b);
+    if(v.length<10){ u[c.k]=null; continue; }
+    u[c.k] = {alto:v[Math.floor(v.length*.9)], bajo:v[Math.floor(v.length*.1)]};
+  }
+  return u;
+}
+
+function fmt(c,x){
+  if(x===null||x===undefined||isNaN(x)) return "–";
+  if(c.pct) return (x*100).toFixed(1);
+  if(c.k==="pj") return x;
+  if(c.k==="edad") return x.toFixed(1);
+  if(c.k==="valor") return (x>0?"+":"")+x.toFixed(1);
+  if(F.modo==="tot" && c.k!=="mpg") return Math.round(x);
+  return x.toFixed(1);
+}
+
+function esc(s){ return String(s).replace(/[&<>"]/g,ch=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[ch])); }
+
+function pintar(){
+  const lista = filtrar();
+  calcularValor(lista);
+  const col = COLS.find(c=>c.k===F.orden) || COLS[COLS.length-1];
+  lista.sort((a,b)=>{
+    let va = valorCelda(a,col.k), vb = valorCelda(b,col.k);
+    if(col.k==="nombre") return F.asc ? va.localeCompare(vb) : vb.localeCompare(va);
+    if(va===null) return 1; if(vb===null) return -1;
+    return F.asc ? va-vb : vb-va;
+  });
+  const u = umbrales(lista);
+  document.getElementById("cab").innerHTML = COLS.map(c=>
+    `<th data-k="${c.k}" class="${c.k===F.orden?"ord":""}">${c.t}${c.k===F.orden?(F.asc?" ▲":" ▼"):""}</th>`).join("");
+  const filas = lista.slice(0,limite).map(j=>{
+    const tds = COLS.map(c=>{
+      if(c.k==="nombre"){
+        const extra = j.equipoFantasy ? ` · ${esc(j.equipoFantasy)}` : (j.estado==="FA" ? " · Libre" : "");
+        const meta = [j.equipo, j.pos].filter(Boolean).map(esc).join(" · ");
+        return `<td title="${esc(j.nombre)}"><span class="n">${esc(j.nombre)}</span><span class="m">${meta}${extra}</span></td>`;
+      }
+      const x = valorCelda(j,c.k); let cls = c.dim?"dim":"";
+      const t = u[c.k];
+      if(t && x!==null){
+        if(c.inv){ if(x>=t.alto) cls="bajo"; }
+        else if(x>=t.alto) cls="top";
+      }
+      if(c.k==="valor") cls += " valor";
+      return `<td class="${cls}">${fmt(c,x)}</td>`;
+    }).join("");
+    return `<tr>${tds}</tr>`;
+  }).join("");
+  document.getElementById("cuerpo").innerHTML = filas ||
+    `<tr><td colspan="${COLS.length}" class="vacio" style="position:static">Ningún jugador cumple los filtros. Baja los mínimos.</td></tr>`;
+  document.getElementById("resumen").textContent =
+    `${lista.length} de ${jugadores.length} jugadores cumplen los filtros` + (lista.length>limite?` · mostrando ${limite}`:"");
+  document.getElementById("mas").hidden = lista.length<=limite;
+  guardarFiltros();
+}
+
+function sincronizarControles(){
+  document.querySelectorAll("#periodo button").forEach(b=>b.classList.toggle("on",b.dataset.p===F.periodo));
+  document.querySelectorAll("#modo button").forEach(b=>b.classList.toggle("on",b.dataset.m===F.modo));
+  document.querySelectorAll("#pos .chip").forEach(b=>b.classList.toggle("on",b.dataset.p===F.pos));
+  document.getElementById("f-pj").value=F.pj; document.getElementById("f-mpg").value=F.mpg;
+  document.getElementById("f-mpgmax").value=F.mpgmax; document.getElementById("f-min").value=F.min;
+  document.getElementById("f-edadmax").value=F.edadmax;
+  document.getElementById("f-q").value=F.q; document.getElementById("f-orden").value=F.orden;
+  document.getElementById("f-fantasy").value=F.fantasy;
+}
+
+function eventos(){
+  document.getElementById("f-orden").innerHTML = COLS.filter(c=>!c.dim)
+    .map(c=>`<option value="${c.k}">${c.k==="nombre"?"Nombre":c.t}</option>`).join("");
+  document.getElementById("modo").addEventListener("click",e=>{
+    const b=e.target.closest("button"); if(!b) return; F.modo=b.dataset.m; sincronizarControles(); pintar(); });
+  document.getElementById("periodo").addEventListener("click",e=>{
+    const b=e.target.closest("button"); if(!b) return; F.periodo=b.dataset.p;
+    Object.assign(F, MINIMOS_PERIODO[F.periodo]);   // mínimos razonables para cada periodo
+    if(DATOS){ jugadores = prepara(DATOS); } limite=100; sincronizarControles(); pintar(); });
+  document.getElementById("pos").addEventListener("click",e=>{
+    const b=e.target.closest(".chip"); if(!b) return; F.pos=b.dataset.p; limite=100; sincronizarControles(); pintar(); });
+  [["f-pj","pj"],["f-mpg","mpg"],["f-mpgmax","mpgmax"],["f-min","min"],["f-edadmax","edadmax"],["f-q","q"],["f-fantasy","fantasy"]].forEach(([id,k])=>
+    document.getElementById(id).addEventListener("input",e=>{ F[k]=e.target.value; limite=100; pintar(); }));
+  document.getElementById("f-orden").addEventListener("change",e=>{
+    F.orden=e.target.value; F.asc = (F.orden==="to"||F.orden==="nombre"||F.orden==="edad"); pintar(); });
+  document.getElementById("cab").addEventListener("click",e=>{
+    const th=e.target.closest("th"); if(!th) return; const k=th.dataset.k;
+    if(F.orden===k) F.asc=!F.asc; else { F.orden=k; F.asc=(k==="to"||k==="nombre"||k==="edad"); }
+    if(COLS.find(c=>c.k===k&&!c.dim)) document.getElementById("f-orden").value=k;
+    pintar(); });
+  document.getElementById("mas").addEventListener("click",()=>{ limite+=100; pintar(); });
+  document.getElementById("reset").addEventListener("click",()=>{ F={...DEF}; limite=100; sincronizarControles(); pintar(); });
+}
+
+(async function(){
+  cargarFiltros(); eventos();
+  const {d, origen} = await obtenerDatos();
+  if(!d){ document.getElementById("resumen").textContent="No hay datos disponibles."; return; }
+  DATOS = d; REAL = esReal(d);
+  document.getElementById("fila-periodo").hidden = !REAL;
+  jugadores = prepara(d);
+  if(!jugadores.some(j=>j.pos)){ document.getElementById("fila-pos").hidden = true; F.pos = ""; }
+  if(!jugadores.some(j=>j.edad!=null)){ document.getElementById("campo-edad").hidden = true; F.edadmax = ""; }
+  const fecha = d.actualizado ? new Date(d.actualizado).toLocaleString("es-ES",{day:"numeric",month:"short",hour:"2-digit",minute:"2-digit"}) : "";
+  const badge = document.getElementById("fuente-badge");
+  if(!d.simulado){ badge.textContent = "DATOS REALES"; badge.classList.add("ok"); }
+  const fuente = d.fuente || (REAL ? "NBA" : "");
+  document.getElementById("fuente-txt").textContent =
+    `${fuente} · temporada ${d.temporada||""}${fecha?" · actualizado "+fecha:""}${origen==="copia"?" · copia guardada (no se actualiza sola)":""}`;
+  if(jugadores.some(j=>j.estado||j.equipoFantasy)){
+    document.getElementById("fila-fantasy").hidden=false;
+    const eqs=[...new Set(jugadores.map(j=>j.equipoFantasy).filter(Boolean))].sort();
+    document.getElementById("f-fantasy").insertAdjacentHTML("beforeend",eqs.map(e=>`<option value="${esc(e)}">${esc(e)}</option>`).join(""));
+  }
+  sincronizarControles(); pintar();
+})();
+</script>
+</body>
+</html>
