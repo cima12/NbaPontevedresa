@@ -404,7 +404,7 @@ def leer_enfrentamientos(token, league_key, semana=None):
             equipos.append({"key": info["key"], "stats": estadisticas(d.get("team_stats")),
                             "puntos": (d.get("team_points") or {}).get("total")})
         res["partidos"].append({"estado": m.get("status"), "playoffs": str(m.get("is_playoffs")) == "1",
-                                "equipos": equipos})
+                                "consolacion": str(m.get("is_consolation")) == "1", "equipos": equipos})
     return res
 
 

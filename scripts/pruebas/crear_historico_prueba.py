@@ -21,6 +21,73 @@ SALIDA = RAIZ / "data" / "historico_prueba"
 TEMPORADAS = [2021, 2022, 2023, 2024, 2025, 2026]
 GAMES = {2021: "410", 2022: "418", 2023: "428", 2024: "441", 2025: "454", 2026: "466"}
 APODOS = ["Old School", "Tiburones", "Los del Puerto", "Galácticos", "Mareas", "Furia"]
+CATS = [("fg_pct", "FG%", False), ("ft_pct", "FT%", False), ("tpm", "3PTM", False), ("pts", "PTS", False),
+        ("reb", "REB", False), ("ast", "AST", False), ("stl", "ST", False), ("blk", "BLK", False), ("to", "TO", True)]
+MEDIAS = {"fga": (400, 35), "fg_pct": (.47, .02), "fta": (100, 15), "ft_pct": (.78, .035), "tpm": (60, 10),
+          "pts": (500, 50), "reb": (200, 25), "ast": (115, 18), "stl": (32, 6), "blk": (22, 6), "to": (60, 9)}
+
+
+def stats_semana(fuerza):
+    s = {}
+    for k, (m, d) in MEDIAS.items():
+        v = random.gauss(m + fuerza.get(k, 0) * d, d)
+        s[k] = round(v, 3) if k.endswith("pct") else max(0, round(v))
+    s["fgm"], s["ftm"] = round(s["fga"] * s["fg_pct"]), round(s["fta"] * s["ft_pct"])
+    s["fg_pct"], s["ft_pct"] = round(s["fgm"] / s["fga"], 3), round(s["ftm"] / s["fta"], 3)
+    return s
+
+
+def resultado(sa, sb):
+    ga = gb = 0
+    for k, _, menos in CATS:
+        if sa[k] != sb[k]:
+            if (sa[k] < sb[k]) == menos:
+                ga += 1
+            else:
+                gb += 1
+    return ga, gb
+
+
+def semanas_temporada(key, n_reg, con_playoffs):
+    """Calendario liga (método del círculo) + playoffs de 4. Devuelve (semanas, puestos)."""
+    fuerza = {i: {k: random.gauss(0, .5) for k in MEDIAS} for i in range(12)}
+    rec = {i: [0, 0, 0] for i in range(12)}
+    semanas, ids = [], list(range(12))
+    for w in range(n_reg):
+        r = w % 11
+        rot = [ids[0]] + ids[1:][r:] + ids[1:][:r]
+        pares = [(rot[i], rot[11 - i]) for i in range(6)]
+        partidos = []
+        for a, b in pares:
+            sa, sb = stats_semana(fuerza[a]), stats_semana(fuerza[b])
+            ga, gb = resultado(sa, sb)
+            rec[a][0 if ga > gb else 1 if ga < gb else 2] += 1
+            rec[b][0 if gb > ga else 1 if gb < ga else 2] += 1
+            partidos.append({"estado": "postevent", "playoffs": False, "consolacion": False,
+                             "equipos": [{"key": key(a), "stats": sa}, {"key": key(b), "stats": sb}]})
+        semanas.append({"semana": w + 1, "partidos": partidos})
+    orden = sorted(range(12), key=lambda i: (-(rec[i][0] + rec[i][2] / 2), random.random()))
+    puestos = {i: None for i in range(12)}
+    if con_playoffs:
+        def jugar(a, b, cons=False):
+            sa, sb = stats_semana(fuerza[a]), stats_semana(fuerza[b])
+            ga, gb = resultado(sa, sb)
+            if ga == gb:
+                ga += 1 if random.random() < .5 else 0
+                gb += 0 if ga > gb else 1
+            p = {"estado": "postevent", "playoffs": True, "consolacion": cons,
+                 "equipos": [{"key": key(a), "stats": sa}, {"key": key(b), "stats": sb}]}
+            return p, (a, b) if ga > gb else (b, a)
+        s1, w1 = jugar(orden[0], orden[3]); s2, w2 = jugar(orden[1], orden[2])
+        semanas.append({"semana": n_reg + 1, "partidos": [s1, s2]})
+        f, (camp, sub) = jugar(w1[0], w2[0]); t3, (ter, cua) = jugar(w1[1], w2[1], True)
+        semanas.append({"semana": n_reg + 2, "partidos": [f, t3]})
+        for n, i in enumerate([camp, sub, ter, cua] + [i for i in orden if i not in (camp, sub, ter, cua)]):
+            puestos[i] = n + 1
+    else:
+        for n, i in enumerate(orden):
+            puestos[i] = n + 1
+    return semanas, puestos, rec
 
 
 def escribir(ruta, datos):
@@ -78,7 +145,8 @@ def main():
                    for e in equipos_act]
         equipos = [{"key": key(i), "id": str(i + 1), "nombre": nombres[i], "manager": equipos_act[i]["manager"], "logo": ""}
                    for i in range(12)]
-        puestos = random.sample(range(1, 13), 12)
+        en_curso = t == 2026
+        semanas, puesto_de, rec = semanas_temporada(key, 5 if en_curso else 20, not en_curso)
         # Draft de novatos: 2 rondas con jugadores de la plantilla inicial (los más jóvenes)
         picks, n = [], 0
         for r in range(2):
@@ -88,8 +156,11 @@ def main():
                 picks.append({"pick": n, "ronda": r + 1, "equipo": key(i), "jugador": f"{g}.p.{cand}", "nombre": nombre_de.get(cand)})
         historia[t] = {
             "liga.json": {"league_key": lk, "nombre": f"NBA Pontevedresa {t}-{str(t + 1)[2:]} (PRUEBA)", "temporada": str(t),
-                          "fecha_inicio": str(inicio), "equipos": equipos},
-            "clasificacion.json": {"equipos": [{"key": key(i), "puesto": puestos[i], "g": 0, "p": 0, "e": 0} for i in range(12)]},
+                          "fecha_inicio": str(inicio), "fecha_fin": f"{t + 1}-03-28", "playoffs_semana_inicio": "21",
+                          "categorias": [{"id": str(n), "clave": k, "nombre": nm, "menos_es_mejor": m} for n, (k, nm, m) in enumerate(CATS)],
+                          "equipos": equipos},
+            "clasificacion.json": {"equipos": [{"key": key(i), "puesto": puesto_de[i], "g": rec[i][0], "p": rec[i][1], "e": rec[i][2]} for i in range(12)]},
+            **{f"semanas/{w['semana']:02d}.json": w for w in semanas},
             "draft.json": {"picks": picks},
             "movimientos.json": {"movimientos": sorted(movs, key=lambda m: m["fecha"])},
             "plantillas_inicio.json": {"semana": 1, "equipos": {key(i): [{"yahoo_id": p, "nombre": nombre_de.get(p)} for p in final[i]] for i in range(12)}},

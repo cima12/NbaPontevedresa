@@ -1,0 +1,263 @@
+{
+ "semana": 9,
+ "partidos": [
+  {
+   "estado": "postevent",
+   "playoffs": false,
+   "consolacion": false,
+   "equipos": [
+    {
+     "key": "410.l.3021.t.1",
+     "stats": {
+      "fga": 453,
+      "fg_pct": 0.477,
+      "fta": 112,
+      "ft_pct": 0.795,
+      "tpm": 65,
+      "pts": 481,
+      "reb": 224,
+      "ast": 99,
+      "stl": 41,
+      "blk": 19,
+      "to": 49,
+      "fgm": 216,
+      "ftm": 89
+     }
+    },
+    {
+     "key": "410.l.3021.t.9",
+     "stats": {
+      "fga": 423,
+      "fg_pct": 0.452,
+      "fta": 74,
+      "ft_pct": 0.676,
+      "tpm": 60,
+      "pts": 518,
+      "reb": 180,
+      "ast": 122,
+      "stl": 26,
+      "blk": 24,
+      "to": 49,
+      "fgm": 191,
+      "ftm": 50
+     }
+    }
+   ]
+  },
+  {
+   "estado": "postevent",
+   "playoffs": false,
+   "consolacion": false,
+   "equipos": [
+    {
+     "key": "410.l.3021.t.10",
+     "stats": {
+      "fga": 326,
+      "fg_pct": 0.503,
+      "fta": 107,
+      "ft_pct": 0.748,
+      "tpm": 57,
+      "pts": 500,
+      "reb": 214,
+      "ast": 67,
+      "stl": 24,
+      "blk": 16,
+      "to": 45,
+      "fgm": 164,
+      "ftm": 80
+     }
+    },
+    {
+     "key": "410.l.3021.t.8",
+     "stats": {
+      "fga": 427,
+      "fg_pct": 0.485,
+      "fta": 84,
+      "ft_pct": 0.821,
+      "tpm": 53,
+      "pts": 502,
+      "reb": 204,
+      "ast": 109,
+      "stl": 31,
+      "blk": 23,
+      "to": 72,
+      "fgm": 207,
+      "ftm": 69
+     }
+    }
+   ]
+  },
+  {
+   "estado": "postevent",
+   "playoffs": false,
+   "consolacion": false,
+   "equipos": [
+    {
+     "key": "410.l.3021.t.11",
+     "stats": {
+      "fga": 362,
+      "fg_pct": 0.45,
+      "fta": 114,
+      "ft_pct": 0.763,
+      "tpm": 74,
+      "pts": 444,
+      "reb": 174,
+      "ast": 141,
+      "stl": 25,
+      "blk": 15,
+      "to": 62,
+      "fgm": 163,
+      "ftm": 87
+     }
+    },
+    {
+     "key": "410.l.3021.t.7",
+     "stats": {
+      "fga": 423,
+      "fg_pct": 0.485,
+      "fta": 116,
+      "ft_pct": 0.836,
+      "tpm": 67,
+      "pts": 537,
+      "reb": 199,
+      "ast": 123,
+      "stl": 31,
+      "blk": 21,
+      "to": 61,
+      "fgm": 205,
+      "ftm": 97
+     }
+    }
+   ]
+  },
+  {
+   "estado": "postevent",
+   "playoffs": false,
+   "consolacion": false,
+   "equipos": [
+    {
+     "key": "410.l.3021.t.12",
+     "stats": {
+      "fga": 409,
+      "fg_pct": 0.477,
+      "fta": 111,
+      "ft_pct": 0.793,
+      "tpm": 41,
+      "pts": 474,
+      "reb": 204,
+      "ast": 105,
+      "stl": 40,
+      "blk": 26,
+      "to": 69,
+      "fgm": 195,
+      "ftm": 88
+     }
+    },
+    {
+     "key": "410.l.3021.t.6",
+     "stats": {
+      "fga": 368,
+      "fg_pct": 0.47,
+      "fta": 104,
+      "ft_pct": 0.827,
+      "tpm": 62,
+      "pts": 515,
+      "reb": 185,
+      "ast": 134,
+      "stl": 30,
+      "blk": 32,
+      "to": 53,
+      "fgm": 173,
+      "ftm": 86
+     }
+    }
+   ]
+  },
+  {
+   "estado": "postevent",
+   "playoffs": false,
+   "consolacion": false,
+   "equipos": [
+    {
+     "key": "410.l.3021.t.2",
+     "stats": {
+      "fga": 373,
+      "fg_pct": 0.418,
+      "fta": 109,
+      "ft_pct": 0.798,
+      "tpm": 72,
+      "pts": 450,
+      "reb": 217,
+      "ast": 109,
+      "stl": 29,
+      "blk": 30,
+      "to": 62,
+      "fgm": 156,
+      "ftm": 87
+     }
+    },
+    {
+     "key": "410.l.3021.t.5",
+     "stats": {
+      "fga": 412,
+      "fg_pct": 0.42,
+      "fta": 91,
+      "ft_pct": 0.78,
+      "tpm": 54,
+      "pts": 497,
+      "reb": 259,
+      "ast": 119,
+      "stl": 28,
+      "blk": 22,
+      "to": 59,
+      "fgm": 173,
+      "ftm": 71
+     }
+    }
+   ]
+  },
+  {
+   "estado": "postevent",
+   "playoffs": false,
+   "consolacion": false,
+   "equipos": [
+    {
+     "key": "410.l.3021.t.3",
+     "stats": {
+      "fga": 440,
+      "fg_pct": 0.443,
+      "fta": 88,
+      "ft_pct": 0.784,
+      "tpm": 66,
+      "pts": 470,
+      "reb": 235,
+      "ast": 120,
+      "stl": 29,
+      "blk": 30,
+      "to": 72,
+      "fgm": 195,
+      "ftm": 69
+     }
+    },
+    {
+     "key": "410.l.3021.t.4",
+     "stats": {
+      "fga": 448,
+      "fg_pct": 0.471,
+      "fta": 125,
+      "ft_pct": 0.776,
+      "tpm": 55,
+      "pts": 455,
+      "reb": 218,
+      "ast": 89,
+      "stl": 34,
+      "blk": 29,
+      "to": 75,
+      "fgm": 211,
+      "ftm": 97
+     }
+    }
+   ]
+  }
+ ]
+}

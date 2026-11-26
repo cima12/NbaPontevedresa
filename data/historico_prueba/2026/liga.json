@@ -3,6 +3,64 @@
  "nombre": "NBA Pontevedresa 2026-27 (PRUEBA)",
  "temporada": "2026",
  "fecha_inicio": "2026-10-20",
+ "fecha_fin": "2027-03-28",
+ "playoffs_semana_inicio": "21",
+ "categorias": [
+  {
+   "id": "0",
+   "clave": "fg_pct",
+   "nombre": "FG%",
+   "menos_es_mejor": false
+  },
+  {
+   "id": "1",
+   "clave": "ft_pct",
+   "nombre": "FT%",
+   "menos_es_mejor": false
+  },
+  {
+   "id": "2",
+   "clave": "tpm",
+   "nombre": "3PTM",
+   "menos_es_mejor": false
+  },
+  {
+   "id": "3",
+   "clave": "pts",
+   "nombre": "PTS",
+   "menos_es_mejor": false
+  },
+  {
+   "id": "4",
+   "clave": "reb",
+   "nombre": "REB",
+   "menos_es_mejor": false
+  },
+  {
+   "id": "5",
+   "clave": "ast",
+   "nombre": "AST",
+   "menos_es_mejor": false
+  },
+  {
+   "id": "6",
+   "clave": "stl",
+   "nombre": "ST",
+   "menos_es_mejor": false
+  },
+  {
+   "id": "7",
+   "clave": "blk",
+   "nombre": "BLK",
+   "menos_es_mejor": false
+  },
+  {
+   "id": "8",
+   "clave": "to",
+   "nombre": "TO",
+   "menos_es_mejor": true
+  }
+ ],
  "equipos": [
   {
    "key": "466.l.9972.t.1",

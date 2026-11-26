@@ -56,9 +56,11 @@ def queda_tiempo():
     return (time.time() - INICIO) / 60 < MINUTOS_MAX
 
 
-def escribir(ruta, datos):
+def escribir(ruta, datos, compacto=False):
     ruta.parent.mkdir(parents=True, exist_ok=True)
-    ruta.write_text(json.dumps(datos, ensure_ascii=False, indent=1), encoding="utf-8")
+    texto = json.dumps(datos, ensure_ascii=False, separators=(",", ":")) if compacto \
+        else json.dumps(datos, ensure_ascii=False, indent=1)
+    ruta.write_text(texto, encoding="utf-8")
 
 
 def cadena_ligas(token):
@@ -288,8 +290,66 @@ def construir_indice():
     for j in jugadores.values():
         j["eventos"].sort(key=lambda e: (e["fecha"] or "", orden.get(e["tipo"], 2)))
     escribir(SALIDA / "jugadores.json", {"temporadas": temporadas, "jugadores": jugadores,
-                                          "actualizado": datetime.now(timezone.utc).isoformat(timespec="seconds")})
+                                          "actualizado": datetime.now(timezone.utc).isoformat(timespec="seconds")},
+             compacto=True)
     print(f"OK  Índice de jugadores: {len(jugadores)} jugadores en {len(temporadas)} temporadas.")
+    construir_partidos(temporadas)
+
+
+CLAVES_STATS = ["fgm", "fga", "fg_pct", "ftm", "fta", "ft_pct", "tpm", "pts", "reb", "ast", "stl", "blk", "to"]
+
+
+def construir_partidos(temporadas):
+    """data/historico/partidos.json: todos los enfrentamientos de todas las temporadas, con
+    categorías ganadas por cada uno y sus estadísticas. Con esto la web calcula récords,
+    cara a cara, rachas, suerte, etc.
+
+    Mánagers: el apodo de Yahoo; si falta (ligas antiguas) o se quiere corregir, se usa la
+    tabla manual data/historico/managers.json: {"2012": {"<team_key>": "Pepe"}, ...}
+    o {"2012": {"<nombre del equipo>": "Pepe"}}.
+    """
+    manual = cx.leer_json(SALIDA / "managers.json", {})
+    partidos, meta = [], {}
+    for t, info in sorted(temporadas.items()):
+        carpeta = SALIDA / t
+        liga = cx.leer_json(carpeta / "liga.json", {})
+        cats = [c for c in liga.get("categorias", []) if c.get("clave")]
+        man_t = manual.get(t, {})
+        equipos = {}
+        for k, e in info["equipos"].items():
+            m = man_t.get(k) or man_t.get(e.get("nombre") or "") or e.get("manager") or e.get("nombre")
+            equipos[k] = {"nombre": e.get("nombre"), "manager": m, "puesto": e.get("puesto")}
+        terminada = (liga.get("fecha_fin") or "9999") < datetime.now(timezone.utc).date().isoformat()
+        campeon = next((k for k, e in equipos.items() if e.get("puesto") == 1), None) if terminada else None
+        meta[t] = {"nombre": info.get("nombre"), "equipos": equipos, "campeon": campeon,
+                   "categorias": [{"clave": c["clave"], "nombre": c["nombre"], "menos": c.get("menos_es_mejor", False)} for c in cats],
+                   "playoffs_desde": liga.get("playoffs_semana_inicio")}
+        for f in sorted((carpeta / "semanas").glob("*.json")):
+            sem = cx.leer_json(f, {})
+            for p in sem.get("partidos", []):
+                if len(p.get("equipos", [])) != 2:
+                    continue
+                a, b = p["equipos"]
+                ga = gb = em = 0
+                for c in cats:
+                    va, vb = a["stats"].get(c["clave"]), b["stats"].get(c["clave"])
+                    if va is None or vb is None:
+                        continue
+                    if va == vb:
+                        em += 1
+                    elif (va < vb) == bool(c.get("menos_es_mejor")):
+                        ga += 1
+                    else:
+                        gb += 1
+                partidos.append({"t": t, "s": int(sem.get("semana") or f.stem), "po": bool(p.get("playoffs")),
+                                 "con": bool(p.get("consolacion")), "a": a["key"], "b": b["key"],
+                                 "ga": ga, "gb": gb, "e": em,
+                                 "sa": {k: a["stats"][k] for k in CLAVES_STATS if k in a["stats"]},
+                                 "sb": {k: b["stats"][k] for k in CLAVES_STATS if k in b["stats"]}})
+    escribir(SALIDA / "partidos.json", {"temporadas": meta, "partidos": partidos,
+                                         "actualizado": datetime.now(timezone.utc).isoformat(timespec="seconds")},
+             compacto=True)
+    print(f"OK  Partidos históricos: {len(partidos)} enfrentamientos en {len(meta)} temporadas.")
 
 
 def importar(token, ligas):

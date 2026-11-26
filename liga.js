@@ -296,7 +296,7 @@ function prepararSelectores() {
   $("soy").innerHTML = `<option value="">Elige tu equipo…</option>` + opts;
   $("soy").value = LIGA.soy || "";
   $("soy").onchange = e => { LIGA.soy = e.target.value || null; guardarLS("soy", LIGA.soy); pintarLiga(); pintarRanking(); };
-  $("dueno").innerHTML = `<option value="">Todos (libres y con dueño)</option><option value="libres">Solo libres</option>
+  $("dueno").innerHTML = `<option value="">Libres y con dueño</option><option value="libres">Solo libres</option>
     <option value="mio">Solo mi equipo</option>` + opts;
   $("dueno").hidden = false;
   $("dueno").onchange = e => { est.dueno = e.target.value; est.limite = PASO; pintarRanking(); };

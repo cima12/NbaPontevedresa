@@ -3,32 +3,90 @@
  "nombre": "NBA Pontevedresa 2021-22 (PRUEBA)",
  "temporada": "2021",
  "fecha_inicio": "2021-10-20",
+ "fecha_fin": "2022-03-28",
+ "playoffs_semana_inicio": "21",
+ "categorias": [
+  {
+   "id": "0",
+   "clave": "fg_pct",
+   "nombre": "FG%",
+   "menos_es_mejor": false
+  },
+  {
+   "id": "1",
+   "clave": "ft_pct",
+   "nombre": "FT%",
+   "menos_es_mejor": false
+  },
+  {
+   "id": "2",
+   "clave": "tpm",
+   "nombre": "3PTM",
+   "menos_es_mejor": false
+  },
+  {
+   "id": "3",
+   "clave": "pts",
+   "nombre": "PTS",
+   "menos_es_mejor": false
+  },
+  {
+   "id": "4",
+   "clave": "reb",
+   "nombre": "REB",
+   "menos_es_mejor": false
+  },
+  {
+   "id": "5",
+   "clave": "ast",
+   "nombre": "AST",
+   "menos_es_mejor": false
+  },
+  {
+   "id": "6",
+   "clave": "stl",
+   "nombre": "ST",
+   "menos_es_mejor": false
+  },
+  {
+   "id": "7",
+   "clave": "blk",
+   "nombre": "BLK",
+   "menos_es_mejor": false
+  },
+  {
+   "id": "8",
+   "clave": "to",
+   "nombre": "TO",
+   "menos_es_mejor": true
+  }
+ ],
  "equipos": [
   {
    "key": "410.l.3021.t.1",
    "id": "1",
-   "nombre": "Grit & Grind",
+   "nombre": "Grind Old School",
    "manager": "Mánager 1",
    "logo": ""
   },
   {
    "key": "410.l.3021.t.2",
    "id": "2",
-   "nombre": "Prueba Rías Baixas",
+   "nombre": "Baixas Furia",
    "manager": "Mánager 2",
    "logo": ""
   },
   {
    "key": "410.l.3021.t.3",
    "id": "3",
-   "nombre": "Lérez Los del Puerto",
+   "nombre": "Prueba Lérez",
    "manager": "Mánager 3",
    "logo": ""
   },
   {
    "key": "410.l.3021.t.4",
    "id": "4",
-   "nombre": "Peregrina Tiburones",
+   "nombre": "Prueba Peregrina",
    "manager": "Mánager 4",
    "logo": ""
   },
@@ -42,49 +100,49 @@
   {
    "key": "410.l.3021.t.6",
    "id": "6",
-   "nombre": "Poio Tiburones",
+   "nombre": "Prueba Poio",
    "manager": "Mánager 6",
    "logo": ""
   },
   {
    "key": "410.l.3021.t.7",
    "id": "7",
-   "nombre": "Sanxenxo Furia",
+   "nombre": "Prueba Sanxenxo",
    "manager": "Mánager 7",
    "logo": ""
   },
   {
    "key": "410.l.3021.t.8",
    "id": "8",
-   "nombre": "Cambados Furia",
+   "nombre": "Prueba Cambados",
    "manager": "Mánager 8",
    "logo": ""
   },
   {
    "key": "410.l.3021.t.9",
    "id": "9",
-   "nombre": "Prueba Vilagarcía",
+   "nombre": "Vilagarcía Los del Puerto",
    "manager": "Mánager 9",
    "logo": ""
   },
   {
    "key": "410.l.3021.t.10",
    "id": "10",
-   "nombre": "Prueba Bueu",
+   "nombre": "Bueu Los del Puerto",
    "manager": "Mánager 10",
    "logo": ""
   },
   {
    "key": "410.l.3021.t.11",
    "id": "11",
-   "nombre": "Prueba Cangas",
+   "nombre": "Cangas Galácticos",
    "manager": "Mánager 11",
    "logo": ""
   },
   {
    "key": "410.l.3021.t.12",
    "id": "12",
-   "nombre": "Prueba Moaña",
+   "nombre": "Moaña Los del Puerto",
    "manager": "Mánager 12",
    "logo": ""
   }

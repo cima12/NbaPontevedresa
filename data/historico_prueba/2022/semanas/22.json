@@ -1,0 +1,91 @@
+{
+ "semana": 22,
+ "partidos": [
+  {
+   "estado": "postevent",
+   "playoffs": true,
+   "consolacion": false,
+   "equipos": [
+    {
+     "key": "418.l.3022.t.4",
+     "stats": {
+      "fga": 478,
+      "fg_pct": 0.46,
+      "fta": 114,
+      "ft_pct": 0.772,
+      "tpm": 60,
+      "pts": 590,
+      "reb": 183,
+      "ast": 98,
+      "stl": 30,
+      "blk": 26,
+      "to": 36,
+      "fgm": 220,
+      "ftm": 88
+     }
+    },
+    {
+     "key": "418.l.3022.t.1",
+     "stats": {
+      "fga": 496,
+      "fg_pct": 0.46,
+      "fta": 104,
+      "ft_pct": 0.798,
+      "tpm": 47,
+      "pts": 525,
+      "reb": 221,
+      "ast": 109,
+      "stl": 35,
+      "blk": 22,
+      "to": 62,
+      "fgm": 228,
+      "ftm": 83
+     }
+    }
+   ]
+  },
+  {
+   "estado": "postevent",
+   "playoffs": true,
+   "consolacion": true,
+   "equipos": [
+    {
+     "key": "418.l.3022.t.2",
+     "stats": {
+      "fga": 435,
+      "fg_pct": 0.487,
+      "fta": 91,
+      "ft_pct": 0.791,
+      "tpm": 66,
+      "pts": 494,
+      "reb": 189,
+      "ast": 122,
+      "stl": 28,
+      "blk": 20,
+      "to": 47,
+      "fgm": 212,
+      "ftm": 72
+     }
+    },
+    {
+     "key": "418.l.3022.t.9",
+     "stats": {
+      "fga": 353,
+      "fg_pct": 0.465,
+      "fta": 96,
+      "ft_pct": 0.781,
+      "tpm": 57,
+      "pts": 491,
+      "reb": 186,
+      "ast": 98,
+      "stl": 26,
+      "blk": 18,
+      "to": 88,
+      "fgm": 164,
+      "ftm": 75
+     }
+    }
+   ]
+  }
+ ]
+}

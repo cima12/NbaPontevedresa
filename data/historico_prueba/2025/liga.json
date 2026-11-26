@@ -3,6 +3,64 @@
  "nombre": "NBA Pontevedresa 2025-26 (PRUEBA)",
  "temporada": "2025",
  "fecha_inicio": "2025-10-20",
+ "fecha_fin": "2026-03-28",
+ "playoffs_semana_inicio": "21",
+ "categorias": [
+  {
+   "id": "0",
+   "clave": "fg_pct",
+   "nombre": "FG%",
+   "menos_es_mejor": false
+  },
+  {
+   "id": "1",
+   "clave": "ft_pct",
+   "nombre": "FT%",
+   "menos_es_mejor": false
+  },
+  {
+   "id": "2",
+   "clave": "tpm",
+   "nombre": "3PTM",
+   "menos_es_mejor": false
+  },
+  {
+   "id": "3",
+   "clave": "pts",
+   "nombre": "PTS",
+   "menos_es_mejor": false
+  },
+  {
+   "id": "4",
+   "clave": "reb",
+   "nombre": "REB",
+   "menos_es_mejor": false
+  },
+  {
+   "id": "5",
+   "clave": "ast",
+   "nombre": "AST",
+   "menos_es_mejor": false
+  },
+  {
+   "id": "6",
+   "clave": "stl",
+   "nombre": "ST",
+   "menos_es_mejor": false
+  },
+  {
+   "id": "7",
+   "clave": "blk",
+   "nombre": "BLK",
+   "menos_es_mejor": false
+  },
+  {
+   "id": "8",
+   "clave": "to",
+   "nombre": "TO",
+   "menos_es_mejor": true
+  }
+ ],
  "equipos": [
   {
    "key": "454.l.3025.t.1",
@@ -14,7 +72,7 @@
   {
    "key": "454.l.3025.t.2",
    "id": "2",
-   "nombre": "Prueba Rías Baixas",
+   "nombre": "Baixas Los del Puerto",
    "manager": "Mánager 2",
    "logo": ""
   },
@@ -28,14 +86,14 @@
   {
    "key": "454.l.3025.t.4",
    "id": "4",
-   "nombre": "Peregrina Furia",
+   "nombre": "Prueba Peregrina",
    "manager": "Mánager 4",
    "logo": ""
   },
   {
    "key": "454.l.3025.t.5",
    "id": "5",
-   "nombre": "Marín Galácticos",
+   "nombre": "Marín Los del Puerto",
    "manager": "Mánager 5",
    "logo": ""
   },
@@ -56,7 +114,7 @@
   {
    "key": "454.l.3025.t.8",
    "id": "8",
-   "nombre": "Cambados Old School",
+   "nombre": "Prueba Cambados",
    "manager": "Mánager 8",
    "logo": ""
   },

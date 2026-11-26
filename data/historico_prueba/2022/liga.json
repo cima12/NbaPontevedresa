@@ -3,39 +3,97 @@
  "nombre": "NBA Pontevedresa 2022-23 (PRUEBA)",
  "temporada": "2022",
  "fecha_inicio": "2022-10-20",
+ "fecha_fin": "2023-03-28",
+ "playoffs_semana_inicio": "21",
+ "categorias": [
+  {
+   "id": "0",
+   "clave": "fg_pct",
+   "nombre": "FG%",
+   "menos_es_mejor": false
+  },
+  {
+   "id": "1",
+   "clave": "ft_pct",
+   "nombre": "FT%",
+   "menos_es_mejor": false
+  },
+  {
+   "id": "2",
+   "clave": "tpm",
+   "nombre": "3PTM",
+   "menos_es_mejor": false
+  },
+  {
+   "id": "3",
+   "clave": "pts",
+   "nombre": "PTS",
+   "menos_es_mejor": false
+  },
+  {
+   "id": "4",
+   "clave": "reb",
+   "nombre": "REB",
+   "menos_es_mejor": false
+  },
+  {
+   "id": "5",
+   "clave": "ast",
+   "nombre": "AST",
+   "menos_es_mejor": false
+  },
+  {
+   "id": "6",
+   "clave": "stl",
+   "nombre": "ST",
+   "menos_es_mejor": false
+  },
+  {
+   "id": "7",
+   "clave": "blk",
+   "nombre": "BLK",
+   "menos_es_mejor": false
+  },
+  {
+   "id": "8",
+   "clave": "to",
+   "nombre": "TO",
+   "menos_es_mejor": true
+  }
+ ],
  "equipos": [
   {
    "key": "418.l.3022.t.1",
    "id": "1",
-   "nombre": "Grind Mareas",
+   "nombre": "Grit & Grind",
    "manager": "Mánager 1",
    "logo": ""
   },
   {
    "key": "418.l.3022.t.2",
    "id": "2",
-   "nombre": "Prueba Rías Baixas",
+   "nombre": "Baixas Galácticos",
    "manager": "Mánager 2",
    "logo": ""
   },
   {
    "key": "418.l.3022.t.3",
    "id": "3",
-   "nombre": "Lérez Furia",
+   "nombre": "Prueba Lérez",
    "manager": "Mánager 3",
    "logo": ""
   },
   {
    "key": "418.l.3022.t.4",
    "id": "4",
-   "nombre": "Peregrina Galácticos",
+   "nombre": "Prueba Peregrina",
    "manager": "Mánager 4",
    "logo": ""
   },
   {
    "key": "418.l.3022.t.5",
    "id": "5",
-   "nombre": "Marín Tiburones",
+   "nombre": "Marín Old School",
    "manager": "Mánager 5",
    "logo": ""
   },
@@ -56,21 +114,21 @@
   {
    "key": "418.l.3022.t.8",
    "id": "8",
-   "nombre": "Cambados Galácticos",
+   "nombre": "Cambados Mareas",
    "manager": "Mánager 8",
    "logo": ""
   },
   {
    "key": "418.l.3022.t.9",
    "id": "9",
-   "nombre": "Prueba Vilagarcía",
+   "nombre": "Vilagarcía Galácticos",
    "manager": "Mánager 9",
    "logo": ""
   },
   {
    "key": "418.l.3022.t.10",
    "id": "10",
-   "nombre": "Prueba Bueu",
+   "nombre": "Bueu Old School",
    "manager": "Mánager 10",
    "logo": ""
   },
@@ -84,7 +142,7 @@
   {
    "key": "418.l.3022.t.12",
    "id": "12",
-   "nombre": "Prueba Moaña",
+   "nombre": "Moaña Los del Puerto",
    "manager": "Mánager 12",
    "logo": ""
   }
