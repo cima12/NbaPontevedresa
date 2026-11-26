@@ -36,6 +36,13 @@ jobs:
           YAHOO_REFRESH_TOKEN: ${{ secrets.YAHOO_REFRESH_TOKEN }}
         run: python scripts/conexion.py
 
+      - name: Avisos por Telegram (si están configurados)
+        env:
+          TELEGRAM_TOKEN: ${{ secrets.TELEGRAM_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+          MI_EQUIPO: "Grit & Grind"
+        run: python scripts/avisos.py
+
       - name: Guardar los datos en el repositorio
         run: |
           git config user.name "github-actions[bot]"

@@ -1,0 +1,23 @@
+name: Probar Telegram
+
+on:
+  workflow_dispatch:     # manda un mensaje de prueba para comprobar el bot
+
+permissions:
+  contents: read
+
+jobs:
+  prueba:
+    runs-on: ubuntu-latest
+    timeout-minutes: 3
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.12"
+      - name: Enviar mensaje de prueba
+        env:
+          TELEGRAM_TOKEN: ${{ secrets.TELEGRAM_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+          PRUEBA_TELEGRAM: "1"
+        run: python scripts/avisos.py

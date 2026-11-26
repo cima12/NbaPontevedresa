@@ -135,6 +135,9 @@
   .fila-rec { display: flex; gap: 8px; align-items: baseline; padding: 3px 0; }
   .fila-rec b { min-width: 58px; font: 700 18px var(--cond); }
 
+  pre.cronica { white-space: pre-wrap; font: 14px/1.5 "Barlow", sans-serif; background: var(--card2); border-radius: 12px; padding: 12px; margin: 10px 0; }
+  a.chip { text-decoration: none; display: inline-block; }
+
   /* Ficha de jugador */
   #ficha { position: fixed; inset: 0; z-index: 60; background: rgba(5,10,18,.72); display: flex; align-items: flex-end; justify-content: center; }
   #ficha[hidden] { display: none; }
@@ -150,6 +153,10 @@
   @media (prefers-reduced-motion: reduce) { #ficha .panel { animation: none; } }
   @media (min-width: 700px) { #ficha { align-items: center; } #ficha .panel { border-radius: 20px; border-bottom: 1px solid var(--line); } }
 
+  #btn-comparar { position: fixed; right: 14px; bottom: calc(var(--nav-alto) + 14px + env(safe-area-inset-bottom)); z-index: 45;
+    background: var(--acento); color: #1a0d03; border: 0; border-radius: 999px; padding: 12px 18px; font: 700 15px "Barlow", sans-serif; cursor: pointer; }
+  #btn-comparar[hidden] { display: none; }
+  @media (min-width: 760px) { #btn-comparar { bottom: 20px; } }
   footer { color: var(--sub); font-size: 12px; text-align: center; padding: 4px 12px calc(var(--nav-alto) + 20px + env(safe-area-inset-bottom)); margin-top: -20px; }
   @media (min-width: 760px) { footer { padding-bottom: 24px; } }
   footer a { color: var(--sub); }
@@ -208,7 +215,9 @@
       <div class="chips" id="chips"><span class="etq">Puntear:</span></div>
       <details class="ayuda"><summary>Cómo se usa</summary>Toca una categoría para <b>puntearla</b> (no cuenta en el valor). Toca una cabecera de la tabla para ordenar y un jugador para ver su ficha.
         El color indica lo bueno (verde) o malo (rojo) que es el jugador en esa categoría.
-        Posición: Yahoo cuando hay datos de la liga; si no, ESPN. Edad: ESPN.</details>
+        Posición: Yahoo cuando hay datos de la liga; si no, ESPN. Edad: ESPN.<br>
+        <b>Dinastía</b>: valor (mitad temporada, mitad últimos 30 días) más un ajuste por edad: +0,6 por cada año por debajo de 26 y −0,7 por cada año por encima de 29. Sirve para comparar jóvenes y veteranos.<br>
+        <b>Tend.</b>: cuánto ha subido (▲) o bajado (▼) su valor en los últimos 14 días respecto a la temporada.</details>
     </div>
     <div class="tabla-wrap"><table id="tabla-ranking"></table></div>
     <button class="mas" id="ver-mas" hidden>Ver más jugadores</button>
@@ -228,6 +237,13 @@
       <div class="dias" id="dias"></div>
       <p class="ayuda">Partidos NBA cada día. En <span style="color:var(--verde)">verde</span> los días ligeros
         (<span id="lig-max">7</span> partidos o menos): con 8 titulares es más fácil que no se te quede nadie en el banquillo.</p>
+    </div>
+    <div class="tarjeta">
+      <div class="controles"><span class="nom" style="flex:1">Para lo que queda de semana</span>
+        <select id="semana-filtro"><option value="">Todos</option></select></div>
+      <table class="liga" id="tabla-aporte" style="margin-top:8px"></table>
+      <p class="ayuda">Aporte = partidos que le quedan esta semana × su valor de los últimos 30 días por encima del nivel de un jugador de relleno.
+        Útil para fichajes de pocos días.</p>
     </div>
     <div class="tabla-wrap"><table id="tabla-semanas"></table></div>
     <p class="ayuda">Número grande: partidos del equipo esa semana (lunes a domingo, hora EE. UU.).
@@ -299,6 +315,23 @@ function valorJugador(s) {
   return s.z.reduce((acc, z, i) => acc + (est.punt.has(CATS[i].k) ? 0 : z), 0);
 }
 
+// Valor de dinastía: rendimiento (mitad temporada, mitad 30 días) + ajuste por edad.
+// +0,6 por cada año por debajo de 26 (hasta +4) y −0,7 por cada año por encima de 29 (hasta −6).
+function dinastia(j) {
+  const t = j.temporada && j.temporada.z ? valorJugador(j.temporada) : null;
+  if (t == null) return null;
+  const u = j.ult30 && j.ult30.z && j.ult30.pj >= 5 ? valorJugador(j.ult30) : t;
+  const e = edad(j);
+  const ajuste = e == null ? 0 : e < 26 ? Math.min(4, 0.6 * (26 - e)) : e > 29 ? -Math.min(6, 0.7 * (e - 29)) : 0;
+  return (t + u) / 2 + ajuste;
+}
+
+// Tendencia: valor de los últimos 14 días menos el de la temporada
+function tendencia(j) {
+  if (!j.ult14 || !j.ult14.z || j.ult14.pj < 3 || !j.temporada || j.temporada.pj < 6) return null;
+  return valorJugador(j.ult14) - valorJugador(j.temporada);
+}
+
 function pintarRanking() {
   const d = est.datos; if (!d) return;
   const v = est.ventana, q = est.buscar.trim().toLowerCase();
@@ -311,12 +344,14 @@ function pintarRanking() {
   filas.forEach(j => j._edad = edad(j));
   if (est.edadMax) filas = filas.filter(j => j._edad != null && j._edad < est.edadMax + 1);
 
-  filas.forEach(j => j._val = valorJugador(j[v]));
+  filas.forEach(j => { j._val = valorJugador(j[v]); j._din = dinastia(j); j._ten = tendencia(j); });
   const iCat = CATS.findIndex(c => c.k === est.orden);
   if (est.orden === "valor") filas.sort((a, b) => b._val - a._val);
   else if (est.orden === "min") filas.sort((a, b) => b[v].min - a[v].min);
   else if (est.orden === "pj") filas.sort((a, b) => b[v].pj - a[v].pj);
   else if (est.orden === "edad") filas.sort((a, b) => (a._edad ?? 99) - (b._edad ?? 99));
+  else if (est.orden === "din") filas.sort((a, b) => (b._din ?? -99) - (a._din ?? -99));
+  else if (est.orden === "tend") filas.sort((a, b) => (b._ten ?? -99) - (a._ten ?? -99));
   else filas.sort((a, b) => b[v].z[iCat] - a[v].z[iCat]);
 
   // posición según el valor (no cambia al ordenar por otra columna)
@@ -324,7 +359,7 @@ function pintarRanking() {
 
   const th = (k, t, cls = "") =>
     `<th data-orden="${k}" class="${cls}${est.orden === k ? " orden" : ""}${est.punt.has(k) ? " punt" : ""}">${t}</th>`;
-  let html = "<thead><tr>" + th("valor", "Jugador", "fijo") + th("valor", "Valor") + th("edad", "Edad") +
+  let html = "<thead><tr>" + th("valor", "Jugador", "fijo") + th("valor", "Valor") + th("edad", "Edad") + th("din", "Dinastía") + th("tend", "Tend.") +
     th("pj", "PJ") + th("min", "MIN") + CATS.map(c => th(c.k, c.n)).join("") + "</tr></thead><tbody>";
 
   for (const j of filas.slice(0, est.limite)) {
@@ -332,6 +367,8 @@ function pintarRanking() {
     html += `<tr class="clic" data-id="${j.id}"><td class="fijo"><span class="pos">${rank.get(j.id)}</span><span class="nom">${esc(j.nombre)}</span><span class="peq eq">${esc(j.equipo)}${j.pos ? " · " + esc(j.pos) : ""}${ligaEtiqueta(j)}</span></td>
       <td class="val" style="${color(j._val / 3)}">${j._val.toFixed(1)}</td>
       <td>${j._edad == null ? "–" : j._edad.toFixed(1)}</td>
+      <td style="${j._din == null ? "" : color(j._din / 4)}">${j._din == null ? "–" : j._din.toFixed(1)}</td>
+      <td style="color:${j._ten == null ? "var(--sub)" : j._ten > 0.5 ? "var(--verde)" : j._ten < -0.5 ? "var(--rojo)" : "var(--txt)"}">${j._ten == null ? "–" : (j._ten > 0 ? "▲" : j._ten < 0 ? "▼" : "") + Math.abs(j._ten).toFixed(1)}</td>
       <td>${s.pj}</td><td>${s.min.toFixed(0)}</td>` +
       CATS.map((c, i) => `<td class="cat${est.punt.has(c.k) ? " off" : ""}" style="${color(s.z[i])}">${c.v(s)}</td>`).join("") +
       "</tr>";
@@ -429,7 +466,32 @@ function pintarCalendario() {
     }).join("") + `<td>${tot}</td></tr>`;
   }
   $("tabla-semanas").innerHTML = html + "</tbody>";
+  pintarAporte(actual, hoyIdx);
 }
+
+// Mejores jugadores para lo que queda de semana
+function pintarAporte(semana, hoyIdx) {
+  if (!est.datos) return;
+  const f = est.filtroSemana || "";
+  const filas = [];
+  for (const j of est.datos.jugadores) {
+    const s = j.ult30 && j.ult30.elegible ? j.ult30 : null;
+    if (!s) continue;
+    if (f && typeof ligaFiltroValor === "function" && !ligaFiltroValor(j, f)) continue;
+    const x = semana.equipos[j.equipo]; if (!x) continue;
+    const quedan = hoyIdx >= 0 ? (x.dias || []).filter(d => d >= hoyIdx).length : x.p;
+    if (!quedan) continue;
+    const v = valorJugador(s);
+    filas.push({ j, quedan, v, aporte: quedan * (v + 3) });
+  }
+  filas.sort((a, b) => b.aporte - a.aporte);
+  $("tabla-aporte").innerHTML = `<thead><tr><th style="text-align:left">Jugador</th><th>Quedan</th><th>Valor</th><th>Aporte</th></tr></thead><tbody>` +
+    filas.slice(0, 12).map(r => `<tr class="clic" data-id="${r.j.id}"><td style="text-align:left"><span class="nom">${esc(r.j.nombre)}</span>
+      <span class="peq" style="display:block">${esc(r.j.equipo)}${r.j.pos ? " · " + esc(r.j.pos) : ""}${typeof ligaEtiqueta === "function" ? ligaEtiqueta(r.j) : ""}</span></td>
+      <td><b>${r.quedan}</b></td><td style="${color(r.v / 3)}">${r.v.toFixed(1)}</td><td><b>${r.aporte.toFixed(0)}</b></td></tr>`).join("") + "</tbody>";
+}
+$("tabla-aporte").onclick = e => { const tr = e.target.closest("tr.clic"); if (tr) abrirFicha({ nbaId: +tr.dataset.id }); };
+$("semana-filtro").onchange = e => { est.filtroSemana = e.target.value; pintarCalendario(); };
 
 $("tabla-semanas").onclick = e => {
   const t = e.target.closest("th[data-k]"); if (!t) return;

@@ -234,6 +234,7 @@ function pintarLiga() {
         Previsión con los promedios de los últimos 30 días; las dudas cuentan al 75 % y los lesionados no cuentan. Orientativa: no sabe de descansos ni lesiones nuevas.</p>`;
     }
     html += `</div>`;
+    html += tarjetaLibres(an);
   }
 
   // Alineación de hoy
@@ -246,8 +247,9 @@ function pintarLiga() {
       (h.j.hueco === "BN" ? ' <span class="peq" style="color:var(--ambar)">(ahora en banquillo)</span>' : "") : '<span class="peq">— nadie disponible —</span>'}</td></tr>`).join("") +
     `</table><p class="ayuda">Los que juegan hoy, ordenados por valor (últimos 30 días) y respetando las posiciones de Yahoo.</p></details></div>`;
 
-  // Plantillas
+  // Plantillas y traspasos
   html += tarjetaPlantillas();
+  html += tarjetaTraspasos();
 
   // Clasificación
   if (LIGA.clasif && LIGA.clasif.equipos.length) {
@@ -272,12 +274,15 @@ function pintarLiga() {
   }
   cont.innerHTML = html;
   activarPlantillas();
+  activarTraspasos();
+  const tl = $("tabla-libres");
+  if (tl) tl.onclick = e => { const tr = e.target.closest("tr.clic"); if (tr) abrirFicha({ nbaId: +tr.dataset.id }); };
 }
 
 /* ---------- integración con el ranking ---------- */
 // Filtro del selector "Dueño" del ranking
-function ligaFiltro(j) {
-  const f = est.dueno;
+function ligaFiltro(j) { return ligaFiltroValor(j, est.dueno); }
+function ligaFiltroValor(j, f) {
   if (!f || !LIGA.liga) return true;
   const d = LIGA.dueno.get(j.id);
   if (f === "libres") return !d;
@@ -299,6 +304,8 @@ function prepararSelectores() {
   $("dueno").innerHTML = `<option value="">Libres y con dueño</option><option value="libres">Solo libres</option>
     <option value="mio">Solo mi equipo</option>` + opts;
   $("dueno").hidden = false;
+  $("semana-filtro").innerHTML = `<option value="">Todos</option><option value="libres">Solo libres</option><option value="mio">Mi equipo</option>`;
+  if (est.semanas) pintarCalendario();
   $("dueno").onchange = e => { est.dueno = e.target.value; est.limite = PASO; pintarRanking(); };
 }
 
@@ -440,7 +447,12 @@ async function abrirFicha({ nbaId = null, yahooId = null, nombre = null }) {
   let caja = $("ficha");
   if (!caja) {
     caja = document.createElement("div"); caja.id = "ficha";
-    caja.onclick = e => { if (e.target === caja || e.target.closest(".cerrar")) caja.hidden = true; };
+    caja.onclick = e => {
+      if (e.target === caja || e.target.closest(".cerrar")) { caja.hidden = true; return; }
+      const b = e.target.closest("#ficha-comparar");
+      if (b) { alternarComparar(+caja.dataset.id); const on = LIGA.comp.includes(+caja.dataset.id);
+        b.classList.toggle("on", on); b.textContent = on ? "✓ Comparando" : "Comparar"; }
+    };
     document.body.appendChild(caja);
   }
   const dueno = y ? Object.entries(LIGA.plantillas.equipos).find(([, l]) => l.includes(y))?.[0] : null;
@@ -455,6 +467,7 @@ async function abrirFicha({ nbaId = null, yahooId = null, nombre = null }) {
       : y && hist.jugadores[y.yahoo_id] ? y.yahoo_id : hist.porNombre.get(norm(nombre)));
     caja.innerHTML = `<div class="panel"><button class="cerrar" aria-label="Cerrar">✕</button>
       <div class="nom" style="font-size:18px">${esc(nombre)}</div>
+      ${j ? `<button class="chip${LIGA.comp.includes(j.id) ? " on" : ""}" id="ficha-comparar" style="margin:6px 0 4px">${LIGA.comp.includes(j.id) ? "✓ Comparando" : "Comparar"}</button>` : ""}
       <div class="peq">${esc(j?.equipo || y?.equipo_nba || "")}${j?.pos || y?.pos?.length ? " · " + esc(y?.pos?.join(",") || j.pos) : ""}${e != null ? ` · ${e.toFixed(1)} años` : ""}</div>
       ${LIGA.liga ? `<p style="margin:8px 0 0">${dueno ? `En <b style="color:${dueno === LIGA.soy ? "var(--ambar)" : "var(--txt)"}">${esc(LIGA.nombre[dueno])}</b>` +
         ` <span class="peq">(${esc(y.hueco === "BN" ? "banquillo" : y.hueco || "")}${y.estado ? " · " + esc(y.estado) : ""})</span>` : `<b style="color:var(--verde)">Libre</b>`}</p>` : ""}
@@ -464,7 +477,241 @@ async function abrirFicha({ nbaId = null, yahooId = null, nombre = null }) {
       ${hist === undefined ? `<p class="ayuda">Cargando…</p>` : htmlHistorial(hist, hid && hist.jugadores[hid])}
     </div>`;
   };
+  caja.dataset.id = j ? j.id : "";
   pintar(LIGA.hist);
   caja.hidden = false;
   if (LIGA.hist === undefined) pintar(await cargarHistorico());
+}
+
+/* =====================================================================
+ * TRASPASOS: evaluador y propuestas automáticas
+ * ===================================================================== */
+LIGA.tr = { otro: null, doy: new Set(), recibo: new Set(), propuestas: null };
+
+// Totales por categoría con los 10 mejores sanos de una lista de jugadores
+function totalesLista(lista) {
+  const top = lista.filter(j => j._p && j.hueco !== "IL" && j.hueco !== "IL+").sort((a, b) => b._v - a._v).slice(0, 10);
+  const t = { fgm: 0, fga: 0, ftm: 0, fta: 0, tpm: 0, pts: 0, reb: 0, ast: 0, stl: 0, blk: 0, to: 0 };
+  for (const j of top) for (const k in t) t[k] += j._p[k] || 0;
+  const v = {};
+  for (const c of CAT_LIGA) v[c.k] = c.pct ? (t[c.a] ? t[c.m] / t[c.a] : 0) : t[c.k];
+  return v;
+}
+function puestos(key, V) {
+  const p = {};
+  for (const c of CAT_LIGA) {
+    let r = 1;
+    for (const [k, v] of Object.entries(V)) if (k !== key && (c.menos ? v[c.k] < V[key][c.k] : v[c.k] > V[key][c.k])) r++;
+    p[c.k] = r;
+  }
+  p.media = CAT_LIGA.reduce((s, c) => s + p[c.k], 0) / CAT_LIGA.length;
+  return p;
+}
+function valoresBase() {
+  const V = {}, P = {};
+  for (const e of LIGA.liga.equipos) { P[e.key] = plantilla(e.key); V[e.key] = totalesLista(P[e.key]); }
+  return { V, P };
+}
+function simular(base, yo, el, doy, recibo) {
+  const V = { ...base.V };
+  const fuera = (lista, quitar) => { const ids = new Set(quitar.map(j => j.yahoo_id)); return lista.filter(j => !ids.has(j.yahoo_id)); };
+  const mio = fuera(base.P[yo], doy).concat(recibo);
+  const suyo = fuera(base.P[el], recibo).concat(doy);
+  V[yo] = totalesLista(mio); V[el] = totalesLista(suyo);
+  return { yo: puestos(yo, V), el: puestos(el, V) };
+}
+const dinDe = j => { const n = LIGA.jug.get(j.nba_id); return n ? dinastia(n) : null; };
+const edadDe = j => { const n = LIGA.jug.get(j.nba_id); return n ? edad(n) : null; };
+const suma = (lista, f) => lista.reduce((s, j) => s + (f(j) ?? 0), 0);
+
+function buscarPropuestas() {
+  const base = valoresBase(), yo = LIGA.soy;
+  const antesYo = puestos(yo, base.V).media;
+  const res = [];
+  for (const e of LIGA.liga.equipos) {
+    if (e.key === yo) continue;
+    const antesEl = puestos(e.key, base.V).media;
+    for (const p of base.P[yo]) {
+      if (!p._p) continue;
+      for (const q of base.P[e.key]) {
+        if (!q._p) continue;
+        const r = simular(base, yo, e.key, [p], [q]);
+        const gYo = antesYo - r.yo.media, gEl = antesEl - r.el.media;
+        if (gYo > 0.05 && gEl > 0.05) res.push({ el: e.key, p, q, gYo, gEl, dDin: (dinDe(q) ?? 0) - (dinDe(p) ?? 0) });
+      }
+    }
+  }
+  // Se premia que mejore a los dos y se castiga que sea muy desigual en dinastía (el otro no lo aceptaría)
+  const nota = r => r.gYo + r.gEl * 0.5 - 0.12 * Math.max(0, Math.abs(r.dDin) - 2);
+  res.sort((a, b) => nota(b) - nota(a));
+  // variedad: como mucho 2 propuestas por jugador que das y 1 por jugador que recibes
+  const cuenta = new Map(), out = [];
+  for (const r of res) {
+    if ((cuenta.get(r.p) || 0) >= 2 || (cuenta.get(r.q) || 0) >= 1) continue;
+    cuenta.set(r.p, (cuenta.get(r.p) || 0) + 1); cuenta.set(r.q, 1); out.push(r);
+    if (out.length >= 10) break;
+  }
+  return out;
+}
+
+function tarjetaTraspasos() {
+  const T = LIGA.tr, yo = LIGA.soy;
+  const otros = LIGA.liga.equipos.filter(e => e.key !== yo);
+  if (!T.otro || T.otro === yo) T.otro = otros[0].key;
+  const mios = plantilla(yo).sort((a, b) => b._v - a._v), suyos = plantilla(T.otro).sort((a, b) => b._v - a._v);
+  const chip = (j, lado) => {
+    const on = (lado === "doy" ? T.doy : T.recibo).has(j.yahoo_id);
+    const e = edadDe(j);
+    return `<button class="chip${on ? " on" : ""}" data-lado="${lado}" data-y="${esc(j.yahoo_id)}">${esc(j.nombre)}<span class="peq" style="color:inherit;opacity:.75"> ${e != null ? Math.floor(e) : ""}</span></button>`;
+  };
+  let res = "";
+  const doy = mios.filter(j => T.doy.has(j.yahoo_id)), recibo = suyos.filter(j => T.recibo.has(j.yahoo_id));
+  if (doy.length && recibo.length) {
+    const base = valoresBase();
+    const aYo = puestos(yo, base.V), aEl = puestos(T.otro, base.V);
+    const r = simular(base, yo, T.otro, doy, recibo);
+    const flecha = (a, b) => `${a}→<b style="color:${b < a ? "var(--verde)" : b > a ? "var(--rojo)" : "var(--txt)"}">${b}</b>`;
+    const gYo = aYo.media - r.yo.media, gEl = aEl.media - r.el.media;
+    const veredicto = gYo > 0.05 && gEl > 0.05 ? "✅ Os mejora a los dos" : gYo > 0.05 ? "👍 Te mejora a ti, a él no" :
+      gEl > 0.05 ? "👎 Le mejora a él, a ti no" : "➖ No mejora a ninguno";
+    const paquete = l => `valor ${suma(l, j => j._v).toFixed(1)} · dinastía ${suma(l, dinDe).toFixed(1)} · edad media ${(suma(l, edadDe) / l.length).toFixed(1)}`;
+    res = `<p style="margin:10px 0 4px"><b>${veredicto}</b></p>
+      <p class="ayuda" style="margin:0">Das: ${paquete(doy)}<br>Recibes: ${paquete(recibo)}</p>
+      <table class="liga" style="margin-top:6px"><thead><tr><th>Cat.</th><th>Tú (puesto)</th><th>Él (puesto)</th></tr></thead><tbody>` +
+      CAT_LIGA.map(c => `<tr><td class="nom">${c.n}</td><td>${flecha(aYo[c.k], r.yo[c.k])}</td><td>${flecha(aEl[c.k], r.el[c.k])}</td></tr>`).join("") +
+      `<tr><td class="nom">Media</td><td>${aYo.media.toFixed(1)}→<b>${r.yo.media.toFixed(1)}</b></td><td>${aEl.media.toFixed(1)}→<b>${r.el.media.toFixed(1)}</b></td></tr></tbody></table>`;
+  }
+  const props = T.propuestas;
+  const htmlProps = props == null ? "" : !props.length ? `<p class="ayuda">No he encontrado traspasos 1 por 1 que mejoren a los dos.</p>` :
+    `<ul class="avisos" id="lista-propuestas">` + props.map((r, i) => `<li class="clic" data-i="${i}">🔁 <b>${esc(r.p.nombre)}</b> por <b>${esc(r.q.nombre)}</b>
+      <span class="peq" style="display:block">con ${esc(LIGA.nombre[r.el])} · tu media de puestos −${r.gYo.toFixed(2)}, la suya −${r.gEl.toFixed(2)} ·
+      dinastía ${r.dDin >= 0 ? "+" : ""}${r.dDin.toFixed(1)}</span></li>`).join("") + `</ul>`;
+  return `<div class="tarjeta" id="tarjeta-traspasos"><div class="nom">Traspasos</div>
+    <div class="controles" style="margin-top:8px"><span class="peq">Con</span><select id="tr-otro" style="flex:1">` +
+    otros.map(e => `<option value="${esc(e.key)}"${e.key === T.otro ? " selected" : ""}>${esc(e.nombre)}</option>`).join("") + `</select></div>
+    <div class="peq" style="margin-top:10px">Das</div><div class="chips" style="margin-top:4px">${mios.map(j => chip(j, "doy")).join("")}</div>
+    <div class="peq" style="margin-top:10px">Recibes</div><div class="chips" style="margin-top:4px">${suyos.map(j => chip(j, "recibo")).join("")}</div>
+    ${res}
+    <button class="mas" id="tr-buscar">Buscar traspasos que nos mejoren a los dos</button>${htmlProps}
+    <p class="ayuda">Puestos (1 = mejor de 12) en cada categoría con los 10 mejores jugadores sanos de cada equipo, antes → después.
+      Es una ayuda para pensar, no tiene en cuenta el calendario ni las lesiones futuras.</p></div>`;
+}
+
+function activarTraspasos() {
+  const t = $("tarjeta-traspasos"); if (!t) return;
+  const T = LIGA.tr;
+  $("tr-otro").onchange = e => { T.otro = e.target.value; T.recibo.clear(); pintarLiga(); };
+  t.onclick = e => {
+    const b = e.target.closest("button.chip[data-lado]");
+    if (b) {
+      const set = b.dataset.lado === "doy" ? T.doy : T.recibo;
+      set.has(b.dataset.y) ? set.delete(b.dataset.y) : set.add(b.dataset.y);
+      pintarLiga(); $("tarjeta-traspasos")?.scrollIntoView({ block: "nearest" }); return;
+    }
+    if (e.target.closest("#tr-buscar")) { T.propuestas = buscarPropuestas(); pintarLiga(); $("tarjeta-traspasos")?.scrollIntoView({ block: "start" }); return; }
+    const li = e.target.closest("#lista-propuestas li.clic");
+    if (li) {
+      const r = T.propuestas[+li.dataset.i];
+      T.otro = r.el; T.doy = new Set([r.p.yahoo_id]); T.recibo = new Set([r.q.yahoo_id]);
+      pintarLiga(); $("tarjeta-traspasos")?.scrollIntoView({ block: "start" });
+    }
+  };
+}
+
+/* =====================================================================
+ * AGENTES LIBRES PARA ESTA SEMANA
+ * ===================================================================== */
+function libresSemana(an) {
+  const peso = {};
+  for (const f of an.filas) peso[f.c.k] = f.prob > 0.15 && f.prob < 0.85 ? 1 : 0.25;
+  const fin = LIGA.enfr.fin, res = [];
+  for (const j of est.datos.jugadores) {
+    if (LIGA.dueno.has(j.id)) continue;
+    const s = j.ult30;
+    if (!s || !s.elegible || !s.z) continue;
+    const quedan = partidosPendientes(j.equipo, an.desde, fin).length;
+    if (!quedan) continue;
+    let nota = 0;
+    const ayuda = [];
+    CAT_LIGA.forEach((c, i) => {
+      nota += (peso[c.k] ?? 0.25) * s.z[i];
+      if (peso[c.k] === 1 && s.z[i] > 0.4) ayuda.push([c.n, s.z[i]]);
+    });
+    res.push({ j, quedan, nota: nota * quedan, ayuda: ayuda.sort((a, b) => b[1] - a[1]).slice(0, 3).map(x => x[0]) });
+  }
+  return res.sort((a, b) => b.nota - a.nota).slice(0, 6);
+}
+
+function tarjetaLibres(an) {
+  const aire = an.filas.filter(f => f.prob > 0.15 && f.prob < 0.85).map(f => f.c.n);
+  const L = libresSemana(an);
+  if (!L.length) return "";
+  return `<div class="tarjeta"><div class="nom">Libres que te ayudan esta semana</div>
+    <p class="ayuda" style="margin-top:2px">Categorías en el aire: <b style="color:var(--ambar)">${aire.join(", ") || "ninguna"}</b>.</p>
+    <table class="liga" id="tabla-libres"><tbody>` +
+    L.map(r => `<tr class="clic" data-id="${r.j.id}"><td style="text-align:left"><span class="nom">${esc(r.j.nombre)}</span>
+      <span class="peq" style="display:block">${esc(r.j.equipo)}${r.j.pos ? " · " + esc(r.j.pos) : ""}${r.ayuda.length ? " · ayuda en " + r.ayuda.join(", ") : ""}</span></td>
+      <td><b>${r.quedan}</b><span class="peq" style="display:block">partidos</span></td></tr>`).join("") +
+    `</tbody></table><p class="ayuda">Ordenados por lo que aportan en las categorías en el aire (últimos 30 días) multiplicado por los partidos que les quedan esta semana.</p></div>`;
+}
+
+/* =====================================================================
+ * COMPARADOR DE JUGADORES (hasta 3, desde la ficha)
+ * ===================================================================== */
+LIGA.comp = [];
+LIGA.compVentana = "ult30";
+
+function botonComparar() {
+  let b = $("btn-comparar");
+  if (!b) {
+    b = document.createElement("button"); b.id = "btn-comparar";
+    b.onclick = abrirComparador; document.body.appendChild(b);
+  }
+  b.hidden = !LIGA.comp.length;
+  b.textContent = `Comparar (${LIGA.comp.length})`;
+}
+
+function alternarComparar(id) {
+  const i = LIGA.comp.indexOf(id);
+  if (i >= 0) LIGA.comp.splice(i, 1);
+  else { if (LIGA.comp.length >= 3) LIGA.comp.shift(); LIGA.comp.push(id); }
+  botonComparar();
+}
+
+function abrirComparador() {
+  const caja = $("ficha") || (abrirFicha({ nbaId: LIGA.comp[0] }), $("ficha"));
+  const v = LIGA.compVentana;
+  const js = LIGA.comp.map(id => est.datos.jugadores.find(x => x.id === id)).filter(Boolean);
+  const filas = [
+    ["Edad", j => edad(j), x => x == null ? "–" : x.toFixed(1), "menos"],
+    ["Dinastía", j => dinastia(j), x => x == null ? "–" : x.toFixed(1)],
+    ["Tendencia", j => tendencia(j), x => x == null ? "–" : (x > 0 ? "▲" : "▼") + Math.abs(x).toFixed(1)],
+    ["Valor", j => j[v]?.z ? valorJugador(j[v]) : null, x => x == null ? "–" : x.toFixed(1)],
+    ["PJ", j => j[v]?.pj, x => x ?? "–", "nada"],
+    ["MIN", j => j[v]?.min, x => x == null ? "–" : x.toFixed(1)],
+    ...CATS.map((c, i) => [c.n, j => j[v]?.z ? j[v].z[i] : null, (x, j) => j[v] ? c.v(j[v]) : "–"]),
+  ];
+  let html = `<div class="panel"><button class="cerrar" aria-label="Cerrar">✕</button>
+    <div class="nom" style="font-size:24px">Comparar jugadores</div>
+    <div class="controles" style="margin-top:8px"><select id="comp-ventana">
+      <option value="temporada">Temporada</option><option value="ult30">Últimos 30 días</option>
+      <option value="ult14">Últimos 14 días</option><option value="ult7">Últimos 7 días</option></select>
+      <button class="chip" id="comp-vaciar">Vaciar</button></div>
+    <div class="tabla-wrap" style="background:var(--card2);margin-top:10px"><table class="liga"><thead><tr><th></th>` +
+    js.map(j => `<th style="color:var(--txt)">${esc(j.nombre)}<span class="peq" style="display:block">${esc(j.equipo)}${j.pos ? " · " + esc(j.pos) : ""}</span>
+      ${LIGA.liga ? `<span class="peq" style="display:block">${LIGA.dueno.get(j.id) ? esc(LIGA.corto[LIGA.dueno.get(j.id)]) : "Libre"}</span>` : ""}</th>`).join("") +
+    `</tr></thead><tbody>`;
+  for (const [n, f, fmtF, modo] of filas) {
+    const vals = js.map(f);
+    const ok = vals.filter(x => x != null);
+    const mejor = modo === "nada" || ok.length < 2 ? null : modo === "menos" ? Math.min(...ok) : Math.max(...ok);
+    html += `<tr><td class="nom" style="text-align:left">${n}</td>` + js.map((j, i) =>
+      `<td style="${vals[i] != null && vals[i] === mejor ? "color:var(--verde);font-weight:700" : ""}">${fmtF(vals[i], j)}</td>`).join("") + `</tr>`;
+  }
+  html += `</tbody></table></div><p class="ayuda">En verde, el mejor de cada fila (en las categorías, según su puntuación respecto a la liga).
+    Para añadir jugadores, abre su ficha y toca "Comparar".</p></div>`;
+  caja.innerHTML = html; caja.hidden = false;
+  $("comp-ventana").value = v;
+  $("comp-ventana").onchange = e => { LIGA.compVentana = e.target.value; abrirComparador(); };
+  $("comp-vaciar").onclick = () => { LIGA.comp = []; botonComparar(); caja.hidden = true; };
 }

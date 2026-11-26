@@ -10,10 +10,10 @@
 
 const HIST = {
   base: new URLSearchParams(location.search).has("prueba") ? "data/historico_prueba/" : "data/historico/",
-  d: null, vista: "palmares", yo: null, rival: null,
+  d: null, vista: "cronica", yo: null, rival: null, tDraft: null, semCron: null,
 };
-const VISTAS = [["palmares", "Palmarés"], ["managers", "Mánagers"], ["h2h", "Cara a cara"],
-                ["rachas", "Rachas"], ["records", "Récords"], ["suerte", "Suerte"]];
+const VISTAS = [["cronica", "Crónica"], ["palmares", "Palmarés"], ["managers", "Mánagers"], ["h2h", "Cara a cara"],
+                ["rachas", "Rachas"], ["records", "Récords"], ["suerte", "Suerte"], ["drafts", "Drafts"]];
 
 /* ---------- preparación ---------- */
 function prepararHistoria(d) {
@@ -161,13 +161,17 @@ function pintarHistoria() {
     c.innerHTML = `<div class="tarjeta"><div class="nom">Clasificación histórica</div>
       <div class="tabla-wrap" style="background:var(--card2);margin-top:8px"><table class="liga"><thead><tr><th class="fijo">Mánager</th><th>Temp.</th>
       <th>Liga regular</th><th>%</th><th>Playoffs</th><th>Categorías</th><th>🏆</th><th>Finales</th><th>Mejor</th><th>Media</th></tr></thead><tbody>` +
-      tabla.map(x => `<tr><td class="fijo nom">${esc(x.m)}</td><td>${x.temps}</td><td>${rec(x.g, x.p, x.e)}</td>
+      tabla.map(x => `<tr class="clic" data-m="${esc(x.m)}"><td class="fijo nom">${esc(x.m)}</td><td>${x.temps}</td><td>${rec(x.g, x.p, x.e)}</td>
         <td style="${color((pct(x.g, x.p, x.e) - .5) * 8)}"><b>${fmtPct(pct(x.g, x.p, x.e))}</b></td><td>${x.pg}-${x.pp}</td>
         <td>${fmtPct(pct(x.cg, x.cp, x.ce))}%</td><td>${x.titulos || ""}</td><td>${x.finales || ""}</td>
         <td>${x.mejor ? x.mejor + "º" : "–"}</td><td>${x.media ? x.media.toFixed(1) : "–"}</td></tr>`).join("") +
       `</tbody></table></div><p class="ayuda">Liga regular: enfrentamientos semanales ganados-perdidos-empatados. Categorías: % de categorías ganadas en todos los enfrentamientos.
-      Puestos solo de temporadas terminadas.</p></div>` + sub;
+      Puestos solo de temporadas terminadas. Toca un mánager para ver su ficha.</p></div>` + sub;
+    c.querySelector("table").onclick = e => { const tr = e.target.closest("tr.clic"); if (tr) abrirManager(tr.dataset.m); };
   }
+
+  if (HIST.vista === "drafts") pintarDrafts(c);
+  if (HIST.vista === "cronica") pintarCronica(c);
 
   if (HIST.vista === "h2h") {
     const yo = HIST.yo && H.porManager.has(HIST.yo) ? HIST.yo : H.managers[0];
@@ -251,4 +255,180 @@ async function iniciarHistoria() {
   $("hist-vistas").onclick = e => { const b = e.target.closest("button[data-v]"); if (!b) return; HIST.vista = b.dataset.v; pintarHistoria(); };
   pintarHistoria();
   if (leerLS("seccion", "") === "historia") document.querySelector('nav button[data-sec="historia"]').click();
+}
+
+
+/* =====================================================================
+ * FICHA DE MÁNAGER
+ * ===================================================================== */
+function cajaPanel() {
+  let caja = $("ficha");
+  if (!caja) {
+    caja = document.createElement("div"); caja.id = "ficha";
+    caja.onclick = e => { if (e.target === caja || e.target.closest(".cerrar")) caja.hidden = true; };
+    document.body.appendChild(caja);
+  }
+  return caja;
+}
+
+async function abrirManager(m) {
+  const H = HIST.d, L = H.porManager.get(m) || [];
+  const fila = calcManagers(H).find(x => x.m === m);
+  const temporadas = [];
+  for (const [t, info] of Object.entries(H.T).sort().reverse()) {
+    const ent = Object.entries(info.equipos).find(([, e]) => (e.manager || e.nombre) === m);
+    if (!ent) continue;
+    const [k, e] = ent;
+    const reg = L.filter(x => x.p.t === t && !x.p.po), po = L.filter(x => x.p.t === t && x.p.po);
+    const n = (l, r) => l.filter(x => x.r === r).length;
+    temporadas.push({ t, k, nombre: e.nombre, puesto: info.campeon ? e.puesto : null, campeon: info.campeon === k,
+                      g: n(reg, "G"), p: n(reg, "P"), e: n(reg, "E"), pg: n(po, "G"), pp: n(po, "P") });
+  }
+  const conPct = temporadas.filter(x => x.g + x.p + x.e >= 5);
+  const mejor = [...conPct].sort((a, b) => pct(b.g, b.p, b.e) - pct(a.g, a.p, a.e))[0];
+  const peor = [...conPct].sort((a, b) => pct(a.g, a.p, a.e) - pct(b.g, b.p, b.e))[0];
+  const caja = cajaPanel();
+  const pintar = (hist) => {
+    let extra = `<p class="ayuda">Cargando traspasos…</p>`;
+    if (hist === null) extra = "";
+    else if (hist) {
+      // Socios de traspaso y jugador fetiche a partir del índice de jugadores
+      const misEquipos = new Set(temporadas.map(x => x.k));
+      const socios = new Map(), vistos = new Set(), fetiche = new Map();
+      for (const [id, j] of Object.entries(hist.jugadores)) {
+        const temps = new Set();
+        for (const e of j.eventos) {
+          if (misEquipos.has(e.a) && ["inicio", "draft", "add", "trade"].includes(e.tipo)) temps.add(e.t);
+          if (e.tipo !== "trade") continue;
+          const mio = misEquipos.has(e.a) ? e.a : misEquipos.has(e.de) ? e.de : null;
+          if (!mio) continue;
+          const otro = mio === e.a ? e.de : e.a;
+          const clave = [e.t, e.fecha, [e.a, e.de].sort().join()].join("|");
+          if (vistos.has(clave)) continue;
+          vistos.add(clave);
+          const om = H.man(e.t, otro);
+          socios.set(om, (socios.get(om) || 0) + 1);
+        }
+        if (temps.size) fetiche.set(id, { nombre: j.nombre, n: temps.size });
+      }
+      const s = [...socios].sort((a, b) => b[1] - a[1]).slice(0, 3);
+      const f = [...fetiche.values()].sort((a, b) => b.n - a.n).slice(0, 3);
+      extra = `<p style="margin:10px 0 0">🤝 Con quien más traspasa: ${s.length ? s.map(([n, c]) => `<b>${esc(n)}</b> (${c})`).join(", ") : "nadie todavía"}</p>
+        <p style="margin:6px 0 0">❤️ Jugadores fetiche: ${f.map(x => `<b>${esc(x.nombre)}</b> (${x.n} temp.)`).join(", ") || "–"}</p>`;
+    }
+    caja.innerHTML = `<div class="panel"><button class="cerrar" aria-label="Cerrar">✕</button>
+      <div class="nom" style="font-size:26px">${esc(m)}</div>
+      <p style="margin:6px 0 0">${"🏆".repeat(fila.titulos) || "Sin títulos todavía"} · ${fila.finales} final${fila.finales === 1 ? "" : "es"} · ${fila.temps} temporadas ·
+        liga regular ${rec(fila.g, fila.p, fila.e)} (${fmtPct(pct(fila.g, fila.p, fila.e))}%)</p>
+      ${mejor ? `<p class="peq" style="margin:4px 0 0">Mejor temporada: ${etqTemporada(mejor.t)} (${rec(mejor.g, mejor.p, mejor.e)}) · peor: ${etqTemporada(peor.t)} (${rec(peor.g, peor.p, peor.e)})</p>` : ""}
+      ${extra}
+      <table class="liga" style="margin-top:12px"><thead><tr><th>Temp.</th><th style="text-align:left">Equipo</th><th>Liga</th><th>PO</th><th>Puesto</th></tr></thead><tbody>` +
+      temporadas.map(x => `<tr><td class="peq">${etqTemporada(x.t)}</td><td style="text-align:left">${esc(x.nombre)}</td><td>${rec(x.g, x.p, x.e)}</td>
+        <td>${x.pg + x.pp ? x.pg + "-" + x.pp : ""}</td><td>${x.campeon ? "🏆" : x.puesto ? x.puesto + "º" : "<span class='peq'>en juego</span>"}</td></tr>`).join("") +
+      `</tbody></table></div>`;
+  };
+  pintar(LIGA.hist);
+  caja.hidden = false;
+  if (LIGA.hist === undefined) pintar(await cargarHistorico());
+}
+
+/* =====================================================================
+ * DRAFTS: qué fue de cada elección
+ * ===================================================================== */
+async function pintarDrafts(c) {
+  const H = HIST.d;
+  c.innerHTML = `<div class="estado">Cargando…</div>`;
+  const hist = await cargarHistorico();
+  if (!hist) { c.innerHTML = `<div class="estado">Faltan los datos de jugadores del histórico.</div>`; return; }
+  const porT = {};
+  for (const [id, j] of Object.entries(hist.jugadores))
+    for (const e of j.eventos) if (e.tipo === "draft") (porT[e.t] = porT[e.t] || []).push({ ...e, id, nombre: j.nombre });
+  const temps = Object.keys(porT).sort().reverse();
+  if (!temps.length) { c.innerHTML = `<div class="estado">No hay drafts en el histórico.</div>`; return; }
+  const t = temps.includes(HIST.tDraft) ? HIST.tDraft : temps[0];
+  const porNombre = new Map(est.datos.jugadores.map(j => [norm(j.nombre), j]));
+  const picks = porT[t].sort((a, b) => a.pick - b.pick).map(p => {
+    const nba = porNombre.get(norm(p.nombre));
+    const v = nba && nba.temporada?.z ? valorJugador(nba.temporada) : null;
+    return { ...p, nba, v, din: nba ? dinastia(nba) : null };
+  });
+  const mejor = picks.filter(p => p.v != null).sort((a, b) => b.v - a.v)[0];
+  c.innerHTML = `<div class="tarjeta"><div class="controles"><span class="nom" style="flex:1">Draft</span><select id="draft-t">` +
+    temps.map(x => `<option value="${x}"${x === t ? " selected" : ""}>${etqTemporada(x)}</option>`).join("") + `</select></div>
+    ${mejor ? `<p class="ayuda">💎 Mejor elección vista hoy: <b style="color:var(--verde)">${esc(mejor.nombre)}</b> (pick ${mejor.pick}, ${esc(H.eqN(t, mejor.a))})</p>` : ""}
+    <table class="liga" id="tabla-draft" style="margin-top:6px"><thead><tr><th>#</th><th style="text-align:left">Jugador</th><th>Valor hoy</th><th>Dinastía</th></tr></thead><tbody>` +
+    picks.map(p => `<tr class="clic" data-n="${esc(p.nombre)}" data-id="${p.nba ? p.nba.id : ""}"><td class="peq">${p.ronda}.${p.pick}</td>
+      <td style="text-align:left"><span class="nom">${esc(p.nombre)}</span><span class="peq" style="display:block">${esc(H.eqN(t, p.a))} · ${esc(H.man(t, p.a))}</span></td>
+      <td style="${p.v != null ? color(p.v / 3) : ""}">${p.v != null ? p.v.toFixed(1) : '<span class="peq">no juega</span>'}</td>
+      <td>${p.din != null ? p.din.toFixed(1) : "–"}</td></tr>`).join("") +
+    `</tbody></table><p class="ayuda">Valor de esta temporada en la NBA de cada jugador elegido. "No juega": retirado, lesionado o fuera de la NBA.</p></div>`;
+  $("draft-t").onchange = e => { HIST.tDraft = e.target.value; pintarHistoria(); };
+  $("tabla-draft").onclick = e => { const tr = e.target.closest("tr.clic"); if (tr) abrirFicha({ nbaId: tr.dataset.id ? +tr.dataset.id : null, nombre: tr.dataset.n }); };
+}
+
+/* =====================================================================
+ * CRÓNICA SEMANAL (para mandar al grupo)
+ * ===================================================================== */
+function textoCronica(H, t, s) {
+  const sem = H.partidos.filter(p => p.t === t && p.s === s);
+  if (!sem.length) return "";
+  const nombre = (k) => H.eqN(t, k);
+  const lineas = [`🏀 NBA Pontevedresa · Semana ${s} (${etqTemporada(t)})${sem[0].po ? " · PLAYOFFS" : ""}`, ""];
+  for (const p of sem) {
+    const ganaA = p.ga >= p.gb;
+    lineas.push(`${ganaA ? "✅" : "  "} ${nombre(p.a)} ${p.ga}-${p.gb} ${nombre(p.b)} ${!ganaA ? "✅" : ""}`.trim());
+  }
+  const paliza = [...sem].sort((a, b) => Math.abs(b.ga - b.gb) - Math.abs(a.ga - a.gb))[0];
+  const ajustado = [...sem].sort((a, b) => Math.abs(a.ga - a.gb) - Math.abs(b.ga - b.gb))[0];
+  const gP = paliza.ga > paliza.gb;
+  lineas.push("", `💥 Paliza: ${nombre(gP ? paliza.a : paliza.b)} ${Math.max(paliza.ga, paliza.gb)}-${Math.min(paliza.ga, paliza.gb)} a ${nombre(gP ? paliza.b : paliza.a)}.`);
+  if (ajustado !== paliza) lineas.push(`😬 Más ajustado: ${nombre(ajustado.a)} ${ajustado.ga}-${ajustado.gb} ${nombre(ajustado.b)}.`);
+  // Récords históricos batidos esta semana
+  for (const { c, top } of calcRecords(H).cats) {
+    const r = top[0];
+    if (r && r.p.t === t && r.p.s === s)
+      lineas.push(`📈 ¡Récord histórico de ${c.nombre}! ${nombre(r.k)}: ${c.clave.endsWith("pct") ? (r.s[c.clave] * 100).toFixed(1) + "%" : r.s[c.clave]}.`);
+  }
+  // Suerte de la semana: contra todos
+  const equipos = sem.flatMap(p => [{ k: p.a, s: p.sa, gana: p.ga > p.gb }, { k: p.b, s: p.sb, gana: p.gb > p.ga }]);
+  const cats = H.T[t].categorias || [];
+  for (const e of equipos) {
+    e.vence = equipos.filter(o => o !== e).filter(o => {
+      let w = 0, l = 0;
+      for (const c of cats) { const x = e.s[c.clave], y = o.s[c.clave]; if (x == null || y == null || x === y) continue; (x < y) === !!c.menos ? w++ : l++; }
+      return w > l;
+    }).length;
+  }
+  const mejorSem = [...equipos].sort((a, b) => b.vence - a.vence)[0];
+  lineas.push(`⭐ Equipo de la semana: ${nombre(mejorSem.k)}, habría ganado a ${mejorSem.vence} de ${equipos.length - 1} rivales.`);
+  const gafado = equipos.filter(e => !e.gana).sort((a, b) => b.vence - a.vence)[0];
+  if (gafado && gafado.vence >= Math.ceil((equipos.length - 1) / 2))
+    lineas.push(`🍀 Mala suerte: ${nombre(gafado.k)} perdió aunque habría ganado a ${gafado.vence} rivales.`);
+  // Rachas
+  const R = H.managers.map(m => ({ m, ...rachas(H.porManager.get(m) || []) })).filter(x => x.act.n >= 3);
+  const g = R.filter(x => x.act.r === "G").sort((a, b) => b.act.n - a.act.n)[0];
+  const p = R.filter(x => x.act.r === "P").sort((a, b) => b.act.n - a.act.n)[0];
+  if (g) lineas.push(`🔥 ${g.m} lleva ${g.act.n} victorias seguidas.`);
+  if (p) lineas.push(`🧊 ${p.m} encadena ${p.act.n} derrotas.`);
+  return lineas.join("\n");
+}
+
+function pintarCronica(c) {
+  const H = HIST.d;
+  const semanas = [...new Set(H.partidos.map(p => p.t + "|" + p.s))].sort((a, b) => {
+    const [ta, sa] = a.split("|"), [tb, sb] = b.split("|"); return ta.localeCompare(tb) || sa - sb; }).reverse();
+  const sel = semanas.includes(HIST.semCron) ? HIST.semCron : semanas[0];
+  const [t, s] = sel.split("|");
+  const texto = textoCronica(H, t, +s);
+  c.innerHTML = `<div class="tarjeta"><div class="controles"><span class="nom" style="flex:1">Crónica</span><select id="cron-sem">` +
+    semanas.slice(0, 40).map(x => { const [a, b] = x.split("|"); return `<option value="${x}"${x === sel ? " selected" : ""}>${etqTemporada(a)} · semana ${b}</option>`; }).join("") +
+    `</select></div><pre class="cronica">${esc(texto)}</pre>
+    <div class="controles"><button class="chip on" id="cron-copiar">Copiar</button>
+    <a class="chip" id="cron-wa" href="https://wa.me/?text=${encodeURIComponent(texto)}" target="_blank" rel="noopener">Enviar por WhatsApp</a></div>
+    <p class="ayuda">Resumen automático de la semana elegida para mandarlo al grupo.</p></div>`;
+  $("cron-sem").onchange = e => { HIST.semCron = e.target.value; pintarHistoria(); };
+  $("cron-copiar").onclick = async e => {
+    try { await navigator.clipboard.writeText(texto); e.target.textContent = "¡Copiada!"; }
+    catch (err) { e.target.textContent = "No se pudo copiar"; }
+  };
 }
