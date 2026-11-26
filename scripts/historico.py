@@ -18,6 +18,11 @@ Modos (variable MODO):
                vuelve a pedir. Para antes de MINUTOS_MAX y guarda lo hecho; si no le da
                tiempo, basta con volver a lanzarlo.
 
+  indice    -> solo rehace data/historico/jugadores.json (se hace también al final de importar):
+               para cada jugador, todos sus pasos por la liga (draft, plantilla al empezar
+               cada temporada, fichajes, bajas y traspasos) y los nombres de los equipos de
+               cada temporada. Es lo que usa la ficha del jugador en la web.
+
 Opcional: TEMPORADAS="2008-2012" para limitar el rango.
 Pruebas: YAHOO_FIXTURES=scripts/pruebas/yahoo HISTORICO_SALIDA=/tmp/historico
 """
@@ -238,6 +243,55 @@ def importar_temporada(token, clave, meta, actual):
     return True
 
 
+# ---------------------------------------------------------------- índice de jugadores
+def pid(player_key):
+    """'466.p.5352' -> '5352' (el número de jugador de Yahoo no cambia entre temporadas)."""
+    return str(player_key or "").split(".p.")[-1] or None
+
+
+def construir_indice():
+    temporadas, jugadores = {}, {}
+
+    def ev(p, nombre, e):
+        if not p:
+            return
+        j = jugadores.setdefault(p, {"nombre": nombre, "eventos": []})
+        if nombre:
+            j["nombre"] = nombre
+        j["eventos"].append(e)
+
+    for carpeta in sorted(SALIDA.glob("[0-9][0-9][0-9][0-9]")):
+        t = carpeta.name
+        liga = cx.leer_json(carpeta / "liga.json", {})
+        inicio = liga.get("fecha_inicio") or f"{t}-10-01"
+        temporadas[t] = {"nombre": liga.get("nombre"), "inicio": inicio,
+                         "equipos": {e["key"]: {"nombre": e.get("nombre"), "manager": e.get("manager")}
+                                     for e in liga.get("equipos", [])}}
+        clasif = cx.leer_json(carpeta / "clasificacion.json", {}).get("equipos", [])
+        for c in clasif:
+            if c["key"] in temporadas[t]["equipos"]:
+                temporadas[t]["equipos"][c["key"]]["puesto"] = c.get("puesto")
+        for p in cx.leer_json(carpeta / "draft.json", {}).get("picks", []):
+            ev(pid(p.get("jugador")), p.get("nombre"),
+               {"t": t, "tipo": "draft", "fecha": inicio, "a": p.get("equipo"), "ronda": p.get("ronda"), "pick": p.get("pick")})
+        for key, lista in cx.leer_json(carpeta / "plantillas_inicio.json", {}).get("equipos", {}).items():
+            for j in lista:
+                ev(j.get("yahoo_id"), j.get("nombre"), {"t": t, "tipo": "inicio", "fecha": inicio, "a": key})
+        for m in cx.leer_json(carpeta / "movimientos.json", {}).get("movimientos", []):
+            if m.get("estado") not in (None, "successful"):
+                continue
+            for j in m.get("jugadores", []):
+                ev(pid(j.get("jugador")), j.get("nombre"),
+                   {"t": t, "tipo": j.get("tipo") or m.get("tipo"), "fecha": (m.get("fecha") or "")[:10],
+                    "de": j.get("de"), "a": j.get("a")})
+    orden = {"draft": 0, "inicio": 1}
+    for j in jugadores.values():
+        j["eventos"].sort(key=lambda e: (e["fecha"] or "", orden.get(e["tipo"], 2)))
+    escribir(SALIDA / "jugadores.json", {"temporadas": temporadas, "jugadores": jugadores,
+                                          "actualizado": datetime.now(timezone.utc).isoformat(timespec="seconds")})
+    print(f"OK  Índice de jugadores: {len(jugadores)} jugadores en {len(temporadas)} temporadas.")
+
+
 def importar(token, ligas):
     rango = rango_temporadas()
     for i, (clave, meta) in enumerate(ligas):
@@ -245,16 +299,20 @@ def importar(token, ligas):
         if rango and not (rango[0] <= t <= rango[1]):
             continue
         if not importar_temporada(token, clave, meta, actual=(i == 0)):
+            construir_indice()
             print(f"⏸  Se acabó el tiempo ({MINUTOS_MAX:.0f} min) en la temporada {t}. "
                   "Lo hecho queda guardado: vuelve a lanzar el Action para seguir.")
             return
     escribir(SALIDA / "indice.json", {
         "temporadas": [{"temporada": m.get("season"), "league_key": k, "nombre": m.get("name")} for k, m in ligas],
         "actualizado": datetime.now(timezone.utc).isoformat(timespec="seconds")})
+    construir_indice()
     print("✅ Histórico completo.")
 
 
 def main():
+    if MODO == "indice":
+        return construir_indice()
     token = cx.obtener_token()
     ligas = cadena_ligas(token)
     if MODO == "censo":
@@ -262,7 +320,7 @@ def main():
     elif MODO == "importar":
         importar(token, ligas)
     else:
-        cx.fallo(f"MODO desconocido: {MODO} (usa censo o importar)")
+        cx.fallo(f"MODO desconocido: {MODO} (usa censo, importar o indice)")
 
 
 if __name__ == "__main__":

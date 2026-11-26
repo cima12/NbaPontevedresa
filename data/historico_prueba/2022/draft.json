@@ -1,0 +1,172 @@
+{
+ "picks": [
+  {
+   "pick": 1,
+   "ronda": 1,
+   "equipo": "418.l.3022.t.1",
+   "jugador": "418.p.1631457",
+   "nombre": "Alex Morales"
+  },
+  {
+   "pick": 2,
+   "ronda": 1,
+   "equipo": "418.l.3022.t.2",
+   "jugador": "418.p.1631119",
+   "nombre": "Jaylin Williams"
+  },
+  {
+   "pick": 3,
+   "ronda": 1,
+   "equipo": "418.l.3022.t.3",
+   "jugador": "418.p.1642848",
+   "nombre": "Tre Johnson"
+  },
+  {
+   "pick": 4,
+   "ronda": 1,
+   "equipo": "418.l.3022.t.4",
+   "jugador": "418.p.1643591",
+   "nombre": "Tobe Awaka"
+  },
+  {
+   "pick": 5,
+   "ronda": 1,
+   "equipo": "418.l.3022.t.5",
+   "jugador": "418.p.1641724",
+   "nombre": "Jett Howard"
+  },
+  {
+   "pick": 6,
+   "ronda": 1,
+   "equipo": "418.l.3022.t.6",
+   "jugador": "418.p.1629675",
+   "nombre": "Naz Reid"
+  },
+  {
+   "pick": 7,
+   "ronda": 1,
+   "equipo": "418.l.3022.t.7",
+   "jugador": "418.p.1630544",
+   "nombre": "Tre Mann"
+  },
+  {
+   "pick": 8,
+   "ronda": 1,
+   "equipo": "418.l.3022.t.8",
+   "jugador": "418.p.1629012",
+   "nombre": "Collin Sexton"
+  },
+  {
+   "pick": 9,
+   "ronda": 1,
+   "equipo": "418.l.3022.t.9",
+   "jugador": "418.p.1630590",
+   "nombre": "Scotty Pippen Jr."
+  },
+  {
+   "pick": 10,
+   "ronda": 1,
+   "equipo": "418.l.3022.t.10",
+   "jugador": "418.p.1641710",
+   "nombre": "Anthony Black"
+  },
+  {
+   "pick": 11,
+   "ronda": 1,
+   "equipo": "418.l.3022.t.11",
+   "jugador": "418.p.1630703",
+   "nombre": "Scoot Henderson"
+  },
+  {
+   "pick": 12,
+   "ronda": 1,
+   "equipo": "418.l.3022.t.12",
+   "jugador": "418.p.1628368",
+   "nombre": "De'Aaron Fox"
+  },
+  {
+   "pick": 13,
+   "ronda": 2,
+   "equipo": "418.l.3022.t.12",
+   "jugador": "418.p.1641739",
+   "nombre": "Toumani Camara"
+  },
+  {
+   "pick": 14,
+   "ronda": 2,
+   "equipo": "418.l.3022.t.11",
+   "jugador": "418.p.1626204",
+   "nombre": "Larry Nance Jr."
+  },
+  {
+   "pick": 15,
+   "ronda": 2,
+   "equipo": "418.l.3022.t.10",
+   "jugador": "418.p.1629130",
+   "nombre": "Duncan Robinson"
+  },
+  {
+   "pick": 16,
+   "ronda": 2,
+   "equipo": "418.l.3022.t.9",
+   "jugador": "418.p.203954",
+   "nombre": "Joel Embiid"
+  },
+  {
+   "pick": 17,
+   "ronda": 2,
+   "equipo": "418.l.3022.t.8",
+   "jugador": "418.p.1642450",
+   "nombre": "Daniss Jenkins"
+  },
+  {
+   "pick": 18,
+   "ronda": 2,
+   "equipo": "418.l.3022.t.7",
+   "jugador": "418.p.1629640",
+   "nombre": "Keldon Johnson"
+  },
+  {
+   "pick": 19,
+   "ronda": 2,
+   "equipo": "418.l.3022.t.6",
+   "jugador": "418.p.1629638",
+   "nombre": "Nickeil Alexander-Walker"
+  },
+  {
+   "pick": 20,
+   "ronda": 2,
+   "equipo": "418.l.3022.t.5",
+   "jugador": "418.p.1642920",
+   "nombre": "Kobe Sanders"
+  },
+  {
+   "pick": 21,
+   "ronda": 2,
+   "equipo": "418.l.3022.t.4",
+   "jugador": "418.p.1627884",
+   "nombre": "Derrick Jones Jr."
+  },
+  {
+   "pick": 22,
+   "ronda": 2,
+   "equipo": "418.l.3022.t.3",
+   "jugador": "418.p.203076",
+   "nombre": "Anthony Davis"
+  },
+  {
+   "pick": 23,
+   "ronda": 2,
+   "equipo": "418.l.3022.t.2",
+   "jugador": "418.p.1642357",
+   "nombre": "David Jones Garcia"
+  },
+  {
+   "pick": 24,
+   "ronda": 2,
+   "equipo": "418.l.3022.t.1",
+   "jugador": "418.p.203484",
+   "nombre": "Kentavious Caldwell-Pope"
+  }
+ ]
+}

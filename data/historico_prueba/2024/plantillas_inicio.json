@@ -1,0 +1,701 @@
+{
+ "semana": 1,
+ "equipos": {
+  "441.l.3024.t.1": [
+   {
+    "yahoo_id": "1629674",
+    "nombre": "Neemias Queta"
+   },
+   {
+    "yahoo_id": "1641796",
+    "nombre": "Pelle Larsson"
+   },
+   {
+    "yahoo_id": "1627936",
+    "nombre": "Alex Caruso"
+   },
+   {
+    "yahoo_id": "1629001",
+    "nombre": "De'Anthony Melton"
+   },
+   {
+    "yahoo_id": "1630178",
+    "nombre": "Tyrese Maxey"
+   },
+   {
+    "yahoo_id": "201935",
+    "nombre": "James Harden"
+   },
+   {
+    "yahoo_id": "1642367",
+    "nombre": "Jonathan Mogbo"
+   },
+   {
+    "yahoo_id": "1630529",
+    "nombre": "Herbert Jones"
+   },
+   {
+    "yahoo_id": "1631127",
+    "nombre": "Harrison Ingram"
+   },
+   {
+    "yahoo_id": "1631222",
+    "nombre": "Jake LaRavia"
+   },
+   {
+    "yahoo_id": "1643567",
+    "nombre": "Emanuel Sharp"
+   },
+   {
+    "yahoo_id": "1628976",
+    "nombre": "Wendell Carter Jr."
+   },
+   {
+    "yahoo_id": "1630166",
+    "nombre": "Deni Avdija"
+   },
+   {
+    "yahoo_id": "1631106",
+    "nombre": "Tari Eason"
+   }
+  ],
+  "441.l.3024.t.2": [
+   {
+    "yahoo_id": "1641708",
+    "nombre": "Amen Thompson"
+   },
+   {
+    "yahoo_id": "1642276",
+    "nombre": "Kel'el Ware"
+   },
+   {
+    "yahoo_id": "1641710",
+    "nombre": "Anthony Black"
+   },
+   {
+    "yahoo_id": "1642259",
+    "nombre": "Alex Sarr"
+   },
+   {
+    "yahoo_id": "1629651",
+    "nombre": "Nic Claxton"
+   },
+   {
+    "yahoo_id": "1643530",
+    "nombre": "Aday Mara"
+   },
+   {
+    "yahoo_id": "1628991",
+    "nombre": "Jaren Jackson Jr."
+   },
+   {
+    "yahoo_id": "1641871",
+    "nombre": "Duop Reath"
+   },
+   {
+    "yahoo_id": "1630170",
+    "nombre": "Devin Vassell"
+   },
+   {
+    "yahoo_id": "1629628",
+    "nombre": "RJ Barrett"
+   },
+   {
+    "yahoo_id": "1631218",
+    "nombre": "Trayce Jackson-Davis"
+   },
+   {
+    "yahoo_id": "1629680",
+    "nombre": "Matisse Thybulle"
+   },
+   {
+    "yahoo_id": "1630230",
+    "nombre": "Naji Marshall"
+   },
+   {
+    "yahoo_id": "203484",
+    "nombre": "Kentavious Caldwell-Pope"
+   }
+  ],
+  "441.l.3024.t.3": [
+   {
+    "yahoo_id": "1629130",
+    "nombre": "Duncan Robinson"
+   },
+   {
+    "yahoo_id": "1642274",
+    "nombre": "Yves Missi"
+   },
+   {
+    "yahoo_id": "1631212",
+    "nombre": "Peyton Watson"
+   },
+   {
+    "yahoo_id": "1642502",
+    "nombre": "Malevy Leons"
+   },
+   {
+    "yahoo_id": "1629673",
+    "nombre": "Jordan Poole"
+   },
+   {
+    "yahoo_id": "1641771",
+    "nombre": "Jalen Slawson"
+   },
+   {
+    "yahoo_id": "1629111",
+    "nombre": "Jock Landale"
+   },
+   {
+    "yahoo_id": "1629637",
+    "nombre": "Jaxson Hayes"
+   },
+   {
+    "yahoo_id": "1631221",
+    "nombre": "Collin Gillespie"
+   },
+   {
+    "yahoo_id": "1642907",
+    "nombre": "Cedric Coward"
+   },
+   {
+    "yahoo_id": "1629655",
+    "nombre": "Daniel Gafford"
+   },
+   {
+    "yahoo_id": "1630173",
+    "nombre": "Precious Achiuwa"
+   },
+   {
+    "yahoo_id": "1642352",
+    "nombre": "Keshad Johnson"
+   },
+   {
+    "yahoo_id": "203501",
+    "nombre": "Tim Hardaway Jr."
+   }
+  ],
+  "441.l.3024.t.4": [
+   {
+    "yahoo_id": "1641744",
+    "nombre": "Zach Edey"
+   },
+   {
+    "yahoo_id": "1630567",
+    "nombre": "Scottie Barnes"
+   },
+   {
+    "yahoo_id": "1642865",
+    "nombre": "Yaxel Lendeborg"
+   },
+   {
+    "yahoo_id": "1629216",
+    "nombre": "Gabe Vincent"
+   },
+   {
+    "yahoo_id": "203084",
+    "nombre": "Harrison Barnes"
+   },
+   {
+    "yahoo_id": "1642345",
+    "nombre": "Oso Ighodaro"
+   },
+   {
+    "yahoo_id": "1629029",
+    "nombre": "Luka Dončić"
+   },
+   {
+    "yahoo_id": "1627884",
+    "nombre": "Derrick Jones Jr."
+   },
+   {
+    "yahoo_id": "1642847",
+    "nombre": "Jeremiah Fears"
+   },
+   {
+    "yahoo_id": "1642948",
+    "nombre": "Ryan Nembhard"
+   },
+   {
+    "yahoo_id": "1642377",
+    "nombre": "Jaylen Wells"
+   },
+   {
+    "yahoo_id": "1628378",
+    "nombre": "Donovan Mitchell"
+   },
+   {
+    "yahoo_id": "1630228",
+    "nombre": "Jonathan Kuminga"
+   },
+   {
+    "yahoo_id": "1641713",
+    "nombre": "GG Jackson"
+   }
+  ],
+  "441.l.3024.t.5": [
+   {
+    "yahoo_id": "1629027",
+    "nombre": "Trae Young"
+   },
+   {
+    "yahoo_id": "1630162",
+    "nombre": "Anthony Edwards"
+   },
+   {
+    "yahoo_id": "203944",
+    "nombre": "Julius Randle"
+   },
+   {
+    "yahoo_id": "1643558",
+    "nombre": "Jaden Bradley"
+   },
+   {
+    "yahoo_id": "1628386",
+    "nombre": "Jarrett Allen"
+   },
+   {
+    "yahoo_id": "1641730",
+    "nombre": "Noah Clowney"
+   },
+   {
+    "yahoo_id": "1643257",
+    "nombre": "Jayson Kent"
+   },
+   {
+    "yahoo_id": "1642845",
+    "nombre": "VJ Edgecombe"
+   },
+   {
+    "yahoo_id": "1643414",
+    "nombre": "Mikel Brown Jr."
+   },
+   {
+    "yahoo_id": "1631117",
+    "nombre": "Walker Kessler"
+   },
+   {
+    "yahoo_id": "1627742",
+    "nombre": "Brandon Ingram"
+   },
+   {
+    "yahoo_id": "1628396",
+    "nombre": "Tony Bradley"
+   },
+   {
+    "yahoo_id": "1643409",
+    "nombre": "Cameron Boozer"
+   },
+   {
+    "yahoo_id": "1630180",
+    "nombre": "Saddiq Bey"
+   }
+  ],
+  "441.l.3024.t.6": [
+   {
+    "yahoo_id": "1630169",
+    "nombre": "Tyrese Haliburton"
+   },
+   {
+    "yahoo_id": "203954",
+    "nombre": "Joel Embiid"
+   },
+   {
+    "yahoo_id": "1630591",
+    "nombre": "Jalen Suggs"
+   },
+   {
+    "yahoo_id": "1628401",
+    "nombre": "Derrick White"
+   },
+   {
+    "yahoo_id": "1631095",
+    "nombre": "Jabari Smith Jr."
+   },
+   {
+    "yahoo_id": "1631133",
+    "nombre": "Jabari Walker"
+   },
+   {
+    "yahoo_id": "1642954",
+    "nombre": "Will Richard"
+   },
+   {
+    "yahoo_id": "1641989",
+    "nombre": "Elijah Harkless"
+   },
+   {
+    "yahoo_id": "1641761",
+    "nombre": "Grant Nelson"
+   },
+   {
+    "yahoo_id": "1628374",
+    "nombre": "Lauri Markkanen"
+   },
+   {
+    "yahoo_id": "1626171",
+    "nombre": "Bobby Portis Jr."
+   },
+   {
+    "yahoo_id": "1630598",
+    "nombre": "Aaron Wiggins"
+   },
+   {
+    "yahoo_id": "1641824",
+    "nombre": "Matas Buzelis"
+   },
+   {
+    "yahoo_id": "1626181",
+    "nombre": "Norman Powell"
+   }
+  ],
+  "441.l.3024.t.7": [
+   {
+    "yahoo_id": "1630217",
+    "nombre": "Desmond Bane"
+   },
+   {
+    "yahoo_id": "1630543",
+    "nombre": "Isaiah Jackson"
+   },
+   {
+    "yahoo_id": "1628970",
+    "nombre": "Miles Bridges"
+   },
+   {
+    "yahoo_id": "1627832",
+    "nombre": "Fred VanVleet"
+   },
+   {
+    "yahoo_id": "1631123",
+    "nombre": "Jamaree Bouyea"
+   },
+   {
+    "yahoo_id": "1643419",
+    "nombre": "Hannes Steinbach"
+   },
+   {
+    "yahoo_id": "1642403",
+    "nombre": "Isaac Jones"
+   },
+   {
+    "yahoo_id": "1626162",
+    "nombre": "Kelly Oubre Jr."
+   },
+   {
+    "yahoo_id": "1631204",
+    "nombre": "Marcus Sasser"
+   },
+   {
+    "yahoo_id": "1631121",
+    "nombre": "Bryce McGowens"
+   },
+   {
+    "yahoo_id": "1630544",
+    "nombre": "Tre Mann"
+   },
+   {
+    "yahoo_id": "1641716",
+    "nombre": "Jarace Walker"
+   },
+   {
+    "yahoo_id": "1642278",
+    "nombre": "Tyler Kolek"
+   },
+   {
+    "yahoo_id": "1643512",
+    "nombre": "Allen Graves"
+   }
+  ],
+  "441.l.3024.t.8": [
+   {
+    "yahoo_id": "1642843",
+    "nombre": "Cooper Flagg"
+   },
+   {
+    "yahoo_id": "1630558",
+    "nombre": "Davion Mitchell"
+   },
+   {
+    "yahoo_id": "1627826",
+    "nombre": "Ivica Zubac"
+   },
+   {
+    "yahoo_id": "1630193",
+    "nombre": "Immanuel Quickley"
+   },
+   {
+    "yahoo_id": "1642859",
+    "nombre": "Jase Richardson"
+   },
+   {
+    "yahoo_id": "1631105",
+    "nombre": "Jalen Duren"
+   },
+   {
+    "yahoo_id": "1627759",
+    "nombre": "Jaylen Brown"
+   },
+   {
+    "yahoo_id": "1629661",
+    "nombre": "Cameron Johnson"
+   },
+   {
+    "yahoo_id": "1628997",
+    "nombre": "Caleb Martin"
+   },
+   {
+    "yahoo_id": "1631457",
+    "nombre": "Alex Morales"
+   },
+   {
+    "yahoo_id": "1631114",
+    "nombre": "Jalen Williams"
+   },
+   {
+    "yahoo_id": "1627741",
+    "nombre": "Buddy Hield"
+   },
+   {
+    "yahoo_id": "1642266",
+    "nombre": "Ja'Kobe Walter"
+   },
+   {
+    "yahoo_id": "1630643",
+    "nombre": "Jay Huff"
+   }
+  ],
+  "441.l.3024.t.9": [
+   {
+    "yahoo_id": "203076",
+    "nombre": "Anthony Davis"
+   },
+   {
+    "yahoo_id": "1628368",
+    "nombre": "De'Aaron Fox"
+   },
+   {
+    "yahoo_id": "203110",
+    "nombre": "Draymond Green"
+   },
+   {
+    "yahoo_id": "1642910",
+    "nombre": "John Tonje"
+   },
+   {
+    "yahoo_id": "1642846",
+    "nombre": "Ace Bailey"
+   },
+   {
+    "yahoo_id": "1631157",
+    "nombre": "Ryan Rollins"
+   },
+   {
+    "yahoo_id": "1631172",
+    "nombre": "Ousmane Dieng"
+   },
+   {
+    "yahoo_id": "1628389",
+    "nombre": "Bam Adebayo"
+   },
+   {
+    "yahoo_id": "1630590",
+    "nombre": "Scotty Pippen Jr."
+   },
+   {
+    "yahoo_id": "1629646",
+    "nombre": "Charles Bassey"
+   },
+   {
+    "yahoo_id": "1629638",
+    "nombre": "Nickeil Alexander-Walker"
+   },
+   {
+    "yahoo_id": "1630167",
+    "nombre": "Obi Toppin"
+   },
+   {
+    "yahoo_id": "1642263",
+    "nombre": "Reed Sheppard"
+   },
+   {
+    "yahoo_id": "1628983",
+    "nombre": "Shai Gilgeous-Alexander"
+   }
+  ],
+  "441.l.3024.t.10": [
+   {
+    "yahoo_id": "1630202",
+    "nombre": "Payton Pritchard"
+   },
+   {
+    "yahoo_id": "1641718",
+    "nombre": "Keyonte George"
+   },
+   {
+    "yahoo_id": "1630198",
+    "nombre": "Isaiah Joe"
+   },
+   {
+    "yahoo_id": "1630530",
+    "nombre": "Trey Murphy III"
+   },
+   {
+    "yahoo_id": "1642914",
+    "nombre": "Javon Small"
+   },
+   {
+    "yahoo_id": "1630532",
+    "nombre": "Franz Wagner"
+   },
+   {
+    "yahoo_id": "1643408",
+    "nombre": "Darryn Peterson"
+   },
+   {
+    "yahoo_id": "1643555",
+    "nombre": "Jaron Pierre Jr."
+   },
+   {
+    "yahoo_id": "1628969",
+    "nombre": "Mikal Bridges"
+   },
+   {
+    "yahoo_id": "1630559",
+    "nombre": "Austin Reaves"
+   },
+   {
+    "yahoo_id": "1628964",
+    "nombre": "Mo Bamba"
+   },
+   {
+    "yahoo_id": "1642867",
+    "nombre": "Collin Murray-Boyles"
+   },
+   {
+    "yahoo_id": "1643591",
+    "nombre": "Tobe Awaka"
+   },
+   {
+    "yahoo_id": "1641705",
+    "nombre": "Victor Wembanyama"
+   }
+  ],
+  "441.l.3024.t.11": [
+   {
+    "yahoo_id": "1631096",
+    "nombre": "Chet Holmgren"
+   },
+   {
+    "yahoo_id": "1631245",
+    "nombre": "Quenton Jackson"
+   },
+   {
+    "yahoo_id": "1642848",
+    "nombre": "Tre Johnson"
+   },
+   {
+    "yahoo_id": "1642449",
+    "nombre": "Tolu Smith"
+   },
+   {
+    "yahoo_id": "2544",
+    "nombre": "LeBron James"
+   },
+   {
+    "yahoo_id": "1631288",
+    "nombre": "Jamal Cain"
+   },
+   {
+    "yahoo_id": "1628975",
+    "nombre": "Jevon Carter"
+   },
+   {
+    "yahoo_id": "203897",
+    "nombre": "Zach LaVine"
+   },
+   {
+    "yahoo_id": "203999",
+    "nombre": "Nikola Jokić"
+   },
+   {
+    "yahoo_id": "1641717",
+    "nombre": "Cason Wallace"
+   },
+   {
+    "yahoo_id": "1629630",
+    "nombre": "Ja Morant"
+   },
+   {
+    "yahoo_id": "202691",
+    "nombre": "Klay Thompson"
+   },
+   {
+    "yahoo_id": "1642270",
+    "nombre": "Donovan Clingan"
+   },
+   {
+    "yahoo_id": "1629162",
+    "nombre": "Jordan McLaughlin"
+   }
+  ],
+  "441.l.3024.t.12": [
+   {
+    "yahoo_id": "1626164",
+    "nombre": "Devin Booker"
+   },
+   {
+    "yahoo_id": "1629631",
+    "nombre": "De'Andre Hunter"
+   },
+   {
+    "yahoo_id": "1642964",
+    "nombre": "Brooks Barnhizer"
+   },
+   {
+    "yahoo_id": "203507",
+    "nombre": "Giannis Antetokounmpo"
+   },
+   {
+    "yahoo_id": "1642419",
+    "nombre": "Jamison Battle"
+   },
+   {
+    "yahoo_id": "1628404",
+    "nombre": "Josh Hart"
+   },
+   {
+    "yahoo_id": "1642285",
+    "nombre": "Cam Spencer"
+   },
+   {
+    "yahoo_id": "1642868",
+    "nombre": "Carter Bryant"
+   },
+   {
+    "yahoo_id": "202681",
+    "nombre": "Kyrie Irving"
+   },
+   {
+    "yahoo_id": "1642258",
+    "nombre": "Zaccharie Risacher"
+   },
+   {
+    "yahoo_id": "1630538",
+    "nombre": "Bones Hyland"
+   },
+   {
+    "yahoo_id": "203500",
+    "nombre": "Steven Adams"
+   },
+   {
+    "yahoo_id": "1643717",
+    "nombre": "Josh Dix"
+   },
+   {
+    "yahoo_id": "1642350",
+    "nombre": "Trevon Brazile"
+   }
+  ]
+ }
+}

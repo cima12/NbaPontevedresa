@@ -1,0 +1,172 @@
+{
+ "picks": [
+  {
+   "pick": 1,
+   "ronda": 1,
+   "equipo": "441.l.3024.t.1",
+   "jugador": "441.p.1631106",
+   "nombre": "Tari Eason"
+  },
+  {
+   "pick": 2,
+   "ronda": 1,
+   "equipo": "441.l.3024.t.2",
+   "jugador": "441.p.203484",
+   "nombre": "Kentavious Caldwell-Pope"
+  },
+  {
+   "pick": 3,
+   "ronda": 1,
+   "equipo": "441.l.3024.t.3",
+   "jugador": "441.p.203501",
+   "nombre": "Tim Hardaway Jr."
+  },
+  {
+   "pick": 4,
+   "ronda": 1,
+   "equipo": "441.l.3024.t.4",
+   "jugador": "441.p.1641713",
+   "nombre": "GG Jackson"
+  },
+  {
+   "pick": 5,
+   "ronda": 1,
+   "equipo": "441.l.3024.t.5",
+   "jugador": "441.p.1630180",
+   "nombre": "Saddiq Bey"
+  },
+  {
+   "pick": 6,
+   "ronda": 1,
+   "equipo": "441.l.3024.t.6",
+   "jugador": "441.p.1626181",
+   "nombre": "Norman Powell"
+  },
+  {
+   "pick": 7,
+   "ronda": 1,
+   "equipo": "441.l.3024.t.7",
+   "jugador": "441.p.1643512",
+   "nombre": "Allen Graves"
+  },
+  {
+   "pick": 8,
+   "ronda": 1,
+   "equipo": "441.l.3024.t.8",
+   "jugador": "441.p.1630643",
+   "nombre": "Jay Huff"
+  },
+  {
+   "pick": 9,
+   "ronda": 1,
+   "equipo": "441.l.3024.t.9",
+   "jugador": "441.p.1628983",
+   "nombre": "Shai Gilgeous-Alexander"
+  },
+  {
+   "pick": 10,
+   "ronda": 1,
+   "equipo": "441.l.3024.t.10",
+   "jugador": "441.p.1641705",
+   "nombre": "Victor Wembanyama"
+  },
+  {
+   "pick": 11,
+   "ronda": 1,
+   "equipo": "441.l.3024.t.11",
+   "jugador": "441.p.1629162",
+   "nombre": "Jordan McLaughlin"
+  },
+  {
+   "pick": 12,
+   "ronda": 1,
+   "equipo": "441.l.3024.t.12",
+   "jugador": "441.p.1642350",
+   "nombre": "Trevon Brazile"
+  },
+  {
+   "pick": 13,
+   "ronda": 2,
+   "equipo": "441.l.3024.t.12",
+   "jugador": "441.p.1643717",
+   "nombre": "Josh Dix"
+  },
+  {
+   "pick": 14,
+   "ronda": 2,
+   "equipo": "441.l.3024.t.11",
+   "jugador": "441.p.1642270",
+   "nombre": "Donovan Clingan"
+  },
+  {
+   "pick": 15,
+   "ronda": 2,
+   "equipo": "441.l.3024.t.10",
+   "jugador": "441.p.1643591",
+   "nombre": "Tobe Awaka"
+  },
+  {
+   "pick": 16,
+   "ronda": 2,
+   "equipo": "441.l.3024.t.9",
+   "jugador": "441.p.1642263",
+   "nombre": "Reed Sheppard"
+  },
+  {
+   "pick": 17,
+   "ronda": 2,
+   "equipo": "441.l.3024.t.8",
+   "jugador": "441.p.1642266",
+   "nombre": "Ja'Kobe Walter"
+  },
+  {
+   "pick": 18,
+   "ronda": 2,
+   "equipo": "441.l.3024.t.7",
+   "jugador": "441.p.1642278",
+   "nombre": "Tyler Kolek"
+  },
+  {
+   "pick": 19,
+   "ronda": 2,
+   "equipo": "441.l.3024.t.6",
+   "jugador": "441.p.1641824",
+   "nombre": "Matas Buzelis"
+  },
+  {
+   "pick": 20,
+   "ronda": 2,
+   "equipo": "441.l.3024.t.5",
+   "jugador": "441.p.1643409",
+   "nombre": "Cameron Boozer"
+  },
+  {
+   "pick": 21,
+   "ronda": 2,
+   "equipo": "441.l.3024.t.4",
+   "jugador": "441.p.1630228",
+   "nombre": "Jonathan Kuminga"
+  },
+  {
+   "pick": 22,
+   "ronda": 2,
+   "equipo": "441.l.3024.t.3",
+   "jugador": "441.p.1642352",
+   "nombre": "Keshad Johnson"
+  },
+  {
+   "pick": 23,
+   "ronda": 2,
+   "equipo": "441.l.3024.t.2",
+   "jugador": "441.p.1630230",
+   "nombre": "Naji Marshall"
+  },
+  {
+   "pick": 24,
+   "ronda": 2,
+   "equipo": "441.l.3024.t.1",
+   "jugador": "441.p.1630166",
+   "nombre": "Deni Avdija"
+  }
+ ]
+}

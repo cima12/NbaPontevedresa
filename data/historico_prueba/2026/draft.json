@@ -1,0 +1,172 @@
+{
+ "picks": [
+  {
+   "pick": 1,
+   "ronda": 1,
+   "equipo": "466.l.9972.t.1",
+   "jugador": "466.p.1630166",
+   "nombre": "Deni Avdija"
+  },
+  {
+   "pick": 2,
+   "ronda": 1,
+   "equipo": "466.l.9972.t.2",
+   "jugador": "466.p.1642259",
+   "nombre": "Alex Sarr"
+  },
+  {
+   "pick": 3,
+   "ronda": 1,
+   "equipo": "466.l.9972.t.3",
+   "jugador": "466.p.1628991",
+   "nombre": "Jaren Jackson Jr."
+  },
+  {
+   "pick": 4,
+   "ronda": 1,
+   "equipo": "466.l.9972.t.4",
+   "jugador": "466.p.1642907",
+   "nombre": "Cedric Coward"
+  },
+  {
+   "pick": 5,
+   "ronda": 1,
+   "equipo": "466.l.9972.t.5",
+   "jugador": "466.p.1630596",
+   "nombre": "Evan Mobley"
+  },
+  {
+   "pick": 6,
+   "ronda": 1,
+   "equipo": "466.l.9972.t.6",
+   "jugador": "466.p.1629001",
+   "nombre": "De'Anthony Melton"
+  },
+  {
+   "pick": 7,
+   "ronda": 1,
+   "equipo": "466.l.9972.t.7",
+   "jugador": "466.p.1629646",
+   "nombre": "Charles Bassey"
+  },
+  {
+   "pick": 8,
+   "ronda": 1,
+   "equipo": "466.l.9972.t.8",
+   "jugador": "466.p.1626171",
+   "nombre": "Bobby Portis Jr."
+  },
+  {
+   "pick": 9,
+   "ronda": 1,
+   "equipo": "466.l.9972.t.9",
+   "jugador": "466.p.1631123",
+   "nombre": "Jamaree Bouyea"
+  },
+  {
+   "pick": 10,
+   "ronda": 1,
+   "equipo": "466.l.9972.t.10",
+   "jugador": "466.p.1642954",
+   "nombre": "Will Richard"
+  },
+  {
+   "pick": 11,
+   "ronda": 1,
+   "equipo": "466.l.9972.t.11",
+   "jugador": "466.p.1642964",
+   "nombre": "Brooks Barnhizer"
+  },
+  {
+   "pick": 12,
+   "ronda": 1,
+   "equipo": "466.l.9972.t.12",
+   "jugador": "466.p.1629631",
+   "nombre": "De'Andre Hunter"
+  },
+  {
+   "pick": 13,
+   "ronda": 2,
+   "equipo": "466.l.9972.t.12",
+   "jugador": "466.p.203114",
+   "nombre": "Khris Middleton"
+  },
+  {
+   "pick": 14,
+   "ronda": 2,
+   "equipo": "466.l.9972.t.11",
+   "jugador": "466.p.1630703",
+   "nombre": "Scoot Henderson"
+  },
+  {
+   "pick": 15,
+   "ronda": 2,
+   "equipo": "466.l.9972.t.10",
+   "jugador": "466.p.1630530",
+   "nombre": "Trey Murphy III"
+  },
+  {
+   "pick": 16,
+   "ronda": 2,
+   "equipo": "466.l.9972.t.9",
+   "jugador": "466.p.1642855",
+   "nombre": "Noa Essengue"
+  },
+  {
+   "pick": 17,
+   "ronda": 2,
+   "equipo": "466.l.9972.t.8",
+   "jugador": "466.p.201939",
+   "nombre": "Stephen Curry"
+  },
+  {
+   "pick": 18,
+   "ronda": 2,
+   "equipo": "466.l.9972.t.7",
+   "jugador": "466.p.1630173",
+   "nombre": "Precious Achiuwa"
+  },
+  {
+   "pick": 19,
+   "ronda": 2,
+   "equipo": "466.l.9972.t.6",
+   "jugador": "466.p.1642377",
+   "nombre": "Jaylen Wells"
+  },
+  {
+   "pick": 20,
+   "ronda": 2,
+   "equipo": "466.l.9972.t.5",
+   "jugador": "466.p.1643558",
+   "nombre": "Jaden Bradley"
+  },
+  {
+   "pick": 21,
+   "ronda": 2,
+   "equipo": "466.l.9972.t.4",
+   "jugador": "466.p.1642865",
+   "nombre": "Yaxel Lendeborg"
+  },
+  {
+   "pick": 22,
+   "ronda": 2,
+   "equipo": "466.l.9972.t.3",
+   "jugador": "466.p.2544",
+   "nombre": "LeBron James"
+  },
+  {
+   "pick": 23,
+   "ronda": 2,
+   "equipo": "466.l.9972.t.2",
+   "jugador": "466.p.1630702",
+   "nombre": "Jaden Hardy"
+  },
+  {
+   "pick": 24,
+   "ronda": 2,
+   "equipo": "466.l.9972.t.1",
+   "jugador": "466.p.1627936",
+   "nombre": "Alex Caruso"
+  }
+ ]
+}

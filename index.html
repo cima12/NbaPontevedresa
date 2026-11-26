@@ -74,6 +74,16 @@
   .avisos { list-style: none; padding: 0; margin: 8px 0; }
   .avisos li { padding: 6px 0; border-bottom: 1px solid var(--line); }
   details summary { cursor: pointer; color: var(--verde); margin-top: 6px; }
+  tr.clic { cursor: pointer; }
+  #ficha { position: fixed; inset: 0; z-index: 50; background: rgba(0,0,0,.7); display: flex; align-items: flex-end; justify-content: center; }
+  #ficha[hidden] { display: none; }
+  #ficha .panel { background: var(--card); width: 100%; max-width: 700px; max-height: 88vh; overflow-y: auto;
+    border-radius: 16px 16px 0 0; padding: 16px 14px calc(20px + env(safe-area-inset-bottom)); position: relative; }
+  #ficha .cerrar { position: absolute; top: 10px; right: 10px; background: var(--card2); color: var(--txt); border: 0;
+    border-radius: 999px; width: 34px; height: 34px; font-size: 16px; cursor: pointer; }
+  #ficha .temp { margin-top: 10px; }
+  #ficha .avisos li { font-size: 13px; }
+  @media (min-width: 700px) { #ficha { align-items: center; } #ficha .panel { border-radius: 16px; } }
   .banner { background: var(--ambar); color: #000; border-radius: 10px; padding: 8px 10px; margin-bottom: 12px; font-weight: 600; font-size: 13px; }
 </style>
 </head>
@@ -125,7 +135,7 @@
         <input type="search" id="buscar" placeholder="Buscar jugador…">
       </div>
       <div class="chips" id="chips"><span class="etq">Puntear:</span></div>
-      <p class="ayuda">Toca una categoría para <b>puntearla</b> (no cuenta en el valor). Toca una cabecera de la tabla para ordenar.
+      <p class="ayuda">Toca una categoría para <b>puntearla</b> (no cuenta en el valor). Toca una cabecera de la tabla para ordenar y un jugador para ver su ficha.
         El color indica lo bueno (verde) o malo (rojo) que es el jugador en esa categoría.
         Posición: Yahoo cuando hay datos de la liga; si no, ESPN. Edad: ESPN.</p>
     </div>
@@ -241,7 +251,7 @@ function pintarRanking() {
 
   for (const j of filas.slice(0, est.limite)) {
     const s = j[v];
-    html += `<tr><td class="fijo"><span class="pos">${rank.get(j.id)}</span><span class="nom">${esc(j.nombre)}</span><span class="peq eq">${esc(j.equipo)}${j.pos ? " · " + esc(j.pos) : ""}${ligaEtiqueta(j)}</span></td>
+    html += `<tr class="clic" data-id="${j.id}"><td class="fijo"><span class="pos">${rank.get(j.id)}</span><span class="nom">${esc(j.nombre)}</span><span class="peq eq">${esc(j.equipo)}${j.pos ? " · " + esc(j.pos) : ""}${ligaEtiqueta(j)}</span></td>
       <td class="val" style="${color(j._val / 3)}">${j._val.toFixed(1)}</td>
       <td>${j._edad == null ? "–" : j._edad.toFixed(1)}</td>
       <td>${s.pj}</td><td>${s.min.toFixed(0)}</td>` +
@@ -284,8 +294,10 @@ function prepararRanking() {
   $("buscar").oninput = e => { est.buscar = e.target.value; est.limite = PASO; pintarRanking(); };
   $("ver-mas").onclick = () => { est.limite += PASO; pintarRanking(); };
   $("tabla-ranking").onclick = e => {
-    const t = e.target.closest("th"); if (!t) return;
-    est.orden = t.dataset.orden; pintarRanking();
+    const t = e.target.closest("th");
+    if (t) { est.orden = t.dataset.orden; pintarRanking(); return; }
+    const tr = e.target.closest("tr.clic");
+    if (tr) abrirFicha({ nbaId: +tr.dataset.id });     // ficha del jugador (liga.js)
   };
   pintarRanking();
 }

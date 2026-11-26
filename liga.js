@@ -246,6 +246,9 @@ function pintarLiga() {
       (h.j.hueco === "BN" ? ' <span class="peq" style="color:var(--ambar)">(ahora en banquillo)</span>' : "") : '<span class="peq">— nadie disponible —</span>'}</td></tr>`).join("") +
     `</table><p class="ayuda">Los que juegan hoy, ordenados por valor (últimos 30 días) y respetando las posiciones de Yahoo.</p></details></div>`;
 
+  // Plantillas
+  html += tarjetaPlantillas();
+
   // Clasificación
   if (LIGA.clasif && LIGA.clasif.equipos.length) {
     html += `<div class="tarjeta"><div class="nom">Clasificación</div><table class="liga"><thead><tr><th></th><th style="text-align:left">Equipo</th><th>G-P-E</th><th>%</th></tr></thead><tbody>` +
@@ -268,6 +271,7 @@ function pintarLiga() {
       `</tbody></table></div><p class="ayuda">Puesto de cada equipo (1 = mejor) sumando los promedios de sus 10 mejores jugadores sanos. Sirve para ver qué te sobra y qué le falta a cada uno de cara a traspasos.</p></div>`;
   }
   cont.innerHTML = html;
+  activarPlantillas();
 }
 
 /* ---------- integración con el ranking ---------- */
@@ -326,4 +330,141 @@ async function iniciarLiga() {
   pintarLiga();
   pintarRanking();
   if (leerLS("seccion", "") === "liga") document.querySelector('nav button[data-sec="liga"]').click();
+}
+
+/* =====================================================================
+ * PLANTILLAS Y FICHA DE JUGADOR (con su historia en la liga)
+ * ===================================================================== */
+const ORDEN_HUECO = ["PG", "SG", "G", "SF", "PF", "F", "C", "Util", "BN", "IL", "IL+", "NA"];
+LIGA.verEquipo = null;
+LIGA.hist = undefined;       // undefined = sin cargar · null = no hay histórico
+LIGA.histBase = LIGA.base.includes("prueba") ? "data/historico_prueba/" : "data/historico/";
+
+const norm = n => String(n || "").normalize("NFD").replace(/[̀-ͯ]/g, "").toLowerCase()
+  .replace(/-/g, " ").replace(/[^a-z ]/g, "").split(" ").filter(p => p && !["jr", "sr", "ii", "iii", "iv", "v"].includes(p)).join(" ");
+const etqTemporada = t => `${t}-${String((+t + 1) % 100).padStart(2, "0")}`;
+const fechaCorta = iso => iso ? new Date(iso + "T12:00:00Z").toLocaleDateString("es-ES", { day: "numeric", month: "short" }) : "";
+
+function tarjetaPlantillas() {
+  const key = LIGA.verEquipo || LIGA.soy || LIGA.liga.equipos[0].key;
+  const opts = LIGA.liga.equipos.map(e => `<option value="${esc(e.key)}"${e.key === key ? " selected" : ""}>${esc(e.nombre)}</option>`).join("");
+  const plant = plantilla(key).sort((a, b) =>
+    (ORDEN_HUECO.indexOf(a.hueco) - ORDEN_HUECO.indexOf(b.hueco)) || (b._v - a._v));
+  const filas = plant.map(j => {
+    const nba = LIGA.jug.get(j.nba_id);
+    const e = nba ? edad(nba) : null;
+    const est = j.estado ? `<span style="color:${FUERA.has(j.estado) ? "var(--rojo)" : "var(--ambar)"}">${esc(j.estado)}</span>` : "";
+    return `<tr class="clic" data-yahoo="${esc(j.yahoo_id)}" data-nba="${j.nba_id ?? ""}">
+      <td class="peq">${esc(j.hueco || "")}</td>
+      <td style="text-align:left"><span class="nom">${esc(j.nombre)}</span> ${est}<span class="peq" style="display:block">${esc(j.equipo_nba)} · ${esc((j.pos || []).join(","))}</span></td>
+      <td style="${j._p ? color(j._v / 3) : ""}">${j._p ? j._v.toFixed(1) : "–"}</td>
+      <td>${e == null ? "–" : e.toFixed(1)}</td></tr>`;
+  }).join("");
+  return `<div class="tarjeta"><div class="controles"><span class="nom">Plantilla de</span>
+      <select id="ver-equipo" style="flex:1">${opts}</select></div>
+    <table class="liga" id="tabla-plantilla" style="margin-top:8px"><thead><tr><th></th><th style="text-align:left">Jugador</th><th>Valor</th><th>Edad</th></tr></thead>
+    <tbody>${filas}</tbody></table>
+    <p class="ayuda">Hueco de hoy en Yahoo. Valor de los últimos 30 días. Toca un jugador para ver su ficha y su historia en la liga.</p></div>`;
+}
+
+// Se engancha después de pintar "Mi semana"
+function activarPlantillas() {
+  const sel = $("ver-equipo");
+  if (sel) sel.onchange = e => { LIGA.verEquipo = e.target.value; pintarLiga(); };
+  const t = $("tabla-plantilla");
+  if (t) t.onclick = e => {
+    const tr = e.target.closest("tr.clic"); if (!tr) return;
+    abrirFicha({ yahooId: tr.dataset.yahoo, nbaId: tr.dataset.nba ? +tr.dataset.nba : null });
+  };
+}
+
+async function cargarHistorico() {
+  if (LIGA.hist !== undefined) return LIGA.hist;
+  try {
+    LIGA.hist = await cargar(LIGA.histBase + "jugadores.json");
+    LIGA.hist.porNombre = new Map();
+    for (const [id, j] of Object.entries(LIGA.hist.jugadores)) LIGA.hist.porNombre.set(norm(j.nombre), id);
+  } catch (e) { LIGA.hist = null; }
+  return LIGA.hist;
+}
+
+function textoEvento(e, eq) {
+  const n = k => {
+    if (!k) return "?";
+    if (k === "freeagents") return "agentes libres";
+    if (k === "waivers") return "waivers";
+    const x = eq[k]; return x ? `<b>${esc(x.nombre)}</b>` : esc(k);
+  };
+  switch (e.tipo) {
+    case "draft": return `🎯 Elegido en el draft por ${n(e.a)} (ronda ${e.ronda}, pick ${e.pick})`;
+    case "inicio": return `🏁 Empieza la temporada en ${n(e.a)}`;
+    case "add": return `➕ ${fechaCorta(e.fecha)} · Fichado por ${n(e.a)}${e.de === "waivers" ? " (desde waivers)" : " (agente libre)"}`;
+    case "drop": return `➖ ${fechaCorta(e.fecha)} · Cortado por ${n(e.de)}`;
+    case "trade": return `🔁 ${fechaCorta(e.fecha)} · Traspasado de ${n(e.de)} a ${n(e.a)}`;
+    default: return `${fechaCorta(e.fecha)} · ${esc(e.tipo || "movimiento")}: ${n(e.de)} → ${n(e.a)}`;
+  }
+}
+
+function htmlHistorial(hist, hj) {
+  if (!hist) return `<p class="ayuda">El historial de la liga aparecerá cuando se importe de Yahoo (Action "Importar histórico").</p>`;
+  if (!hj) return `<p class="ayuda">No ha pasado nunca por ningún equipo de la liga (o no se ha encontrado en el histórico).</p>`;
+  const porT = {};
+  for (const e of hj.eventos) (porT[e.t] = porT[e.t] || []).push(e);
+  // Resumen: temporadas en la liga y mánagers que lo han tenido
+  const managers = new Map();
+  for (const e of hj.eventos) for (const k of [e.a, e.de]) {
+    const x = hist.temporadas[e.t]?.equipos[k];
+    if (x && x.manager) managers.set(x.manager, (managers.get(x.manager) || new Set()).add(e.t));
+  }
+  const nT = Object.keys(porT).length;
+  const resumen = `${nT} temporada${nT === 1 ? "" : "s"} en la liga · Mánagers que lo han tenido: ` +
+    [...managers].sort((a, b) => b[1].size - a[1].size).map(([m, ts]) => `${esc(m)} (${ts.size} temp.)`).join(", ");
+  return `<p class="ayuda" style="margin-top:2px">${resumen}</p>` +
+    Object.keys(porT).sort().reverse().map(t => {
+      const eq = hist.temporadas[t]?.equipos || {};
+      return `<div class="temp"><div class="nom">${etqTemporada(t)}</div><ul class="avisos">` +
+        porT[t].map(e => `<li>${textoEvento(e, eq)}</li>`).join("") + `</ul></div>`;
+    }).join("");
+}
+
+async function abrirFicha({ nbaId = null, yahooId = null, nombre = null }) {
+  // Datos NBA y de la liga actual
+  let y = null;
+  if (LIGA.liga) for (const lista of Object.values(LIGA.plantillas.equipos)) {
+    y = lista.find(p => (yahooId && p.yahoo_id === String(yahooId)) || (nbaId && p.nba_id === nbaId)) || y;
+    if (y) break;
+  }
+  nbaId = nbaId || (y && y.nba_id);
+  const j = nbaId ? (LIGA.jug.get(nbaId) || est.datos.jugadores.find(x => x.id === nbaId)) : null;
+  nombre = nombre || (j && j.nombre) || (y && y.nombre) || "Jugador";
+  let caja = $("ficha");
+  if (!caja) {
+    caja = document.createElement("div"); caja.id = "ficha";
+    caja.onclick = e => { if (e.target === caja || e.target.closest(".cerrar")) caja.hidden = true; };
+    document.body.appendChild(caja);
+  }
+  const dueno = y ? Object.entries(LIGA.plantillas.equipos).find(([, l]) => l.includes(y))?.[0] : null;
+  const e = j ? edad(j) : null;
+  const linea = (etq, s) => s && s.pj ? `<tr><td class="peq" style="text-align:left">${etq}</td><td>${s.pj}</td><td>${s.min.toFixed(0)}</td>` +
+    CATS.map((c, i) => `<td style="${color(s.z?.[i])}">${c.v(s)}</td>`).join("") + `<td><b>${(s.valor ?? 0).toFixed(1)}</b></td></tr>` : "";
+  const stats = j ? `<div class="tabla-wrap" style="background:var(--card2);margin-top:8px"><table class="liga"><thead><tr><th></th><th>PJ</th><th>MIN</th>` +
+    CATS.map(c => `<th>${c.n}</th>`).join("") + `<th>Valor</th></tr></thead><tbody>` +
+    linea("Temporada", j.temporada) + linea("30 días", j.ult30) + linea("7 días", j.ult7) + `</tbody></table></div>` : "";
+  const pintar = hist => {
+    const hid = hist && (yahooId && hist.jugadores[yahooId] ? String(yahooId)
+      : y && hist.jugadores[y.yahoo_id] ? y.yahoo_id : hist.porNombre.get(norm(nombre)));
+    caja.innerHTML = `<div class="panel"><button class="cerrar" aria-label="Cerrar">✕</button>
+      <div class="nom" style="font-size:18px">${esc(nombre)}</div>
+      <div class="peq">${esc(j?.equipo || y?.equipo_nba || "")}${j?.pos || y?.pos?.length ? " · " + esc(y?.pos?.join(",") || j.pos) : ""}${e != null ? ` · ${e.toFixed(1)} años` : ""}</div>
+      ${LIGA.liga ? `<p style="margin:8px 0 0">${dueno ? `En <b style="color:${dueno === LIGA.soy ? "var(--ambar)" : "var(--txt)"}">${esc(LIGA.nombre[dueno])}</b>` +
+        ` <span class="peq">(${esc(y.hueco === "BN" ? "banquillo" : y.hueco || "")}${y.estado ? " · " + esc(y.estado) : ""})</span>` : `<b style="color:var(--verde)">Libre</b>`}</p>` : ""}
+      ${y?.lesion ? `<p class="peq" style="color:var(--rojo)">${esc(y.lesion)}</p>` : ""}
+      ${stats}
+      <div class="nom" style="margin-top:14px">Historia en la liga</div>
+      ${hist === undefined ? `<p class="ayuda">Cargando…</p>` : htmlHistorial(hist, hid && hist.jugadores[hid])}
+    </div>`;
+  };
+  pintar(LIGA.hist);
+  caja.hidden = false;
+  if (LIGA.hist === undefined) pintar(await cargarHistorico());
 }

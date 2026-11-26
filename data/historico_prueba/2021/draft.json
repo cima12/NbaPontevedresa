@@ -1,0 +1,172 @@
+{
+ "picks": [
+  {
+   "pick": 1,
+   "ronda": 1,
+   "equipo": "410.l.3021.t.1",
+   "jugador": "410.p.1629631",
+   "nombre": "De'Andre Hunter"
+  },
+  {
+   "pick": 2,
+   "ronda": 1,
+   "equipo": "410.l.3021.t.2",
+   "jugador": "410.p.1642449",
+   "nombre": "Tolu Smith"
+  },
+  {
+   "pick": 3,
+   "ronda": 1,
+   "equipo": "410.l.3021.t.3",
+   "jugador": "410.p.203468",
+   "nombre": "CJ McCollum"
+  },
+  {
+   "pick": 4,
+   "ronda": 1,
+   "equipo": "410.l.3021.t.4",
+   "jugador": "410.p.1629012",
+   "nombre": "Collin Sexton"
+  },
+  {
+   "pick": 5,
+   "ronda": 1,
+   "equipo": "410.l.3021.t.5",
+   "jugador": "410.p.1643552",
+   "nombre": "Braden Smith"
+  },
+  {
+   "pick": 6,
+   "ronda": 1,
+   "equipo": "410.l.3021.t.6",
+   "jugador": "410.p.1626181",
+   "nombre": "Norman Powell"
+  },
+  {
+   "pick": 7,
+   "ronda": 1,
+   "equipo": "410.l.3021.t.7",
+   "jugador": "410.p.1630191",
+   "nombre": "Isaiah Stewart"
+  },
+  {
+   "pick": 8,
+   "ronda": 1,
+   "equipo": "410.l.3021.t.8",
+   "jugador": "410.p.1629639",
+   "nombre": "Tyler Herro"
+  },
+  {
+   "pick": 9,
+   "ronda": 1,
+   "equipo": "410.l.3021.t.9",
+   "jugador": "410.p.1642851",
+   "nombre": "Kon Knueppel"
+  },
+  {
+   "pick": 10,
+   "ronda": 1,
+   "equipo": "410.l.3021.t.10",
+   "jugador": "410.p.1630543",
+   "nombre": "Isaiah Jackson"
+  },
+  {
+   "pick": 11,
+   "ronda": 1,
+   "equipo": "410.l.3021.t.11",
+   "jugador": "410.p.1626167",
+   "nombre": "Myles Turner"
+  },
+  {
+   "pick": 12,
+   "ronda": 1,
+   "equipo": "410.l.3021.t.12",
+   "jugador": "410.p.1642879",
+   "nombre": "Ben Saraf"
+  },
+  {
+   "pick": 13,
+   "ronda": 2,
+   "equipo": "410.l.3021.t.12",
+   "jugador": "410.p.1628969",
+   "nombre": "Mikal Bridges"
+  },
+  {
+   "pick": 14,
+   "ronda": 2,
+   "equipo": "410.l.3021.t.11",
+   "jugador": "410.p.203076",
+   "nombre": "Anthony Davis"
+  },
+  {
+   "pick": 15,
+   "ronda": 2,
+   "equipo": "410.l.3021.t.10",
+   "jugador": "410.p.203501",
+   "nombre": "Tim Hardaway Jr."
+  },
+  {
+   "pick": 16,
+   "ronda": 2,
+   "equipo": "410.l.3021.t.9",
+   "jugador": "410.p.1630192",
+   "nombre": "Zeke Nnaji"
+  },
+  {
+   "pick": 17,
+   "ronda": 2,
+   "equipo": "410.l.3021.t.8",
+   "jugador": "410.p.1642355",
+   "nombre": "Bronny James"
+  },
+  {
+   "pick": 18,
+   "ronda": 2,
+   "equipo": "410.l.3021.t.7",
+   "jugador": "410.p.1642874",
+   "nombre": "Danny Wolf"
+  },
+  {
+   "pick": 19,
+   "ronda": 2,
+   "equipo": "410.l.3021.t.6",
+   "jugador": "410.p.1630182",
+   "nombre": "Josh Green"
+  },
+  {
+   "pick": 20,
+   "ronda": 2,
+   "equipo": "410.l.3021.t.5",
+   "jugador": "410.p.1628404",
+   "nombre": "Josh Hart"
+  },
+  {
+   "pick": 21,
+   "ronda": 2,
+   "equipo": "410.l.3021.t.4",
+   "jugador": "410.p.1628398",
+   "nombre": "Kyle Kuzma"
+  },
+  {
+   "pick": 22,
+   "ronda": 2,
+   "equipo": "410.l.3021.t.3",
+   "jugador": "410.p.1642883",
+   "nombre": "Sion James"
+  },
+  {
+   "pick": 23,
+   "ronda": 2,
+   "equipo": "410.l.3021.t.2",
+   "jugador": "410.p.1642954",
+   "nombre": "Will Richard"
+  },
+  {
+   "pick": 24,
+   "ronda": 2,
+   "equipo": "410.l.3021.t.1",
+   "jugador": "410.p.1642267",
+   "nombre": "Bub Carrington"
+  }
+ ]
+}

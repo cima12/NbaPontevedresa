@@ -1,0 +1,172 @@
+{
+ "picks": [
+  {
+   "pick": 1,
+   "ronda": 1,
+   "equipo": "428.l.3023.t.1",
+   "jugador": "428.p.1629680",
+   "nombre": "Matisse Thybulle"
+  },
+  {
+   "pick": 2,
+   "ronda": 1,
+   "equipo": "428.l.3023.t.2",
+   "jugador": "428.p.1628401",
+   "nombre": "Derrick White"
+  },
+  {
+   "pick": 3,
+   "ronda": 1,
+   "equipo": "428.l.3023.t.3",
+   "jugador": "428.p.1629012",
+   "nombre": "Collin Sexton"
+  },
+  {
+   "pick": 4,
+   "ronda": 1,
+   "equipo": "428.l.3023.t.4",
+   "jugador": "428.p.1643555",
+   "nombre": "Jaron Pierre Jr."
+  },
+  {
+   "pick": 5,
+   "ronda": 1,
+   "equipo": "428.l.3023.t.5",
+   "jugador": "428.p.1629630",
+   "nombre": "Ja Morant"
+  },
+  {
+   "pick": 6,
+   "ronda": 1,
+   "equipo": "428.l.3023.t.6",
+   "jugador": "428.p.203501",
+   "nombre": "Tim Hardaway Jr."
+  },
+  {
+   "pick": 7,
+   "ronda": 1,
+   "equipo": "428.l.3023.t.7",
+   "jugador": "428.p.1641705",
+   "nombre": "Victor Wembanyama"
+  },
+  {
+   "pick": 8,
+   "ronda": 1,
+   "equipo": "428.l.3023.t.8",
+   "jugador": "428.p.203110",
+   "nombre": "Draymond Green"
+  },
+  {
+   "pick": 9,
+   "ronda": 1,
+   "equipo": "428.l.3023.t.9",
+   "jugador": "428.p.1642959",
+   "nombre": "Chris Youngblood"
+  },
+  {
+   "pick": 10,
+   "ronda": 1,
+   "equipo": "428.l.3023.t.10",
+   "jugador": "428.p.1628991",
+   "nombre": "Jaren Jackson Jr."
+  },
+  {
+   "pick": 11,
+   "ronda": 1,
+   "equipo": "428.l.3023.t.11",
+   "jugador": "428.p.1641713",
+   "nombre": "GG Jackson"
+  },
+  {
+   "pick": 12,
+   "ronda": 1,
+   "equipo": "428.l.3023.t.12",
+   "jugador": "428.p.1641783",
+   "nombre": "Tristan da Silva"
+  },
+  {
+   "pick": 13,
+   "ronda": 2,
+   "equipo": "428.l.3023.t.12",
+   "jugador": "428.p.1626167",
+   "nombre": "Myles Turner"
+  },
+  {
+   "pick": 14,
+   "ronda": 2,
+   "equipo": "428.l.3023.t.11",
+   "jugador": "428.p.1631094",
+   "nombre": "Paolo Banchero"
+  },
+  {
+   "pick": 15,
+   "ronda": 2,
+   "equipo": "428.l.3023.t.10",
+   "jugador": "428.p.203935",
+   "nombre": "Marcus Smart"
+  },
+  {
+   "pick": 16,
+   "ronda": 2,
+   "equipo": "428.l.3023.t.9",
+   "jugador": "428.p.1643538",
+   "nombre": "Joshua Jefferson"
+  },
+  {
+   "pick": 17,
+   "ronda": 2,
+   "equipo": "428.l.3023.t.8",
+   "jugador": "428.p.1627826",
+   "nombre": "Ivica Zubac"
+  },
+  {
+   "pick": 18,
+   "ronda": 2,
+   "equipo": "428.l.3023.t.7",
+   "jugador": "428.p.1629660",
+   "nombre": "Ty Jerome"
+  },
+  {
+   "pick": 19,
+   "ronda": 2,
+   "equipo": "428.l.3023.t.6",
+   "jugador": "428.p.1626181",
+   "nombre": "Norman Powell"
+  },
+  {
+   "pick": 20,
+   "ronda": 2,
+   "equipo": "428.l.3023.t.5",
+   "jugador": "428.p.1629638",
+   "nombre": "Nickeil Alexander-Walker"
+  },
+  {
+   "pick": 21,
+   "ronda": 2,
+   "equipo": "428.l.3023.t.4",
+   "jugador": "428.p.1630543",
+   "nombre": "Isaiah Jackson"
+  },
+  {
+   "pick": 22,
+   "ronda": 2,
+   "equipo": "428.l.3023.t.3",
+   "jugador": "428.p.1642274",
+   "nombre": "Yves Missi"
+  },
+  {
+   "pick": 23,
+   "ronda": 2,
+   "equipo": "428.l.3023.t.2",
+   "jugador": "428.p.1629639",
+   "nombre": "Tyler Herro"
+  },
+  {
+   "pick": 24,
+   "ronda": 2,
+   "equipo": "428.l.3023.t.1",
+   "jugador": "428.p.1642859",
+   "nombre": "Jase Richardson"
+  }
+ ]
+}

@@ -1,0 +1,1882 @@
+{
+ "movimientos": [
+  {
+   "id": "441.l.3024.ad.81",
+   "tipo": "add/drop",
+   "estado": "successful",
+   "fecha": "2024-10-21T09:00:00+00:00",
+   "jugadores": [
+    {
+     "jugador": "441.p.201950",
+     "nombre": "Jrue Holiday",
+     "tipo": "add",
+     "de": "freeagents",
+     "a": "441.l.3024.t.12"
+    },
+    {
+     "jugador": "441.p.1642350",
+     "nombre": "Trevon Brazile",
+     "tipo": "drop",
+     "de": "441.l.3024.t.12",
+     "a": "waivers"
+    }
+   ]
+  },
+  {
+   "id": "441.l.3024.ad.80",
+   "tipo": "add/drop",
+   "estado": "successful",
+   "fecha": "2024-10-23T09:00:00+00:00",
+   "jugadores": [
+    {
+     "jugador": "441.p.1642844",
+     "nombre": "Dylan Harper",
+     "tipo": "add",
+     "de": "freeagents",
+     "a": "441.l.3024.t.8"
+    },
+    {
+     "jugador": "441.p.1630643",
+     "nombre": "Jay Huff",
+     "tipo": "drop",
+     "de": "441.l.3024.t.8",
+     "a": "waivers"
+    }
+   ]
+  },
+  {
+   "id": "441.l.3024.tr.79",
+   "tipo": "trade",
+   "estado": "successful",
+   "fecha": "2024-10-25T20:00:00+00:00",
+   "propone": "441.l.3024.t.5",
+   "recibe": "441.l.3024.t.6",
+   "jugadores": [
+    {
+     "jugador": "441.p.1630180",
+     "nombre": "Saddiq Bey",
+     "tipo": "trade",
+     "de": "441.l.3024.t.5",
+     "a": "441.l.3024.t.6"
+    },
+    {
+     "jugador": "441.p.1626181",
+     "nombre": "Norman Powell",
+     "tipo": "trade",
+     "de": "441.l.3024.t.6",
+     "a": "441.l.3024.t.5"
+    }
+   ]
+  },
+  {
+   "id": "441.l.3024.ad.78",
+   "tipo": "add/drop",
+   "estado": "successful",
+   "fecha": "2024-10-26T09:00:00+00:00",
+   "jugadores": [
+    {
+     "jugador": "441.p.1631217",
+     "nombre": "Moussa Diabaté",
+     "tipo": "add",
+     "de": "freeagents",
+     "a": "441.l.3024.t.4"
+    },
+    {
+     "jugador": "441.p.1641713",
+     "nombre": "GG Jackson",
+     "tipo": "drop",
+     "de": "441.l.3024.t.4",
+     "a": "waivers"
+    }
+   ]
+  },
+  {
+   "id": "441.l.3024.tr.77",
+   "tipo": "trade",
+   "estado": "successful",
+   "fecha": "2024-10-28T20:00:00+00:00",
+   "propone": "441.l.3024.t.9",
+   "recibe": "441.l.3024.t.8",
+   "jugadores": [
+    {
+     "jugador": "441.p.1628983",
+     "nombre": "Shai Gilgeous-Alexander",
+     "tipo": "trade",
+     "de": "441.l.3024.t.9",
+     "a": "441.l.3024.t.8"
+    },
+    {
+     "jugador": "441.p.1642266",
+     "nombre": "Ja'Kobe Walter",
+     "tipo": "trade",
+     "de": "441.l.3024.t.8",
+     "a": "441.l.3024.t.9"
+    }
+   ]
+  },
+  {
+   "id": "441.l.3024.tr.76",
+   "tipo": "trade",
+   "estado": "successful",
+   "fecha": "2024-10-29T20:00:00+00:00",
+   "propone": "441.l.3024.t.1",
+   "recibe": "441.l.3024.t.5",
+   "jugadores": [
+    {
+     "jugador": "441.p.1631106",
+     "nombre": "Tari Eason",
+     "tipo": "trade",
+     "de": "441.l.3024.t.1",
+     "a": "441.l.3024.t.5"
+    },
+    {
+     "jugador": "441.p.1643409",
+     "nombre": "Cameron Boozer",
+     "tipo": "trade",
+     "de": "441.l.3024.t.5",
+     "a": "441.l.3024.t.1"
+    }
+   ]
+  },
+  {
+   "id": "441.l.3024.ad.75",
+   "tipo": "add/drop",
+   "estado": "successful",
+   "fecha": "2024-10-31T09:00:00+00:00",
+   "jugadores": [
+    {
+     "jugador": "441.p.202696",
+     "nombre": "Nikola Vučević",
+     "tipo": "add",
+     "de": "freeagents",
+     "a": "441.l.3024.t.10"
+    },
+    {
+     "jugador": "441.p.1641705",
+     "nombre": "Victor Wembanyama",
+     "tipo": "drop",
+     "de": "441.l.3024.t.10",
+     "a": "waivers"
+    }
+   ]
+  },
+  {
+   "id": "441.l.3024.ad.74",
+   "tipo": "add/drop",
+   "estado": "successful",
+   "fecha": "2024-11-01T09:00:00+00:00",
+   "jugadores": [
+    {
+     "jugador": "441.p.1641709",
+     "nombre": "Ausar Thompson",
+     "tipo": "add",
+     "de": "freeagents",
+     "a": "441.l.3024.t.2"
+    },
+    {
+     "jugador": "441.p.203484",
+     "nombre": "Kentavious Caldwell-Pope",
+     "tipo": "drop",
+     "de": "441.l.3024.t.2",
+     "a": "waivers"
+    }
+   ]
+  },
+  {
+   "id": "441.l.3024.ad.73",
+   "tipo": "add/drop",
+   "estado": "successful",
+   "fecha": "2024-11-02T09:00:00+00:00",
+   "jugadores": [
+    {
+     "jugador": "441.p.1630551",
+     "nombre": "Justin Champagnie",
+     "tipo": "add",
+     "de": "freeagents",
+     "a": "441.l.3024.t.3"
+    },
+    {
+     "jugador": "441.p.203501",
+     "nombre": "Tim Hardaway Jr.",
+     "tipo": "drop",
+     "de": "441.l.3024.t.3",
+     "a": "waivers"
+    }
+   ]
+  },
+  {
+   "id": "441.l.3024.ad.72",
+   "tipo": "add/drop",
+   "estado": "successful",
+   "fecha": "2024-11-05T09:00:00+00:00",
+   "jugadores": [
+    {
+     "jugador": "441.p.1642860",
+     "nombre": "Will Riley",
+     "tipo": "add",
+     "de": "freeagents",
+     "a": "441.l.3024.t.12"
+    },
+    {
+     "jugador": "441.p.1643717",
+     "nombre": "Josh Dix",
+     "tipo": "drop",
+     "de": "441.l.3024.t.12",
+     "a": "waivers"
+    }
+   ]
+  },
+  {
+   "id": "441.l.3024.ad.71",
+   "tipo": "add/drop",
+   "estado": "successful",
+   "fecha": "2024-11-06T09:00:00+00:00",
+   "jugadores": [
+    {
+     "jugador": "441.p.1642863",
+     "nombre": "Khaman Maluach",
+     "tipo": "add",
+     "de": "freeagents",
+     "a": "441.l.3024.t.11"
+    },
+    {
+     "jugador": "441.p.1629162",
+     "nombre": "Jordan McLaughlin",
+     "tipo": "drop",
+     "de": "441.l.3024.t.11",
+     "a": "waivers"
+    }
+   ]
+  },
+  {
+   "id": "441.l.3024.ad.70",
+   "tipo": "add/drop",
+   "estado": "successful",
+   "fecha": "2024-11-08T09:00:00+00:00",
+   "jugadores": [
+    {
+     "jugador": "441.p.1642849",
+     "nombre": "Nolan Traore",
+     "tipo": "add",
+     "de": "freeagents",
+     "a": "441.l.3024.t.8"
+    },
+    {
+     "jugador": "441.p.1627741",
+     "nombre": "Buddy Hield",
+     "tipo": "drop",
+     "de": "441.l.3024.t.8",
+     "a": "waivers"
+    }
+   ]
+  },
+  {
+   "id": "441.l.3024.tr.69",
+   "tipo": "trade",
+   "estado": "successful",
+   "fecha": "2024-11-11T20:00:00+00:00",
+   "propone": "441.l.3024.t.4",
+   "recibe": "441.l.3024.t.8",
+   "jugadores": [
+    {
+     "jugador": "441.p.1630228",
+     "nombre": "Jonathan Kuminga",
+     "tipo": "trade",
+     "de": "441.l.3024.t.4",
+     "a": "441.l.3024.t.8"
+    },
+    {
+     "jugador": "441.p.1631114",
+     "nombre": "Jalen Williams",
+     "tipo": "trade",
+     "de": "441.l.3024.t.8",
+     "a": "441.l.3024.t.4"
+    }
+   ]
+  },
+  {
+   "id": "441.l.3024.ad.68",
+   "tipo": "add/drop",
+   "estado": "successful",
+   "fecha": "2024-11-12T09:00:00+00:00",
+   "jugadores": [
+    {
+     "jugador": "441.p.1629021",
+     "nombre": "Moritz Wagner",
+     "tipo": "add",
+     "de": "freeagents",
+     "a": "441.l.3024.t.10"
+    },
+    {
+     "jugador": "441.p.1643591",
+     "nombre": "Tobe Awaka",
+     "tipo": "drop",
+     "de": "441.l.3024.t.10",
+     "a": "waivers"
+    }
+   ]
+  },
+  {
+   "id": "441.l.3024.tr.67",
+   "tipo": "trade",
+   "estado": "successful",
+   "fecha": "2024-11-15T20:00:00+00:00",
+   "propone": "441.l.3024.t.6",
+   "recibe": "441.l.3024.t.1",
+   "jugadores": [
+    {
+     "jugador": "441.p.1641824",
+     "nombre": "Matas Buzelis",
+     "tipo": "trade",
+     "de": "441.l.3024.t.6",
+     "a": "441.l.3024.t.1"
+    },
+    {
+     "jugador": "441.p.1630166",
+     "nombre": "Deni Avdija",
+     "tipo": "trade",
+     "de": "441.l.3024.t.1",
+     "a": "441.l.3024.t.6"
+    }
+   ]
+  },
+  {
+   "id": "441.l.3024.tr.66",
+   "tipo": "trade",
+   "estado": "successful",
+   "fecha": "2024-11-18T20:00:00+00:00",
+   "propone": "441.l.3024.t.9",
+   "recibe": "441.l.3024.t.2",
+   "jugadores": [
+    {
+     "jugador": "441.p.1642263",
+     "nombre": "Reed Sheppard",
+     "tipo": "trade",
+     "de": "441.l.3024.t.9",
+     "a": "441.l.3024.t.2"
+    },
+    {
+     "jugador": "441.p.1630230",
+     "nombre": "Naji Marshall",
+     "tipo": "trade",
+     "de": "441.l.3024.t.2",
+     "a": "441.l.3024.t.9"
+    }
+   ]
+  },
+  {
+   "id": "441.l.3024.ad.65",
+   "tipo": "add/drop",
+   "estado": "successful",
+   "fecha": "2024-11-21T09:00:00+00:00",
+   "jugadores": [
+    {
+     "jugador": "441.p.1631128",
+     "nombre": "Christian Braun",
+     "tipo": "add",
+     "de": "freeagents",
+     "a": "441.l.3024.t.8"
+    },
+    {
+     "jugador": "441.p.1631457",
+     "nombre": "Alex Morales",
+     "tipo": "drop",
+     "de": "441.l.3024.t.8",
+     "a": "waivers"
+    }
+   ]
+  },
+  {
+   "id": "441.l.3024.tr.64",
+   "tipo": "trade",
+   "estado": "successful",
+   "fecha": "2024-11-24T20:00:00+00:00",
+   "propone": "441.l.3024.t.10",
+   "recibe": "441.l.3024.t.7",
+   "jugadores": [
+    {
+     "jugador": "441.p.1642867",
+     "nombre": "Collin Murray-Boyles",
+     "tipo": "trade",
+     "de": "441.l.3024.t.10",
+     "a": "441.l.3024.t.7"
+    },
+    {
+     "jugador": "441.p.1643512",
+     "nombre": "Allen Graves",
+     "tipo": "trade",
+     "de": "441.l.3024.t.7",
+     "a": "441.l.3024.t.10"
+    }
+   ]
+  },
+  {
+   "id": "441.l.3024.ad.63",
+   "tipo": "add/drop",
+   "estado": "successful",
+   "fecha": "2024-11-25T09:00:00+00:00",
+   "jugadores": [
+    {
+     "jugador": "441.p.1642358",
+     "nombre": "AJ Johnson",
+     "tipo": "add",
+     "de": "freeagents",
+     "a": "441.l.3024.t.3"
+    },
+    {
+     "jugador": "441.p.1642352",
+     "nombre": "Keshad Johnson",
+     "tipo": "drop",
+     "de": "441.l.3024.t.3",
+     "a": "waivers"
+    }
+   ]
+  },
+  {
+   "id": "441.l.3024.tr.62",
+   "tipo": "trade",
+   "estado": "successful",
+   "fecha": "2024-11-26T20:00:00+00:00",
+   "propone": "441.l.3024.t.6",
+   "recibe": "441.l.3024.t.10",
+   "jugadores": [
+    {
+     "jugador": "441.p.1630598",
+     "nombre": "Aaron Wiggins",
+     "tipo": "trade",
+     "de": "441.l.3024.t.6",
+     "a": "441.l.3024.t.10"
+    },
+    {
+     "jugador": "441.p.1628964",
+     "nombre": "Mo Bamba",
+     "tipo": "trade",
+     "de": "441.l.3024.t.10",
+     "a": "441.l.3024.t.6"
+    }
+   ]
+  },
+  {
+   "id": "441.l.3024.tr.61",
+   "tipo": "trade",
+   "estado": "successful",
+   "fecha": "2024-11-28T20:00:00+00:00",
+   "propone": "441.l.3024.t.3",
+   "recibe": "441.l.3024.t.7",
+   "jugadores": [
+    {
+     "jugador": "441.p.1630173",
+     "nombre": "Precious Achiuwa",
+     "tipo": "trade",
+     "de": "441.l.3024.t.3",
+     "a": "441.l.3024.t.7"
+    },
+    {
+     "jugador": "441.p.1642278",
+     "nombre": "Tyler Kolek",
+     "tipo": "trade",
+     "de": "441.l.3024.t.7",
+     "a": "441.l.3024.t.3"
+    }
+   ]
+  },
+  {
+   "id": "441.l.3024.tr.60",
+   "tipo": "trade",
+   "estado": "successful",
+   "fecha": "2024-12-01T20:00:00+00:00",
+   "propone": "441.l.3024.t.1",
+   "recibe": "441.l.3024.t.8",
+   "jugadores": [
+    {
+     "jugador": "441.p.1628976",
+     "nombre": "Wendell Carter Jr.",
+     "tipo": "trade",
+     "de": "441.l.3024.t.1",
+     "a": "441.l.3024.t.8"
+    },
+    {
+     "jugador": "441.p.1642849",
+     "nombre": "Nolan Traore",
+     "tipo": "trade",
+     "de": "441.l.3024.t.8",
+     "a": "441.l.3024.t.1"
+    }
+   ]
+  },
+  {
+   "id": "441.l.3024.ad.59",
+   "tipo": "add/drop",
+   "estado": "successful",
+   "fecha": "2024-12-03T09:00:00+00:00",
+   "jugadores": [
+    {
+     "jugador": "441.p.1629008",
+     "nombre": "Michael Porter Jr.",
+     "tipo": "add",
+     "de": "freeagents",
+     "a": "441.l.3024.t.11"
+    },
+    {
+     "jugador": "441.p.1642270",
+     "nombre": "Donovan Clingan",
+     "tipo": "drop",
+     "de": "441.l.3024.t.11",
+     "a": "waivers"
+    }
+   ]
+  },
+  {
+   "id": "441.l.3024.tr.58",
+   "tipo": "trade",
+   "estado": "successful",
+   "fecha": "2024-12-06T20:00:00+00:00",
+   "propone": "441.l.3024.t.3",
+   "recibe": "441.l.3024.t.11",
+   "jugadores": [
+    {
+     "jugador": "441.p.1629655",
+     "nombre": "Daniel Gafford",
+     "tipo": "trade",
+     "de": "441.l.3024.t.3",
+     "a": "441.l.3024.t.11"
+    },
+    {
+     "jugador": "441.p.202691",
+     "nombre": "Klay Thompson",
+     "tipo": "trade",
+     "de": "441.l.3024.t.11",
+     "a": "441.l.3024.t.3"
+    }
+   ]
+  },
+  {
+   "id": "441.l.3024.ad.57",
+   "tipo": "add/drop",
+   "estado": "successful",
+   "fecha": "2024-12-09T09:00:00+00:00",
+   "jugadores": [
+    {
+     "jugador": "441.p.203991",
+     "nombre": "Clint Capela",
+     "tipo": "add",
+     "de": "freeagents",
+     "a": "441.l.3024.t.2"
+    },
+    {
+     "jugador": "441.p.1629680",
+     "nombre": "Matisse Thybulle",
+     "tipo": "drop",
+     "de": "441.l.3024.t.2",
+     "a": "waivers"
+    }
+   ]
+  },
+  {
+   "id": "441.l.3024.ad.56",
+   "tipo": "add/drop",
+   "estado": "successful",
+   "fecha": "2024-12-11T09:00:00+00:00",
+   "jugadores": [
+    {
+     "jugador": "441.p.1642264",
+     "nombre": "Stephon Castle",
+     "tipo": "add",
+     "de": "freeagents",
+     "a": "441.l.3024.t.6"
+    },
+    {
+     "jugador": "441.p.1626171",
+     "nombre": "Bobby Portis Jr.",
+     "tipo": "drop",
+     "de": "441.l.3024.t.6",
+     "a": "waivers"
+    }
+   ]
+  },
+  {
+   "id": "441.l.3024.tr.55",
+   "tipo": "trade",
+   "estado": "successful",
+   "fecha": "2024-12-13T20:00:00+00:00",
+   "propone": "441.l.3024.t.5",
+   "recibe": "441.l.3024.t.1",
+   "jugadores": [
+    {
+     "jugador": "441.p.1628396",
+     "nombre": "Tony Bradley",
+     "tipo": "trade",
+     "de": "441.l.3024.t.5",
+     "a": "441.l.3024.t.1"
+    },
+    {
+     "jugador": "441.p.1643567",
+     "nombre": "Emanuel Sharp",
+     "tipo": "trade",
+     "de": "441.l.3024.t.1",
+     "a": "441.l.3024.t.5"
+    }
+   ]
+  },
+  {
+   "id": "441.l.3024.ad.54",
+   "tipo": "add/drop",
+   "estado": "successful",
+   "fecha": "2024-12-15T09:00:00+00:00",
+   "jugadores": [
+    {
+     "jugador": "441.p.1627734",
+     "nombre": "Domantas Sabonis",
+     "tipo": "add",
+     "de": "freeagents",
+     "a": "441.l.3024.t.5"
+    },
+    {
+     "jugador": "441.p.1627742",
+     "nombre": "Brandon Ingram",
+     "tipo": "drop",
+     "de": "441.l.3024.t.5",
+     "a": "waivers"
+    }
+   ]
+  },
+  {
+   "id": "441.l.3024.ad.53",
+   "tipo": "add/drop",
+   "estado": "successful",
+   "fecha": "2024-12-16T09:00:00+00:00",
+   "jugadores": [
+    {
+     "jugador": "441.p.1628384",
+     "nombre": "OG Anunoby",
+     "tipo": "add",
+     "de": "freeagents",
+     "a": "441.l.3024.t.3"
+    },
+    {
+     "jugador": "441.p.1642907",
+     "nombre": "Cedric Coward",
+     "tipo": "drop",
+     "de": "441.l.3024.t.3",
+     "a": "waivers"
+    }
+   ]
+  },
+  {
+   "id": "441.l.3024.tr.52",
+   "tipo": "trade",
+   "estado": "successful",
+   "fecha": "2024-12-19T20:00:00+00:00",
+   "propone": "441.l.3024.t.5",
+   "recibe": "441.l.3024.t.6",
+   "jugadores": [
+    {
+     "jugador": "441.p.1631117",
+     "nombre": "Walker Kessler",
+     "tipo": "trade",
+     "de": "441.l.3024.t.5",
+     "a": "441.l.3024.t.6"
+    },
+    {
+     "jugador": "441.p.1642264",
+     "nombre": "Stephon Castle",
+     "tipo": "trade",
+     "de": "441.l.3024.t.6",
+     "a": "441.l.3024.t.5"
+    }
+   ]
+  },
+  {
+   "id": "441.l.3024.tr.51",
+   "tipo": "trade",
+   "estado": "successful",
+   "fecha": "2024-12-21T20:00:00+00:00",
+   "propone": "441.l.3024.t.7",
+   "recibe": "441.l.3024.t.10",
+   "jugadores": [
+    {
+     "jugador": "441.p.1641716",
+     "nombre": "Jarace Walker",
+     "tipo": "trade",
+     "de": "441.l.3024.t.7",
+     "a": "441.l.3024.t.10"
+    },
+    {
+     "jugador": "441.p.1630559",
+     "nombre": "Austin Reaves",
+     "tipo": "trade",
+     "de": "441.l.3024.t.10",
+     "a": "441.l.3024.t.7"
+    }
+   ]
+  },
+  {
+   "id": "441.l.3024.ad.50",
+   "tipo": "add/drop",
+   "estado": "successful",
+   "fecha": "2024-12-23T09:00:00+00:00",
+   "jugadores": [
+    {
+     "jugador": "441.p.1630241",
+     "nombre": "Sam Merrill",
+     "tipo": "add",
+     "de": "freeagents",
+     "a": "441.l.3024.t.4"
+    },
+    {
+     "jugador": "441.p.1631114",
+     "nombre": "Jalen Williams",
+     "tipo": "drop",
+     "de": "441.l.3024.t.4",
+     "a": "waivers"
+    }
+   ]
+  },
+  {
+   "id": "441.l.3024.ad.49",
+   "tipo": "add/drop",
+   "estado": "successful",
+   "fecha": "2024-12-24T09:00:00+00:00",
+   "jugadores": [
+    {
+     "jugador": "441.p.1642852",
+     "nombre": "Derik Queen",
+     "tipo": "add",
+     "de": "freeagents",
+     "a": "441.l.3024.t.9"
+    },
+    {
+     "jugador": "441.p.1630167",
+     "nombre": "Obi Toppin",
+     "tipo": "drop",
+     "de": "441.l.3024.t.9",
+     "a": "waivers"
+    }
+   ]
+  },
+  {
+   "id": "441.l.3024.ad.48",
+   "tipo": "add/drop",
+   "estado": "successful",
+   "fecha": "2024-12-26T09:00:00+00:00",
+   "jugadores": [
+    {
+     "jugador": "441.p.1629057",
+     "nombre": "Robert Williams III",
+     "tipo": "add",
+     "de": "freeagents",
+     "a": "441.l.3024.t.9"
+    },
+    {
+     "jugador": "441.p.1629638",
+     "nombre": "Nickeil Alexander-Walker",
+     "tipo": "drop",
+     "de": "441.l.3024.t.9",
+     "a": "waivers"
+    }
+   ]
+  },
+  {
+   "id": "441.l.3024.ad.47",
+   "tipo": "add/drop",
+   "estado": "successful",
+   "fecha": "2024-12-28T09:00:00+00:00",
+   "jugadores": [
+    {
+     "jugador": "441.p.203114",
+     "nombre": "Khris Middleton",
+     "tipo": "add",
+     "de": "freeagents",
+     "a": "441.l.3024.t.5"
+    },
+    {
+     "jugador": "441.p.1643414",
+     "nombre": "Mikel Brown Jr.",
+     "tipo": "drop",
+     "de": "441.l.3024.t.5",
+     "a": "waivers"
+    }
+   ]
+  },
+  {
+   "id": "441.l.3024.ad.46",
+   "tipo": "add/drop",
+   "estado": "successful",
+   "fecha": "2024-12-30T09:00:00+00:00",
+   "jugadores": [
+    {
+     "jugador": "441.p.1642349",
+     "nombre": "Ajay Mitchell",
+     "tipo": "add",
+     "de": "freeagents",
+     "a": "441.l.3024.t.10"
+    },
+    {
+     "jugador": "441.p.1628969",
+     "nombre": "Mikal Bridges",
+     "tipo": "drop",
+     "de": "441.l.3024.t.10",
+     "a": "waivers"
+    }
+   ]
+  },
+  {
+   "id": "441.l.3024.tr.45",
+   "tipo": "trade",
+   "estado": "successful",
+   "fecha": "2025-01-01T20:00:00+00:00",
+   "propone": "441.l.3024.t.4",
+   "recibe": "441.l.3024.t.7",
+   "jugadores": [
+    {
+     "jugador": "441.p.1628378",
+     "nombre": "Donovan Mitchell",
+     "tipo": "trade",
+     "de": "441.l.3024.t.4",
+     "a": "441.l.3024.t.7"
+    },
+    {
+     "jugador": "441.p.1642867",
+     "nombre": "Collin Murray-Boyles",
+     "tipo": "trade",
+     "de": "441.l.3024.t.7",
+     "a": "441.l.3024.t.4"
+    }
+   ]
+  },
+  {
+   "id": "441.l.3024.tr.44",
+   "tipo": "trade",
+   "estado": "successful",
+   "fecha": "2025-01-04T20:00:00+00:00",
+   "propone": "441.l.3024.t.6",
+   "recibe": "441.l.3024.t.4",
+   "jugadores": [
+    {
+     "jugador": "441.p.1628374",
+     "nombre": "Lauri Markkanen",
+     "tipo": "trade",
+     "de": "441.l.3024.t.6",
+     "a": "441.l.3024.t.4"
+    },
+    {
+     "jugador": "441.p.1630241",
+     "nombre": "Sam Merrill",
+     "tipo": "trade",
+     "de": "441.l.3024.t.4",
+     "a": "441.l.3024.t.6"
+    }
+   ]
+  },
+  {
+   "id": "441.l.3024.ad.43",
+   "tipo": "add/drop",
+   "estado": "successful",
+   "fecha": "2025-01-05T09:00:00+00:00",
+   "jugadores": [
+    {
+     "jugador": "441.p.1630570",
+     "nombre": "Trendon Watford",
+     "tipo": "add",
+     "de": "freeagents",
+     "a": "441.l.3024.t.4"
+    },
+    {
+     "jugador": "441.p.1642377",
+     "nombre": "Jaylen Wells",
+     "tipo": "drop",
+     "de": "441.l.3024.t.4",
+     "a": "waivers"
+    }
+   ]
+  },
+  {
+   "id": "441.l.3024.ad.42",
+   "tipo": "add/drop",
+   "estado": "successful",
+   "fecha": "2025-01-07T09:00:00+00:00",
+   "jugadores": [
+    {
+     "jugador": "441.p.203468",
+     "nombre": "CJ McCollum",
+     "tipo": "add",
+     "de": "freeagents",
+     "a": "441.l.3024.t.10"
+    },
+    {
+     "jugador": "441.p.1643555",
+     "nombre": "Jaron Pierre Jr.",
+     "tipo": "drop",
+     "de": "441.l.3024.t.10",
+     "a": "waivers"
+    }
+   ]
+  },
+  {
+   "id": "441.l.3024.ad.41",
+   "tipo": "add/drop",
+   "estado": "successful",
+   "fecha": "2025-01-09T09:00:00+00:00",
+   "jugadores": [
+    {
+     "jugador": "441.p.1642377",
+     "nombre": "Jaylen Wells",
+     "tipo": "add",
+     "de": "freeagents",
+     "a": "441.l.3024.t.12"
+    },
+    {
+     "jugador": "441.p.1642860",
+     "nombre": "Will Riley",
+     "tipo": "drop",
+     "de": "441.l.3024.t.12",
+     "a": "waivers"
+    }
+   ]
+  },
+  {
+   "id": "441.l.3024.tr.40",
+   "tipo": "trade",
+   "estado": "successful",
+   "fecha": "2025-01-11T20:00:00+00:00",
+   "propone": "441.l.3024.t.9",
+   "recibe": "441.l.3024.t.7",
+   "jugadores": [
+    {
+     "jugador": "441.p.1629646",
+     "nombre": "Charles Bassey",
+     "tipo": "trade",
+     "de": "441.l.3024.t.9",
+     "a": "441.l.3024.t.7"
+    },
+    {
+     "jugador": "441.p.1630544",
+     "nombre": "Tre Mann",
+     "tipo": "trade",
+     "de": "441.l.3024.t.7",
+     "a": "441.l.3024.t.9"
+    }
+   ]
+  },
+  {
+   "id": "441.l.3024.tr.39",
+   "tipo": "trade",
+   "estado": "successful",
+   "fecha": "2025-01-12T20:00:00+00:00",
+   "propone": "441.l.3024.t.2",
+   "recibe": "441.l.3024.t.3",
+   "jugadores": [
+    {
+     "jugador": "441.p.1631218",
+     "nombre": "Trayce Jackson-Davis",
+     "tipo": "trade",
+     "de": "441.l.3024.t.2",
+     "a": "441.l.3024.t.3"
+    },
+    {
+     "jugador": "441.p.202691",
+     "nombre": "Klay Thompson",
+     "tipo": "trade",
+     "de": "441.l.3024.t.3",
+     "a": "441.l.3024.t.2"
+    }
+   ]
+  },
+  {
+   "id": "441.l.3024.tr.38",
+   "tipo": "trade",
+   "estado": "successful",
+   "fecha": "2025-01-13T20:00:00+00:00",
+   "propone": "441.l.3024.t.10",
+   "recibe": "441.l.3024.t.8",
+   "jugadores": [
+    {
+     "jugador": "441.p.1641716",
+     "nombre": "Jarace Walker",
+     "tipo": "trade",
+     "de": "441.l.3024.t.10",
+     "a": "441.l.3024.t.8"
+    },
+    {
+     "jugador": "441.p.1628997",
+     "nombre": "Caleb Martin",
+     "tipo": "trade",
+     "de": "441.l.3024.t.8",
+     "a": "441.l.3024.t.10"
+    }
+   ]
+  },
+  {
+   "id": "441.l.3024.tr.37",
+   "tipo": "trade",
+   "estado": "successful",
+   "fecha": "2025-01-16T20:00:00+00:00",
+   "propone": "441.l.3024.t.3",
+   "recibe": "441.l.3024.t.11",
+   "jugadores": [
+    {
+     "jugador": "441.p.1631221",
+     "nombre": "Collin Gillespie",
+     "tipo": "trade",
+     "de": "441.l.3024.t.3",
+     "a": "441.l.3024.t.11"
+    },
+    {
+     "jugador": "441.p.1629008",
+     "nombre": "Michael Porter Jr.",
+     "tipo": "trade",
+     "de": "441.l.3024.t.11",
+     "a": "441.l.3024.t.3"
+    }
+   ]
+  },
+  {
+   "id": "441.l.3024.ad.36",
+   "tipo": "add/drop",
+   "estado": "successful",
+   "fecha": "2025-01-17T09:00:00+00:00",
+   "jugadores": [
+    {
+     "jugador": "441.p.1643411",
+     "nombre": "Darius Acuff Jr.",
+     "tipo": "add",
+     "de": "freeagents",
+     "a": "441.l.3024.t.2"
+    },
+    {
+     "jugador": "441.p.1629628",
+     "nombre": "RJ Barrett",
+     "tipo": "drop",
+     "de": "441.l.3024.t.2",
+     "a": "waivers"
+    }
+   ]
+  },
+  {
+   "id": "441.l.3024.ad.35",
+   "tipo": "add/drop",
+   "estado": "successful",
+   "fecha": "2025-01-20T09:00:00+00:00",
+   "jugadores": [
+    {
+     "jugador": "441.p.1643018",
+     "nombre": "LJ Cryer",
+     "tipo": "add",
+     "de": "freeagents",
+     "a": "441.l.3024.t.12"
+    },
+    {
+     "jugador": "441.p.203500",
+     "nombre": "Steven Adams",
+     "tipo": "drop",
+     "de": "441.l.3024.t.12",
+     "a": "waivers"
+    }
+   ]
+  },
+  {
+   "id": "441.l.3024.tr.34",
+   "tipo": "trade",
+   "estado": "successful",
+   "fecha": "2025-01-22T20:00:00+00:00",
+   "propone": "441.l.3024.t.2",
+   "recibe": "441.l.3024.t.7",
+   "jugadores": [
+    {
+     "jugador": "441.p.1630170",
+     "nombre": "Devin Vassell",
+     "tipo": "trade",
+     "de": "441.l.3024.t.2",
+     "a": "441.l.3024.t.7"
+    },
+    {
+     "jugador": "441.p.1631121",
+     "nombre": "Bryce McGowens",
+     "tipo": "trade",
+     "de": "441.l.3024.t.7",
+     "a": "441.l.3024.t.2"
+    }
+   ]
+  },
+  {
+   "id": "441.l.3024.ad.33",
+   "tipo": "add/drop",
+   "estado": "successful",
+   "fecha": "2025-01-24T09:00:00+00:00",
+   "jugadores": [
+    {
+     "jugador": "441.p.1630658",
+     "nombre": "Colin Castleton",
+     "tipo": "add",
+     "de": "freeagents",
+     "a": "441.l.3024.t.9"
+    },
+    {
+     "jugador": "441.p.1642852",
+     "nombre": "Derik Queen",
+     "tipo": "drop",
+     "de": "441.l.3024.t.9",
+     "a": "waivers"
+    }
+   ]
+  },
+  {
+   "id": "441.l.3024.ad.32",
+   "tipo": "add/drop",
+   "estado": "successful",
+   "fecha": "2025-01-26T09:00:00+00:00",
+   "jugadores": [
+    {
+     "jugador": "441.p.1643536",
+     "nombre": "Ebuka Okorie",
+     "tipo": "add",
+     "de": "freeagents",
+     "a": "441.l.3024.t.9"
+    },
+    {
+     "jugador": "441.p.1630590",
+     "nombre": "Scotty Pippen Jr.",
+     "tipo": "drop",
+     "de": "441.l.3024.t.9",
+     "a": "waivers"
+    }
+   ]
+  },
+  {
+   "id": "441.l.3024.tr.31",
+   "tipo": "trade",
+   "estado": "successful",
+   "fecha": "2025-01-28T20:00:00+00:00",
+   "propone": "441.l.3024.t.4",
+   "recibe": "441.l.3024.t.1",
+   "jugadores": [
+    {
+     "jugador": "441.p.1642948",
+     "nombre": "Ryan Nembhard",
+     "tipo": "trade",
+     "de": "441.l.3024.t.4",
+     "a": "441.l.3024.t.1"
+    },
+    {
+     "jugador": "441.p.1631222",
+     "nombre": "Jake LaRavia",
+     "tipo": "trade",
+     "de": "441.l.3024.t.1",
+     "a": "441.l.3024.t.4"
+    }
+   ]
+  },
+  {
+   "id": "441.l.3024.tr.30",
+   "tipo": "trade",
+   "estado": "successful",
+   "fecha": "2025-01-29T20:00:00+00:00",
+   "propone": "441.l.3024.t.8",
+   "recibe": "441.l.3024.t.7",
+   "jugadores": [
+    {
+     "jugador": "441.p.1629661",
+     "nombre": "Cameron Johnson",
+     "tipo": "trade",
+     "de": "441.l.3024.t.8",
+     "a": "441.l.3024.t.7"
+    },
+    {
+     "jugador": "441.p.1631204",
+     "nombre": "Marcus Sasser",
+     "tipo": "trade",
+     "de": "441.l.3024.t.7",
+     "a": "441.l.3024.t.8"
+    }
+   ]
+  },
+  {
+   "id": "441.l.3024.ad.29",
+   "tipo": "add/drop",
+   "estado": "successful",
+   "fecha": "2025-02-01T09:00:00+00:00",
+   "jugadores": [
+    {
+     "jugador": "441.p.1629639",
+     "nombre": "Tyler Herro",
+     "tipo": "add",
+     "de": "freeagents",
+     "a": "441.l.3024.t.12"
+    },
+    {
+     "jugador": "441.p.1630538",
+     "nombre": "Bones Hyland",
+     "tipo": "drop",
+     "de": "441.l.3024.t.12",
+     "a": "waivers"
+    }
+   ]
+  },
+  {
+   "id": "441.l.3024.tr.28",
+   "tipo": "trade",
+   "estado": "successful",
+   "fecha": "2025-02-04T20:00:00+00:00",
+   "propone": "441.l.3024.t.3",
+   "recibe": "441.l.3024.t.11",
+   "jugadores": [
+    {
+     "jugador": "441.p.1629637",
+     "nombre": "Jaxson Hayes",
+     "tipo": "trade",
+     "de": "441.l.3024.t.3",
+     "a": "441.l.3024.t.11"
+    },
+    {
+     "jugador": "441.p.1629630",
+     "nombre": "Ja Morant",
+     "tipo": "trade",
+     "de": "441.l.3024.t.11",
+     "a": "441.l.3024.t.3"
+    }
+   ]
+  },
+  {
+   "id": "441.l.3024.tr.27",
+   "tipo": "trade",
+   "estado": "successful",
+   "fecha": "2025-02-05T20:00:00+00:00",
+   "propone": "441.l.3024.t.9",
+   "recibe": "441.l.3024.t.2",
+   "jugadores": [
+    {
+     "jugador": "441.p.1628389",
+     "nombre": "Bam Adebayo",
+     "tipo": "trade",
+     "de": "441.l.3024.t.9",
+     "a": "441.l.3024.t.2"
+    },
+    {
+     "jugador": "441.p.1641709",
+     "nombre": "Ausar Thompson",
+     "tipo": "trade",
+     "de": "441.l.3024.t.2",
+     "a": "441.l.3024.t.9"
+    }
+   ]
+  },
+  {
+   "id": "441.l.3024.ad.26",
+   "tipo": "add/drop",
+   "estado": "successful",
+   "fecha": "2025-02-07T09:00:00+00:00",
+   "jugadores": [
+    {
+     "jugador": "441.p.1630552",
+     "nombre": "Jalen Johnson",
+     "tipo": "add",
+     "de": "freeagents",
+     "a": "441.l.3024.t.3"
+    },
+    {
+     "jugador": "441.p.1629111",
+     "nombre": "Jock Landale",
+     "tipo": "drop",
+     "de": "441.l.3024.t.3",
+     "a": "waivers"
+    }
+   ]
+  },
+  {
+   "id": "441.l.3024.ad.25",
+   "tipo": "add/drop",
+   "estado": "successful",
+   "fecha": "2025-02-10T09:00:00+00:00",
+   "jugadores": [
+    {
+     "jugador": "441.p.1630163",
+     "nombre": "LaMelo Ball",
+     "tipo": "add",
+     "de": "freeagents",
+     "a": "441.l.3024.t.8"
+    },
+    {
+     "jugador": "441.p.1627759",
+     "nombre": "Jaylen Brown",
+     "tipo": "drop",
+     "de": "441.l.3024.t.8",
+     "a": "waivers"
+    }
+   ]
+  },
+  {
+   "id": "441.l.3024.tr.24",
+   "tipo": "trade",
+   "estado": "successful",
+   "fecha": "2025-02-11T20:00:00+00:00",
+   "propone": "441.l.3024.t.7",
+   "recibe": "441.l.3024.t.4",
+   "jugadores": [
+    {
+     "jugador": "441.p.1626162",
+     "nombre": "Kelly Oubre Jr.",
+     "tipo": "trade",
+     "de": "441.l.3024.t.7",
+     "a": "441.l.3024.t.4"
+    },
+    {
+     "jugador": "441.p.1642847",
+     "nombre": "Jeremiah Fears",
+     "tipo": "trade",
+     "de": "441.l.3024.t.4",
+     "a": "441.l.3024.t.7"
+    }
+   ]
+  },
+  {
+   "id": "441.l.3024.tr.23",
+   "tipo": "trade",
+   "estado": "successful",
+   "fecha": "2025-02-13T20:00:00+00:00",
+   "propone": "441.l.3024.t.10",
+   "recibe": "441.l.3024.t.12",
+   "jugadores": [
+    {
+     "jugador": "441.p.1642349",
+     "nombre": "Ajay Mitchell",
+     "tipo": "trade",
+     "de": "441.l.3024.t.10",
+     "a": "441.l.3024.t.12"
+    },
+    {
+     "jugador": "441.p.1642258",
+     "nombre": "Zaccharie Risacher",
+     "tipo": "trade",
+     "de": "441.l.3024.t.12",
+     "a": "441.l.3024.t.10"
+    }
+   ]
+  },
+  {
+   "id": "441.l.3024.ad.22",
+   "tipo": "add/drop",
+   "estado": "successful",
+   "fecha": "2025-02-16T09:00:00+00:00",
+   "jugadores": [
+    {
+     "jugador": "441.p.1627739",
+     "nombre": "Kris Dunn",
+     "tipo": "add",
+     "de": "freeagents",
+     "a": "441.l.3024.t.9"
+    },
+    {
+     "jugador": "441.p.1630544",
+     "nombre": "Tre Mann",
+     "tipo": "drop",
+     "de": "441.l.3024.t.9",
+     "a": "waivers"
+    }
+   ]
+  },
+  {
+   "id": "441.l.3024.tr.21",
+   "tipo": "trade",
+   "estado": "successful",
+   "fecha": "2025-02-18T20:00:00+00:00",
+   "propone": "441.l.3024.t.12",
+   "recibe": "441.l.3024.t.3",
+   "jugadores": [
+    {
+     "jugador": "441.p.1629639",
+     "nombre": "Tyler Herro",
+     "tipo": "trade",
+     "de": "441.l.3024.t.12",
+     "a": "441.l.3024.t.3"
+    },
+    {
+     "jugador": "441.p.1630552",
+     "nombre": "Jalen Johnson",
+     "tipo": "trade",
+     "de": "441.l.3024.t.3",
+     "a": "441.l.3024.t.12"
+    }
+   ]
+  },
+  {
+   "id": "441.l.3024.ad.20",
+   "tipo": "add/drop",
+   "estado": "successful",
+   "fecha": "2025-02-20T09:00:00+00:00",
+   "jugadores": [
+    {
+     "jugador": "441.p.1628436",
+     "nombre": "Luke Kornet",
+     "tipo": "add",
+     "de": "freeagents",
+     "a": "441.l.3024.t.1"
+    },
+    {
+     "jugador": "441.p.1631127",
+     "nombre": "Harrison Ingram",
+     "tipo": "drop",
+     "de": "441.l.3024.t.1",
+     "a": "waivers"
+    }
+   ]
+  },
+  {
+   "id": "441.l.3024.tr.19",
+   "tipo": "trade",
+   "estado": "successful",
+   "fecha": "2025-02-22T20:00:00+00:00",
+   "propone": "441.l.3024.t.3",
+   "recibe": "441.l.3024.t.9",
+   "jugadores": [
+    {
+     "jugador": "441.p.1642278",
+     "nombre": "Tyler Kolek",
+     "tipo": "trade",
+     "de": "441.l.3024.t.3",
+     "a": "441.l.3024.t.9"
+    },
+    {
+     "jugador": "441.p.1643536",
+     "nombre": "Ebuka Okorie",
+     "tipo": "trade",
+     "de": "441.l.3024.t.9",
+     "a": "441.l.3024.t.3"
+    }
+   ]
+  },
+  {
+   "id": "441.l.3024.ad.18",
+   "tipo": "add/drop",
+   "estado": "successful",
+   "fecha": "2025-02-24T09:00:00+00:00",
+   "jugadores": [
+    {
+     "jugador": "441.p.1629652",
+     "nombre": "Luguentz Dort",
+     "tipo": "add",
+     "de": "freeagents",
+     "a": "441.l.3024.t.3"
+    },
+    {
+     "jugador": "441.p.1641771",
+     "nombre": "Jalen Slawson",
+     "tipo": "drop",
+     "de": "441.l.3024.t.3",
+     "a": "waivers"
+    }
+   ]
+  },
+  {
+   "id": "441.l.3024.ad.17",
+   "tipo": "add/drop",
+   "estado": "successful",
+   "fecha": "2025-02-27T09:00:00+00:00",
+   "jugadores": [
+    {
+     "jugador": "441.p.1629023",
+     "nombre": "P.J. Washington",
+     "tipo": "add",
+     "de": "freeagents",
+     "a": "441.l.3024.t.6"
+    },
+    {
+     "jugador": "441.p.1641761",
+     "nombre": "Grant Nelson",
+     "tipo": "drop",
+     "de": "441.l.3024.t.6",
+     "a": "waivers"
+    }
+   ]
+  },
+  {
+   "id": "441.l.3024.ad.16",
+   "tipo": "add/drop",
+   "estado": "successful",
+   "fecha": "2025-02-28T09:00:00+00:00",
+   "jugadores": [
+    {
+     "jugador": "441.p.1628369",
+     "nombre": "Jayson Tatum",
+     "tipo": "add",
+     "de": "freeagents",
+     "a": "441.l.3024.t.1"
+    },
+    {
+     "jugador": "441.p.1630529",
+     "nombre": "Herbert Jones",
+     "tipo": "drop",
+     "de": "441.l.3024.t.1",
+     "a": "waivers"
+    }
+   ]
+  },
+  {
+   "id": "441.l.3024.ad.15",
+   "tipo": "add/drop",
+   "estado": "successful",
+   "fecha": "2025-03-02T09:00:00+00:00",
+   "jugadores": [
+    {
+     "jugador": "441.p.1643637",
+     "nombre": "Jaylin Sellers",
+     "tipo": "add",
+     "de": "freeagents",
+     "a": "441.l.3024.t.7"
+    },
+    {
+     "jugador": "441.p.1642403",
+     "nombre": "Isaac Jones",
+     "tipo": "drop",
+     "de": "441.l.3024.t.7",
+     "a": "waivers"
+    }
+   ]
+  },
+  {
+   "id": "441.l.3024.tr.14",
+   "tipo": "trade",
+   "estado": "successful",
+   "fecha": "2025-03-04T20:00:00+00:00",
+   "propone": "441.l.3024.t.7",
+   "recibe": "441.l.3024.t.4",
+   "jugadores": [
+    {
+     "jugador": "441.p.1628378",
+     "nombre": "Donovan Mitchell",
+     "tipo": "trade",
+     "de": "441.l.3024.t.7",
+     "a": "441.l.3024.t.4"
+    },
+    {
+     "jugador": "441.p.1627884",
+     "nombre": "Derrick Jones Jr.",
+     "tipo": "trade",
+     "de": "441.l.3024.t.4",
+     "a": "441.l.3024.t.7"
+    }
+   ]
+  },
+  {
+   "id": "441.l.3024.ad.13",
+   "tipo": "add/drop",
+   "estado": "successful",
+   "fecha": "2025-03-05T09:00:00+00:00",
+   "jugadores": [
+    {
+     "jugador": "441.p.1630183",
+     "nombre": "Jaden McDaniels",
+     "tipo": "add",
+     "de": "freeagents",
+     "a": "441.l.3024.t.8"
+    },
+    {
+     "jugador": "441.p.1641716",
+     "nombre": "Jarace Walker",
+     "tipo": "drop",
+     "de": "441.l.3024.t.8",
+     "a": "waivers"
+    }
+   ]
+  },
+  {
+   "id": "441.l.3024.tr.12",
+   "tipo": "trade",
+   "estado": "successful",
+   "fecha": "2025-03-08T20:00:00+00:00",
+   "propone": "441.l.3024.t.11",
+   "recibe": "441.l.3024.t.5",
+   "jugadores": [
+    {
+     "jugador": "441.p.1641717",
+     "nombre": "Cason Wallace",
+     "tipo": "trade",
+     "de": "441.l.3024.t.11",
+     "a": "441.l.3024.t.5"
+    },
+    {
+     "jugador": "441.p.1642845",
+     "nombre": "VJ Edgecombe",
+     "tipo": "trade",
+     "de": "441.l.3024.t.5",
+     "a": "441.l.3024.t.11"
+    }
+   ]
+  },
+  {
+   "id": "441.l.3024.ad.11",
+   "tipo": "add/drop",
+   "estado": "successful",
+   "fecha": "2025-03-10T09:00:00+00:00",
+   "jugadores": [
+    {
+     "jugador": "441.p.1642907",
+     "nombre": "Cedric Coward",
+     "tipo": "add",
+     "de": "freeagents",
+     "a": "441.l.3024.t.4"
+    },
+    {
+     "jugador": "441.p.1630570",
+     "nombre": "Trendon Watford",
+     "tipo": "drop",
+     "de": "441.l.3024.t.4",
+     "a": "waivers"
+    }
+   ]
+  },
+  {
+   "id": "441.l.3024.tr.10",
+   "tipo": "trade",
+   "estado": "successful",
+   "fecha": "2025-03-13T20:00:00+00:00",
+   "propone": "441.l.3024.t.10",
+   "recibe": "441.l.3024.t.4",
+   "jugadores": [
+    {
+     "jugador": "441.p.1642258",
+     "nombre": "Zaccharie Risacher",
+     "tipo": "trade",
+     "de": "441.l.3024.t.10",
+     "a": "441.l.3024.t.4"
+    },
+    {
+     "jugador": "441.p.1629029",
+     "nombre": "Luka Dončić",
+     "tipo": "trade",
+     "de": "441.l.3024.t.4",
+     "a": "441.l.3024.t.10"
+    }
+   ]
+  },
+  {
+   "id": "441.l.3024.tr.9",
+   "tipo": "trade",
+   "estado": "successful",
+   "fecha": "2025-03-15T20:00:00+00:00",
+   "propone": "441.l.3024.t.1",
+   "recibe": "441.l.3024.t.8",
+   "jugadores": [
+    {
+     "jugador": "441.p.1628396",
+     "nombre": "Tony Bradley",
+     "tipo": "trade",
+     "de": "441.l.3024.t.1",
+     "a": "441.l.3024.t.8"
+    },
+    {
+     "jugador": "441.p.1630228",
+     "nombre": "Jonathan Kuminga",
+     "tipo": "trade",
+     "de": "441.l.3024.t.8",
+     "a": "441.l.3024.t.1"
+    }
+   ]
+  },
+  {
+   "id": "441.l.3024.tr.8",
+   "tipo": "trade",
+   "estado": "successful",
+   "fecha": "2025-03-18T20:00:00+00:00",
+   "propone": "441.l.3024.t.12",
+   "recibe": "441.l.3024.t.3",
+   "jugadores": [
+    {
+     "jugador": "441.p.202681",
+     "nombre": "Kyrie Irving",
+     "tipo": "trade",
+     "de": "441.l.3024.t.12",
+     "a": "441.l.3024.t.3"
+    },
+    {
+     "jugador": "441.p.1629630",
+     "nombre": "Ja Morant",
+     "tipo": "trade",
+     "de": "441.l.3024.t.3",
+     "a": "441.l.3024.t.12"
+    }
+   ]
+  },
+  {
+   "id": "441.l.3024.ad.7",
+   "tipo": "add/drop",
+   "estado": "successful",
+   "fecha": "2025-03-19T09:00:00+00:00",
+   "jugadores": [
+    {
+     "jugador": "441.p.1629638",
+     "nombre": "Nickeil Alexander-Walker",
+     "tipo": "add",
+     "de": "freeagents",
+     "a": "441.l.3024.t.1"
+    },
+    {
+     "jugador": "441.p.1642367",
+     "nombre": "Jonathan Mogbo",
+     "tipo": "drop",
+     "de": "441.l.3024.t.1",
+     "a": "waivers"
+    }
+   ]
+  },
+  {
+   "id": "441.l.3024.tr.6",
+   "tipo": "trade",
+   "estado": "successful",
+   "fecha": "2025-03-21T20:00:00+00:00",
+   "propone": "441.l.3024.t.12",
+   "recibe": "441.l.3024.t.7",
+   "jugadores": [
+    {
+     "jugador": "441.p.1643018",
+     "nombre": "LJ Cryer",
+     "tipo": "trade",
+     "de": "441.l.3024.t.12",
+     "a": "441.l.3024.t.7"
+    },
+    {
+     "jugador": "441.p.1643419",
+     "nombre": "Hannes Steinbach",
+     "tipo": "trade",
+     "de": "441.l.3024.t.7",
+     "a": "441.l.3024.t.12"
+    }
+   ]
+  },
+  {
+   "id": "441.l.3024.tr.5",
+   "tipo": "trade",
+   "estado": "successful",
+   "fecha": "2025-03-23T20:00:00+00:00",
+   "propone": "441.l.3024.t.11",
+   "recibe": "441.l.3024.t.3",
+   "jugadores": [
+    {
+     "jugador": "441.p.1642845",
+     "nombre": "VJ Edgecombe",
+     "tipo": "trade",
+     "de": "441.l.3024.t.11",
+     "a": "441.l.3024.t.3"
+    },
+    {
+     "jugador": "441.p.1643536",
+     "nombre": "Ebuka Okorie",
+     "tipo": "trade",
+     "de": "441.l.3024.t.3",
+     "a": "441.l.3024.t.11"
+    }
+   ]
+  },
+  {
+   "id": "441.l.3024.ad.4",
+   "tipo": "add/drop",
+   "estado": "successful",
+   "fecha": "2025-03-25T09:00:00+00:00",
+   "jugadores": [
+    {
+     "jugador": "441.p.1630702",
+     "nombre": "Jaden Hardy",
+     "tipo": "add",
+     "de": "freeagents",
+     "a": "441.l.3024.t.2"
+    },
+    {
+     "jugador": "441.p.1641871",
+     "nombre": "Duop Reath",
+     "tipo": "drop",
+     "de": "441.l.3024.t.2",
+     "a": "waivers"
+    }
+   ]
+  },
+  {
+   "id": "441.l.3024.ad.3",
+   "tipo": "add/drop",
+   "estado": "successful",
+   "fecha": "2025-03-27T09:00:00+00:00",
+   "jugadores": [
+    {
+     "jugador": "441.p.201939",
+     "nombre": "Stephen Curry",
+     "tipo": "add",
+     "de": "freeagents",
+     "a": "441.l.3024.t.8"
+    },
+    {
+     "jugador": "441.p.1631105",
+     "nombre": "Jalen Duren",
+     "tipo": "drop",
+     "de": "441.l.3024.t.8",
+     "a": "waivers"
+    }
+   ]
+  },
+  {
+   "id": "441.l.3024.ad.2",
+   "tipo": "add/drop",
+   "estado": "successful",
+   "fecha": "2025-03-30T09:00:00+00:00",
+   "jugadores": [
+    {
+     "jugador": "441.p.1642864",
+     "nombre": "Hugo González",
+     "tipo": "add",
+     "de": "freeagents",
+     "a": "441.l.3024.t.11"
+    },
+    {
+     "jugador": "441.p.203999",
+     "nombre": "Nikola Jokić",
+     "tipo": "drop",
+     "de": "441.l.3024.t.11",
+     "a": "waivers"
+    }
+   ]
+  },
+  {
+   "id": "441.l.3024.ad.1",
+   "tipo": "add/drop",
+   "estado": "successful",
+   "fecha": "2025-04-02T09:00:00+00:00",
+   "jugadores": [
+    {
+     "jugador": "441.p.1629614",
+     "nombre": "Andrew Nembhard",
+     "tipo": "add",
+     "de": "freeagents",
+     "a": "441.l.3024.t.12"
+    },
+    {
+     "jugador": "441.p.1629630",
+     "nombre": "Ja Morant",
+     "tipo": "drop",
+     "de": "441.l.3024.t.12",
+     "a": "waivers"
+    }
+   ]
+  },
+  {
+   "id": "441.l.3024.tr.0",
+   "tipo": "trade",
+   "estado": "successful",
+   "fecha": "2025-04-05T20:00:00+00:00",
+   "propone": "441.l.3024.t.11",
+   "recibe": "441.l.3024.t.6",
+   "jugadores": [
+    {
+     "jugador": "441.p.203897",
+     "nombre": "Zach LaVine",
+     "tipo": "trade",
+     "de": "441.l.3024.t.11",
+     "a": "441.l.3024.t.6"
+    },
+    {
+     "jugador": "441.p.1628964",
+     "nombre": "Mo Bamba",
+     "tipo": "trade",
+     "de": "441.l.3024.t.6",
+     "a": "441.l.3024.t.11"
+    }
+   ]
+  }
+ ]
+}

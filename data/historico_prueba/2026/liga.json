@@ -1,0 +1,92 @@
+{
+ "league_key": "466.l.9972",
+ "nombre": "NBA Pontevedresa 2026-27 (PRUEBA)",
+ "temporada": "2026",
+ "fecha_inicio": "2026-10-20",
+ "equipos": [
+  {
+   "key": "466.l.9972.t.1",
+   "id": "1",
+   "nombre": "Grit & Grind",
+   "manager": "Mánager 1",
+   "logo": ""
+  },
+  {
+   "key": "466.l.9972.t.2",
+   "id": "2",
+   "nombre": "Prueba Rías Baixas",
+   "manager": "Mánager 2",
+   "logo": ""
+  },
+  {
+   "key": "466.l.9972.t.3",
+   "id": "3",
+   "nombre": "Prueba Lérez",
+   "manager": "Mánager 3",
+   "logo": ""
+  },
+  {
+   "key": "466.l.9972.t.4",
+   "id": "4",
+   "nombre": "Prueba Peregrina",
+   "manager": "Mánager 4",
+   "logo": ""
+  },
+  {
+   "key": "466.l.9972.t.5",
+   "id": "5",
+   "nombre": "Prueba Marín",
+   "manager": "Mánager 5",
+   "logo": ""
+  },
+  {
+   "key": "466.l.9972.t.6",
+   "id": "6",
+   "nombre": "Prueba Poio",
+   "manager": "Mánager 6",
+   "logo": ""
+  },
+  {
+   "key": "466.l.9972.t.7",
+   "id": "7",
+   "nombre": "Prueba Sanxenxo",
+   "manager": "Mánager 7",
+   "logo": ""
+  },
+  {
+   "key": "466.l.9972.t.8",
+   "id": "8",
+   "nombre": "Prueba Cambados",
+   "manager": "Mánager 8",
+   "logo": ""
+  },
+  {
+   "key": "466.l.9972.t.9",
+   "id": "9",
+   "nombre": "Prueba Vilagarcía",
+   "manager": "Mánager 9",
+   "logo": ""
+  },
+  {
+   "key": "466.l.9972.t.10",
+   "id": "10",
+   "nombre": "Prueba Bueu",
+   "manager": "Mánager 10",
+   "logo": ""
+  },
+  {
+   "key": "466.l.9972.t.11",
+   "id": "11",
+   "nombre": "Prueba Cangas",
+   "manager": "Mánager 11",
+   "logo": ""
+  },
+  {
+   "key": "466.l.9972.t.12",
+   "id": "12",
+   "nombre": "Prueba Moaña",
+   "manager": "Mánager 12",
+   "logo": ""
+  }
+ ]
+}

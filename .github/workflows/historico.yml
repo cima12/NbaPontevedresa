@@ -4,9 +4,9 @@ on:
   workflow_dispatch:
     inputs:
       modo:
-        description: "censo = ver qué guarda Yahoo (primero) · importar = descargar y guardar"
+        description: "censo = ver qué guarda Yahoo (primero) · importar = descargar y guardar · indice = rehacer fichas de jugadores"
         type: choice
-        options: [censo, importar]
+        options: [censo, importar, indice]
         default: censo
       temporadas:
         description: "Opcional: rango de temporadas, p. ej. 2008-2012 (vacío = todas)"

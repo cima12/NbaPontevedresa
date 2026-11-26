@@ -1,0 +1,172 @@
+{
+ "picks": [
+  {
+   "pick": 1,
+   "ronda": 1,
+   "equipo": "454.l.3025.t.1",
+   "jugador": "454.p.1642948",
+   "nombre": "Ryan Nembhard"
+  },
+  {
+   "pick": 2,
+   "ronda": 1,
+   "equipo": "454.l.3025.t.2",
+   "jugador": "454.p.1628991",
+   "nombre": "Jaren Jackson Jr."
+  },
+  {
+   "pick": 3,
+   "ronda": 1,
+   "equipo": "454.l.3025.t.3",
+   "jugador": "454.p.1642358",
+   "nombre": "AJ Johnson"
+  },
+  {
+   "pick": 4,
+   "ronda": 1,
+   "equipo": "454.l.3025.t.4",
+   "jugador": "454.p.1642345",
+   "nombre": "Oso Ighodaro"
+  },
+  {
+   "pick": 5,
+   "ronda": 1,
+   "equipo": "454.l.3025.t.5",
+   "jugador": "454.p.1626181",
+   "nombre": "Norman Powell"
+  },
+  {
+   "pick": 6,
+   "ronda": 1,
+   "equipo": "454.l.3025.t.6",
+   "jugador": "454.p.1641989",
+   "nombre": "Elijah Harkless"
+  },
+  {
+   "pick": 7,
+   "ronda": 1,
+   "equipo": "454.l.3025.t.7",
+   "jugador": "454.p.1642847",
+   "nombre": "Jeremiah Fears"
+  },
+  {
+   "pick": 8,
+   "ronda": 1,
+   "equipo": "454.l.3025.t.8",
+   "jugador": "454.p.1631128",
+   "nombre": "Christian Braun"
+  },
+  {
+   "pick": 9,
+   "ronda": 1,
+   "equipo": "454.l.3025.t.9",
+   "jugador": "454.p.1630658",
+   "nombre": "Colin Castleton"
+  },
+  {
+   "pick": 10,
+   "ronda": 1,
+   "equipo": "454.l.3025.t.10",
+   "jugador": "454.p.1643512",
+   "nombre": "Allen Graves"
+  },
+  {
+   "pick": 11,
+   "ronda": 1,
+   "equipo": "454.l.3025.t.11",
+   "jugador": "454.p.1628975",
+   "nombre": "Jevon Carter"
+  },
+  {
+   "pick": 12,
+   "ronda": 1,
+   "equipo": "454.l.3025.t.12",
+   "jugador": "454.p.1642868",
+   "nombre": "Carter Bryant"
+  },
+  {
+   "pick": 13,
+   "ronda": 2,
+   "equipo": "454.l.3025.t.12",
+   "jugador": "454.p.1642285",
+   "nombre": "Cam Spencer"
+  },
+  {
+   "pick": 14,
+   "ronda": 2,
+   "equipo": "454.l.3025.t.11",
+   "jugador": "454.p.1643536",
+   "nombre": "Ebuka Okorie"
+  },
+  {
+   "pick": 15,
+   "ronda": 2,
+   "equipo": "454.l.3025.t.10",
+   "jugador": "454.p.202696",
+   "nombre": "Nikola Vučević"
+  },
+  {
+   "pick": 16,
+   "ronda": 2,
+   "equipo": "454.l.3025.t.9",
+   "jugador": "454.p.1630230",
+   "nombre": "Naji Marshall"
+  },
+  {
+   "pick": 17,
+   "ronda": 2,
+   "equipo": "454.l.3025.t.8",
+   "jugador": "454.p.1628983",
+   "nombre": "Shai Gilgeous-Alexander"
+  },
+  {
+   "pick": 18,
+   "ronda": 2,
+   "equipo": "454.l.3025.t.7",
+   "jugador": "454.p.1630173",
+   "nombre": "Precious Achiuwa"
+  },
+  {
+   "pick": 19,
+   "ronda": 2,
+   "equipo": "454.l.3025.t.6",
+   "jugador": "454.p.1630241",
+   "nombre": "Sam Merrill"
+  },
+  {
+   "pick": 20,
+   "ronda": 2,
+   "equipo": "454.l.3025.t.5",
+   "jugador": "454.p.1643257",
+   "nombre": "Jayson Kent"
+  },
+  {
+   "pick": 21,
+   "ronda": 2,
+   "equipo": "454.l.3025.t.4",
+   "jugador": "454.p.203084",
+   "nombre": "Harrison Barnes"
+  },
+  {
+   "pick": 22,
+   "ronda": 2,
+   "equipo": "454.l.3025.t.3",
+   "jugador": "454.p.1629673",
+   "nombre": "Jordan Poole"
+  },
+  {
+   "pick": 23,
+   "ronda": 2,
+   "equipo": "454.l.3025.t.2",
+   "jugador": "454.p.203991",
+   "nombre": "Clint Capela"
+  },
+  {
+   "pick": 24,
+   "ronda": 2,
+   "equipo": "454.l.3025.t.1",
+   "jugador": "454.p.1628369",
+   "nombre": "Jayson Tatum"
+  }
+ ]
+}
